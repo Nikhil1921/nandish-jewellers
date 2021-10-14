@@ -1,0 +1,38 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+$route['default_controller'] = 'home';
+$route['404_override'] = 'home/error_404';
+$route['translate_uri_dashes'] = FALSE;
+
+$route['about-us'] = 'home/about_us';
+$route['contact-us'] = 'home/contact_us';
+$route['privacy'] = 'home/privacy';
+$route['terms'] = 'home/terms';
+$route['refund'] = 'home/refund';
+$route['login-register'] = 'home/login';
+$route['login']['post'] = 'home/login_post';
+$route['signup']['post'] = 'home/signup';
+$route['my-account'] = 'user/my_account';
+$route['logout'] = 'user/logout';
+$route['prod-info'] = 'home/prod_info';
+$route['add-wishlist'] = 'home/add_wishlist';
+$route['wishlist'] = 'user/wishlist';
+$route['cart'] = 'user/cart';
+$route['add-cart'] = 'home/add_cart';
+$route["update-cart"] = "user/update_cart";
+$route["cart-delete"] = "user/cart_delete";
+$route["wish-delete"] = "user/wish_delete";
+$route["checkout"]['get'] = "user/checkout";
+$route["checkout"]['post'] = "user/checkout_post";
+$route["check-code"] = "user/check_code";
+$route["payment"] = "user/payment";
+$route['invoice/(:num)'] = 'user/invoice/$1';
+$route['cancel']['post'] = 'user/cancel';
+$route['return']['post'] = 'user/return';
+$route['update-profile']['post'] = 'user/update_profile';
+$route['otp']['post'] = 'home/otp';
+$route['forgot-password'] = 'home/forgot_password';
+$route['change-password'] = 'home/change_password';
+$route['sitemap'] = 'home/sitemap';
+$route['(:any)(/:any)?(/:any)?'] = 'home/product_list/$1$2$3';
+$route['(:any)/(:any)/(:any)/(:any)'] = 'home/product/$1/$2/$3/$4';
