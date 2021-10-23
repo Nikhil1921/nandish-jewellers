@@ -29,14 +29,14 @@
           <?= img(['id' => "logo", 'src' => 'assets/img/logo/logo.png', 'alt' => APP_NAME."Logo", 'onclick' => "window.location = 'my-account.php'"]) ?>
         </div>
         <div class="col-sm-5 text-center text-sm-right">
-          <h4 class="text-7 mb-0">Invoice</h4>
+          <h4 class="text-7 mb-0">Estimate</h4>
         </div>
       </div>
       <hr>
     <main>
       <div class="row">
         <div class="col-sm-6"><strong>Date / Time : </strong> <?= $data['o_date'].' / '.$data['o_time']; ?></div>
-        <div class="col-sm-6 text-sm-right"> <strong>Invoice No : </strong><?= $data['o_invoice']; ?></div>
+        <div class="col-sm-6 text-sm-right"> <strong>Estimate No : </strong><?= $data['o_invoice']; ?></div>
       </div>
       <hr>
       <div class="row">

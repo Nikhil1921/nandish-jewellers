@@ -2,12 +2,25 @@
 
 class Home extends Public_controller  {
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->config->load('sms');
+	}
+
 	public function index()
 	{
 		if($this->input->get('search'))
 			return $this->product_list();
 		$data['name'] = 'home';
-		$data['title'] = 'home';
+		$data['title'] = 'Online Jewellary Store | Top Jewellery Brand in India';
+		$data['seo'] = [
+			'title' => APP_NAME. ' | Online Jewellary Store | Top Jewellery Brand in India',
+			'desc' => 'Nandish Jewellers - Buy the latest designer Gold & Silver jewellery online in India. We offer the best quality gold & silver jewellery with a wide variety of collections at an affordable price. Secure delivery & BIS Hallmark certified jewellers Shop now!',
+			'image' => base_url('admin/image/logo.png'),
+			'url' => current_url(),
+			'keywords' => 'buy online jewellery, online jewellery shopping, Online jewellery store, online shopping jewellery, jewellery brand, jewellery website, online jewellery, jewellery, jewellery india, jewellery online shopping, buy jewellery online, online jewellery shopping india, buy gold & silver'
+		];
 		$data['banners'] = $this->main->getall('banner', 'b_image', ['b_cat_id' => 0], 'b_id DESC');
 		$data['testimonials'] = $this->main->getall('testimonial', 't_image, t_name, t_detail', []);
 		$data['new_prods'] = $this->main->getNewProds();
@@ -34,8 +47,15 @@ class Home extends Public_controller  {
 	public function about_us()
 	{
 		$data['name'] = 'about_us';
-		$data['title'] = 'about us';
+		$data['title'] = 'about us | Gold & Silver Jewellery Brand';
 		$data['breadcrumb'] = true;
+		$data['seo'] = [
+			'title' => APP_NAME. ' | about us | Gold & Silver Jewellery Brand',
+			'desc' => 'Check Out Amazing Collection of Gold & Silver Jewellery online at Nandish Jewellers where you have High Quality Work, Secure delivery & BIS Certified Jewellery.',
+			'image' => base_url('admin/image/logo.png'),
+			'url' => current_url(),
+			'keywords' => 'Gold Jewellery, Silver Jewellery, About Nandish, Gold Necklaces, Gold Bangles, Silver Ornaments, Silver Coin'
+		];
         
 		return $this->template->load('template', 'about_us', $data);
 	}
@@ -43,8 +63,15 @@ class Home extends Public_controller  {
 	public function contact_us()
 	{
 		$data['name'] = 'contact_us';
-		$data['title'] = 'contact us';
+		$data['title'] = 'contact us | Gold & Silver Jewellery Brand';
 		$data['breadcrumb'] = true;
+		$data['seo'] = [
+			'title' => APP_NAME. ' | contact us | Gold & Silver Jewellery Brand',
+			'desc' => 'Reach out us at E-mail: nandish.jewellers@gmail.com or at +91 80001 04444 for any of inquiry Nandish Jewellers.',
+			'image' => base_url('admin/image/logo.png'),
+			'url' => current_url(),
+			'keywords' => 'Top Jewellery Brand in India, Nandish Jewellers, Gold Jewellery, Silver Jewellery, About Nandish, Gold Necklaces, Gold Bangles, Silver Ornaments, Gold Coin, Silver Coin'
+		];
         
 		return $this->template->load('template', 'contact_us', $data);
 	}
@@ -272,6 +299,7 @@ class Home extends Public_controller  {
 			if ($u_id = $this->main->add($post, "user")){
 				$this->session->set_userdata('user_id', $u_id);
 				$sms = $this->config->item('Singup_SMS');
+					
 				send_sms($post['u_mobile'], $sms, $this->config->item('Singup_TEMPLATE'));
 				send_email($post['u_email'], $sms, "Signup successfull");
 
@@ -415,8 +443,6 @@ class Home extends Public_controller  {
 					$this->main->add($post, 'otp_check');
 				
 				if ($id){
-					$this->config->load('sms');
-
 					$sms = str_ireplace('{#var#}', $post['otp'], $this->config->item('OTP_SMS'));
 					send_sms($post['mobile'], $sms, $this->config->item('OTP_TEMPLATE'));
 					

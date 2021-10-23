@@ -6,6 +6,7 @@ class User extends Public_controller  {
     public function __construct()
 	{
 		parent::__construct();
+		$this->config->load('sms');
 		if (!$this->user_id) 
             return redirect('');
 	}
