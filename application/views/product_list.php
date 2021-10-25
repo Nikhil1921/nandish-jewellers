@@ -20,7 +20,13 @@
                     <nav aria-label="breadcrumb">
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="<?= base_url() ?>"><i class="fa fa-home"></i></a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><?= ucwords($title) ?></li>
+                            <?php if(is_array($breadcrumb_shop)): ?>
+                                <?php foreach($breadcrumb_shop as $k => $tile): ?>
+                                    <li class="breadcrumb-item active" aria-current="page"><?= $k == array_key_last($breadcrumb_shop) ? strip_tags($tile) : $tile ?></li>
+                                <?php endforeach ?>
+                            <?php else: ?>
+                                <li class="breadcrumb-item active" aria-current="page"><?= ucwords($breadcrumb_shop) ?></li>
+                            <?php endif ?>
                         </ul>
                     </nav>
                 </div>

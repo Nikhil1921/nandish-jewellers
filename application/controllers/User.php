@@ -17,7 +17,7 @@ class User extends Public_controller  {
 	{
 		$data['name'] = 'my_account';
 		$data['title'] = 'my account';
-		$data['breadcrumb'] = true;
+		$data['breadcrumb'] = 'my account';
 		$data['orders'] = $this->main->getall('orders', 'o_id, o_date, o_time, o_status, o_total, o_return', ['o_u_id' => $this->user_id]);
         
 		return $this->template->load('template', 'my_account', $data);
@@ -88,7 +88,7 @@ class User extends Public_controller  {
 	{
 		$data['name'] = 'wishlist';
 		$data['title'] = 'wishlist';
-		$data['breadcrumb'] = true;
+		$data['breadcrumb'] = 'wishlist';
         
 		return $this->template->load('template', 'wishlist', $data);
 	}
@@ -97,7 +97,7 @@ class User extends Public_controller  {
 	{
 		$data['name'] = 'cart';
 		$data['title'] = 'cart';
-		$data['breadcrumb'] = true;
+		$data['breadcrumb'] = 'cart';
         
 		return $this->template->load('template', 'cart', $data);
 	}
@@ -107,8 +107,8 @@ class User extends Public_controller  {
 		if(!$this->cart) return redirect('');
 		
 		$data['name'] = 'checkout';
-		$data['title'] = ["<a href='".front_url("cart")."'>Cart</a>", 'checkout'];
-		$data['breadcrumb'] = true;
+		$data['title'] = 'checkout';
+		$data['breadcrumb'] = ["<a href='".front_url("cart")."'>Cart</a>", 'checkout'];
         
 		return $this->template->load('template', 'checkout', $data);
 	}
@@ -283,7 +283,7 @@ class User extends Public_controller  {
 		if ($response) {
 			$data['name'] = 'payment';
 			$data['title'] = 'payment details';
-			$data['breadcrumb'] = true;
+			$data['breadcrumb'] = 'payment details';
 			$data['data'] = $response;
 			
 			return $this->template->load('template', 'payment', $data);

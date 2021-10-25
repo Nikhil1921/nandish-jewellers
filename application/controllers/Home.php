@@ -48,7 +48,7 @@ class Home extends Public_controller  {
 	{
 		$data['name'] = 'about_us';
 		$data['title'] = 'about us | Gold & Silver Jewellery Brand';
-		$data['breadcrumb'] = true;
+		$data['breadcrumb'] = 'about us';
 		$data['seo'] = [
 			'title' => APP_NAME. ' | about us | Gold & Silver Jewellery Brand',
 			'desc' => 'Check Out Amazing Collection of Gold & Silver Jewellery online at Nandish Jewellers where you have High Quality Work, Secure delivery & BIS Certified Jewellery.',
@@ -64,7 +64,7 @@ class Home extends Public_controller  {
 	{
 		$data['name'] = 'contact_us';
 		$data['title'] = 'contact us | Gold & Silver Jewellery Brand';
-		$data['breadcrumb'] = true;
+		$data['breadcrumb'] = 'contact us';
 		$data['seo'] = [
 			'title' => APP_NAME. ' | contact us | Gold & Silver Jewellery Brand',
 			'desc' => 'Reach out us at E-mail: nandish.jewellers@gmail.com or at +91 80001 04444 for any of inquiry Nandish Jewellers.',
@@ -80,7 +80,7 @@ class Home extends Public_controller  {
 	{
 		$data['name'] = 'privacy';
 		$data['title'] = 'privacy policy';
-		$data['breadcrumb'] = true;
+		$data['breadcrumb'] = 'privacy policy';
 		$data['data'] = $this->main->get('page', 'details', ['p_page' => 'privacy']);
         
 		return $this->template->load('template', 'page', $data);
@@ -90,7 +90,7 @@ class Home extends Public_controller  {
 	{
 		$data['name'] = 'terms';
 		$data['title'] = 'Terms & Conditions';
-		$data['breadcrumb'] = true;
+		$data['breadcrumb'] = 'Terms & Conditions';
 		$data['data'] = $this->main->get('page', 'details', ['p_page' => 'terms']);
         
 		return $this->template->load('template', 'page', $data);
@@ -100,7 +100,7 @@ class Home extends Public_controller  {
 	{
 		$data['name'] = 'refund';
 		$data['title'] = 'Exchange, Returns & Refunds';
-		$data['breadcrumb'] = true;
+		$data['breadcrumb'] = 'Exchange, Returns & Refunds';
 		$data['data'] = $this->main->get('page', 'details', ['p_page' => 'refund']);
         
 		return $this->template->load('template', 'page', $data);
@@ -128,24 +128,27 @@ class Home extends Public_controller  {
 				
 		$url = base_url();
 		$where = ['p_qty_avail >' => 0];
-		
+		$data['breadcrumb_shop'] = [];
 		if ($cat){
 			$url .= "/$cat";
 			$where['c_name'] = str_replace('-', ' ', $cat);
+			array_push($data['breadcrumb_shop'], "<a href='".make_slug($cat)."'>".str_replace('-', ' ', $cat)."</a>");
 		}
 
 		if ($subcat){
 			$url .= "/$subcat";
 			$where['sc_name'] = str_replace('-', ' ', $subcat);
+			array_push($data['breadcrumb_shop'], "<a href='".make_slug($cat."/".$subcat)."'>".str_replace('-', ' ', $subcat)."</a>");
 		}
 
 		if ($inner){
 			$url .= "/$inner";
 			$where['i_name'] = str_replace('-', ' ', $inner);
+			array_push($data['breadcrumb_shop'], "<a href='".make_slug($cat."/".$subcat."/".$inner)."'>".str_replace('-', ' ', $inner)."</a>");
 			$inn_id = $this->main->check('innercategory', ['i_name' => str_replace('-', ' ', $inner)], 'i_id');
 			if($inn_id) $data['banners'] = $this->main->getall('banner', 'b_image', ['b_cat_id' => $inn_id], 'b_id DESC');
 		}
-
+		
 		foreach ($this->input->get() as $k => $get) {
 			if ($k == 'per_page') continue;
 			$url .= array_key_first($this->input->get()) == $k ? "?" : "&";
@@ -186,6 +189,16 @@ class Home extends Public_controller  {
 		$data['from'] = $offset + 1;
 		$data['to'] = $offset + $config['per_page'] <= $config['total_rows'] ? $offset + $config['per_page'] : $config['total_rows'];
 		$data['title'] = $data['prods'] && $data['prods'][0]['seo_title'] ? $data['prods'][0]['seo_title'] : 'shop';
+
+		if ($data['prods']) {
+			$data['seo'] = [
+					'title' => $data['prods'][0]['seo_title'],
+					'desc' => $data['prods'][0]['seo_description'],
+					'url' => current_url(),
+					'image' => base_url('admin/admin/image/logo.png'),
+					'keywords' => $data['prods'][0]['seo_keywords']
+				];
+		}
 		
 		return $this->template->load('template', 'product_list', $data);
 	}
@@ -193,10 +206,9 @@ class Home extends Public_controller  {
 	public function product($cat, $subcat, $inner, $prod)
 	{
 		$prod = explode('-', $prod);
-		$prod = end($prod);
+		$prod_id = end($prod);
 		$data['name'] = 'product';
-		$data['breadcrumb'] = true;
-		$data['data'] = $this->main->prod(d_id($prod));
+		$data['data'] = $this->main->prod(d_id($prod_id));
 		
 		if ($data['data']){
 			$img = explode(',', $data['data']['p_image']);
@@ -209,9 +221,14 @@ class Home extends Public_controller  {
 			];
 		}
 
-		$data['related'] = $this->main->getRelatedProds(str_replace('-', ' ', $inner), d_id($prod));
-		
-		$data['title'] = ["<a href='".make_slug($cat."/".$subcat."/".$inner)."'>".str_replace('-', ' ', $inner)."</a>", 'Jewellery Details'];
+		$data['related'] = $this->main->getRelatedProds(str_replace('-', ' ', $inner), d_id($prod_id));
+		unset($prod[array_key_last($prod)]);
+		$data['title'] = implode(" ", $prod);
+		$data['breadcrumb'] = [
+			"<a href='".make_slug($cat)."'>".str_replace('-', ' ', $cat)."</a>",
+			"<a href='".make_slug($cat."/".$subcat)."'>".str_replace('-', ' ', $subcat)."</a>",
+			"<a href='".make_slug($cat."/".$subcat."/".$inner)."'>".str_replace('-', ' ', $inner)."</a>",
+			$data['title']];
 		return $this->template->load('template', 'prod', $data);
 	}
 	
@@ -228,7 +245,7 @@ class Home extends Public_controller  {
             return redirect('my-account');
 		$data['name'] = 'login';
 		$data['title'] = 'login OR Register';
-		$data['breadcrumb'] = true;
+		$data['breadcrumb'] = 'login OR Register';
         
 		return $this->template->load('template', 'login', $data);
 	}
@@ -462,7 +479,7 @@ class Home extends Public_controller  {
 		if (! $this->input->is_ajax_request()){
 			$data['name'] = 'forgot_password';
 			$data['title'] = 'forgot password';
-			$data['breadcrumb'] = true;
+			$data['breadcrumb'] = 'forgot password';
 	
 			return $this->template->load('template', 'forgot_password', $data);
 		}else{

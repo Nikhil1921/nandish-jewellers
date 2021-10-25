@@ -21,9 +21,9 @@ endif;
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <?php if(is_array($title)): ?>
-            <title><?= APP_NAME." | ".ucwords(end($title)) ?></title>
+            <title><?= ucwords(end($title))." | ". APP_NAME ?></title>
         <?php else: ?>
-            <title><?= APP_NAME." | ".ucwords($title) ?></title>
+            <title><?= ucwords($title)." | ". APP_NAME ?></title>
         <?php endif ?>
         <?php if (isset($seo)):
             $e = ['general' => true, 'og' => true, 'twitter'=> true, 'robot'=> true, 'keywords' => true];
@@ -581,12 +581,12 @@ endif;
                                 <nav aria-label="breadcrumb">
                                     <ul class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="<?= base_url() ?>"><i class="fa fa-home"></i></a></li>
-                                        <?php if(is_array($title)): ?>
-                                            <?php foreach($title as $k => $tile): ?>
-                                                <li class="breadcrumb-item active" aria-current="page"><?= $k == array_key_last($title) ? ucwords($tile) : $tile ?></li>
+                                        <?php if(is_array($breadcrumb)): ?>
+                                            <?php foreach($breadcrumb as $k => $tile): ?>
+                                                <li class="breadcrumb-item active" aria-current="page"><?= $k == array_key_last($breadcrumb) ? ucwords($tile) : $tile ?></li>
                                             <?php endforeach ?>
                                         <?php else: ?>
-                                            <li class="breadcrumb-item active" aria-current="page"><?= ucwords($title) ?></li>
+                                            <li class="breadcrumb-item active" aria-current="page"><?= ucwords($breadcrumb) ?></li>
                                         <?php endif ?>
                                     </ul>
                                 </nav>
