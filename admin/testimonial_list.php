@@ -18,7 +18,7 @@
           <span class="navbar-toggler-bar bar3"></span>
         </button>
       </div>
-      <a class="navbar-brand" href="">Sub Category List</a>
+      <a class="navbar-brand" href="">Owner Messsage List</a>
     </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -45,7 +45,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title">Sub Category List</h4>
+          <h4 class="card-title">Owner Messsage List</h4>
         </div>
         <div class="card-body">
           <div class="toolbar">

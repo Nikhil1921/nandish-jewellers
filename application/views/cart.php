@@ -36,7 +36,7 @@
                                     </td>
                                     <td class="pro-subtotal"><span><i class="fa fa-inr" aria-hidden="true"></i> <?= round(($cart[$cart['p_carat']] * $cart['p_gram'] + $cart['p_other'] + $cart['p_l_char']) * $cart['ca_qty'] * 1.03) ?></span></td>
                                     <td class="pro-remove">
-                                        <a class="delete-cart" data-id="<?= e_id($cart['ca_id']) ?>"><i class="fa fa-trash-o"></i></a></td>
+                                        <a class="delete-cart btn btn-cart2" data-id="<?= e_id($cart['ca_id']) ?>"><i class="fa fa-trash-o"></i></a></td>
                                     </tr>
                                     <?php endforeach;
                                     else: ?>

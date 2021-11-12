@@ -266,7 +266,7 @@
             <a data-toggle="collapse" href="#testimonial">
               <i class="nc-icon nc-book-bookmark"></i>
               <p>
-                Testimonial<b class="caret"></b>
+                Owner Messsage<b class="caret"></b>
               </p>
             </a>
             <div class="collapse " id="testimonial">
@@ -274,13 +274,13 @@
                 <li>
                   <a href="add_testimonial.php">
                     <span class="sidebar-mini-icon">AT</span>
-                    <span class="sidebar-normal">Add Testimonial </span>
+                    <span class="sidebar-normal">Add Owner Messsage </span>
                   </a>
                 </li>
                 <li>
                   <a href="testimonial_list.php">
                     <span class="sidebar-mini-icon">TL</span>
-                    <span class="sidebar-normal"> Testimonial List </span>
+                    <span class="sidebar-normal"> Owner Messsage List </span>
                   </a>
                 </li>
               </ul>

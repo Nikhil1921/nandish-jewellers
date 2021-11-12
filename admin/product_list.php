@@ -55,7 +55,7 @@
                   <th>Category Name</th>
                   <th>Sub Category Name</th>
                   <th>Jewellery Name</th>
-                  <th>S.K.U. Cord</th>
+                  <th>S.K.U. Code</th>
                   <th>Jewellery Gram</th>
                   <th>Jewellery Image</th>
                   <th class="disabled-sorting text-right">Actions</th>

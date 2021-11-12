@@ -24,7 +24,7 @@ class Home extends Public_controller  {
 		$data['banners'] = $this->main->getall('banner', 'b_image', ['b_cat_id' => 0], 'b_id DESC');
 		$data['testimonials'] = $this->main->getall('testimonial', 't_image, t_name, t_detail', []);
 		$data['new_prods'] = $this->main->getNewProds();
-		// $data['innerCats'] = $this->main->getInners();
+		$data['innerCats'] = $this->main->getInners();
 		
 		$data['cats'] = array_map(function($arr){
 					return (object) [
@@ -35,7 +35,7 @@ class Home extends Public_controller  {
 								return (object) [
 									'sc_id' => $arr->sc_id,
 									'sc_name' => $arr->sc_name,
-									'inner_cats' => (object) $this->main->getall('innercategory', 'i_id, i_name, i_image, i_show', ['i_sub_id' => $arr->sc_id])
+									'inner_cats' => (object) $this->main->getall('innercategory', 'i_id, i_name, i_image, i_show', ['i_sub_id' => $arr->sc_id], 'i_id ASC')
 								];
 							}, $this->main->getall('subcategory', 'sc_id, sc_name', ['sc_c_id' => $arr->c_id]))
 						];

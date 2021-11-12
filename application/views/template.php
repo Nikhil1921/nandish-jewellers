@@ -870,7 +870,7 @@ endif;
                                             <span class="cart-quantity"> <?= $data_foot['ca_qty'] ?> <strong>&times;</strong>
                                             </span>
                                             <span class="cart-price">
-                                            <i class="fa fa-inr" aria-hidden="true"></i> <?= round(($data_foot[$data_foot['p_carat']] * $data_foot['p_gram'] + $data_foot['p_other'] + $data_foot['p_l_char']) * $data_foot['ca_qty'] * 1.03) ?>
+                                            <i class="fa fa-inr" aria-hidden="true"></i> <?= round(($data_foot[$data_foot['p_carat']] * $data_foot['p_gram'] + $data_foot['p_other'] + $data_foot['p_l_char']) * 1.03) ?>
                                             </span>
                                             </p>
                                         </div>

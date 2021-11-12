@@ -8,7 +8,7 @@ date_default_timezone_set("Asia/Calcutta");
 /*creds for sandbox : nandish.jewellers@gmail.com pass - O0PTJwaV*/
 /*creds for live : nandish.jewellers@gmail.com pass - Nandish@12345*/
 
-define('PAYMENT', false);
+define('PAYMENT', true);
 $config['access_token'] = PAYMENT ? 'E67088A8936CD7F9B6FE0156CE0DFFD4' : '78CF6023896CCAFC4970B4F85567E8E0';
 $config['api_key'] = PAYMENT ? '6FAB93660DFE1052B2BB3949B1389923' : '6690D5E74A29145ED7B9302F1C912DAF';
 $config['merchant_id'] = PAYMENT ? '027005431694377' : '638730950659186';

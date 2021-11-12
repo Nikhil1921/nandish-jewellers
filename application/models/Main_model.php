@@ -23,20 +23,22 @@ class Main_model extends Public_model
 						->join('subcategory sc', 'sc.sc_id = p.p_subcat')
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
 						// ->limit(12)
-						->order_by('last_update DESC')
+						->order_by('p_id DESC')
+						// ->order_by('last_update DESC')
 						->get()
 						->result();
 	}
 
-	/* public function getInners()
+	public function getInners()
 	{
 		return $this->db->select('i_id, c_name, sc_name, i_name, i_image, i_show, c_name')
 						->from('innercategory ic')
 						->join('category c', 'c.c_id = ic.i_cat_id')
 						->join('subcategory sc', 'sc.sc_id = ic.i_sub_id')
+						->order_by('i_id ASC')
 						->get()
 						->result();
-	} */
+	}
 
 	public function getBestProds($p_cat)
 	{
@@ -47,7 +49,8 @@ class Main_model extends Public_model
 						->join('subcategory sc', 'sc.sc_id = p.p_subcat')
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
 						// ->limit(8)
-						->order_by('last_update DESC')
+						// ->order_by('last_update DESC')
+						->order_by('p_id DESC')
 						->get()
 						->result();
 	}

@@ -24,12 +24,12 @@
                                 ?>
                                 <tr>
                                     <td class="pro-thumbnail">
-                                        <a href="javascript:void(0)">
+                                        <a href="<?= make_slug($data['c_name']."/".$data['sc_name']."/".$data['i_name']."/".$data['p_name']."-".e_id($data['p_id'])) ?>">
                                             <img class="img-fluid" src="<?= base_url() ?>admin/image/product/<?= reset($imge) ?>" alt="Jewellery" />
                                         </a>
                                     </td>
                                     <td class="pro-title">
-                                        <a href="javascript:void(0)"><?= $data['p_name'] ?></a>
+                                        <a href="<?= make_slug($data['c_name']."/".$data['sc_name']."/".$data['i_name']."/".$data['p_name']."-".e_id($data['p_id'])) ?>"><?= $data['p_name'] ?></a>
                                     </td>
                                     <td class="pro-price">
                                         <span>
@@ -45,7 +45,7 @@
                                         <button type="button" data-p_id="<?= e_id($data['p_id']) ?>" onclick="addToCart(this)" class="btn btn-cart2">Add to Bag</button>
                                     </td>
                                     <td class="pro-remove">
-                                        <a class="delete-wish" data-id="<?= e_id($data['w_id']) ?>"><i class="fa fa-trash-o"></i></a></td>
+                                        <a class="delete-wish btn btn-cart2" data-id="<?= e_id($data['w_id']) ?>"><i class="fa fa-trash-o"></i></a></td>
                                     </td>
                                 </tr>
                                 <?php endforeach ?>
