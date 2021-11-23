@@ -23,8 +23,8 @@ class Main_model extends Public_model
 						->join('subcategory sc', 'sc.sc_id = p.p_subcat')
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
 						// ->limit(12)
+						->order_by('last_update DESC')
 						->order_by('p_id DESC')
-						// ->order_by('last_update DESC')
 						->get()
 						->result();
 	}
@@ -49,7 +49,7 @@ class Main_model extends Public_model
 						->join('subcategory sc', 'sc.sc_id = p.p_subcat')
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
 						// ->limit(8)
-						// ->order_by('last_update DESC')
+						->order_by('last_update DESC')
 						->order_by('p_id DESC')
 						->get()
 						->result();

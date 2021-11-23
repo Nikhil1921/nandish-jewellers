@@ -5,6 +5,8 @@ $route['404_override'] = 'home/error_404';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['about-us'] = 'home/about_us';
+$route['save-order'] = 'user/save_order';
+$route['payment-status/(:any)'] = 'user/payment_status/$1';
 $route['contact-us'] = 'home/contact_us';
 $route['privacy'] = 'home/privacy';
 $route['terms'] = 'home/terms';

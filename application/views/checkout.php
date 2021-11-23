@@ -124,7 +124,7 @@
                             </div>
                             <div class="order-payment-method">
                                 <div class="summary-footer-area">
-                                    <button type="submit" class="btn btn-sqr">Place Order</button>
+                                    <button type="submit" onclick="checkout(this.form); return false;" class="btn btn-sqr">Place Order</button>
                                 </div>
                             </div>
                         </div>

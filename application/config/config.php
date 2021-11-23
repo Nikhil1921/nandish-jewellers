@@ -5,13 +5,20 @@ define('APP_NAME', 'Nandish Jewellers');
 
 date_default_timezone_set("Asia/Calcutta");
 
+// paykun payment gateway start
 /*creds for sandbox : nandish.jewellers@gmail.com pass - O0PTJwaV*/
 /*creds for live : nandish.jewellers@gmail.com pass - Nandish@12345*/
 
-define('PAYMENT', true);
+/* define('PAYMENT', true);
 $config['access_token'] = PAYMENT ? 'E67088A8936CD7F9B6FE0156CE0DFFD4' : '78CF6023896CCAFC4970B4F85567E8E0';
 $config['api_key'] = PAYMENT ? '6FAB93660DFE1052B2BB3949B1389923' : '6690D5E74A29145ED7B9302F1C912DAF';
-$config['merchant_id'] = PAYMENT ? '027005431694377' : '638730950659186';
+$config['merchant_id'] = PAYMENT ? '027005431694377' : '638730950659186'; */
+// paykun payment gateway end
+
+// razorpay payment gateway start
+$config['api_key'] = $_SERVER['HTTP_HOST'] == 'localhost' ? 'rzp_test_Ih6FtVWFIhWHOC' : 'rzp_live_Jf7dJMbtMe1xSC';
+$config['api_secret'] = $_SERVER['HTTP_HOST'] == 'localhost' ? 'rLPBMsXLE70mTDiciFObL64u' : '7QSfgUjxMW5xWKY3ingxBgWN  ';
+// razorpay payment gateway end
 
 $config['mobile'] = '+91 80001 04444';
 $config['email'] = 'nandish.jewellers@gmail.com';

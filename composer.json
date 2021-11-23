@@ -1,5 +1,6 @@
 {
     "require": {
-        "paykun/checkout": "^2.0"
+        "paykun/checkout": "^2.0",
+        "razorpay/razorpay": "2.*"
     }
 }

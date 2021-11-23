@@ -1,5 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-use Paykun\Checkout\Payment;
+// use Paykun\Checkout\Payment;
+use Razorpay\Api\Api;
 
 class User extends Public_controller  {
 
@@ -192,6 +193,8 @@ class User extends Public_controller  {
 
 	public function checkout_post()
 	{
+		if (!$this->input->is_ajax_request()) die;
+
 		$post = [
 			'u_address'  => $this->input->post('address'),
 			'u_city' 	 => $this->input->post('city'),
@@ -210,10 +213,20 @@ class User extends Public_controller  {
 			$ship += round($cart['p_shipping'] * 1.03);
 			$total += round(($cart[$cart['p_carat']] * $cart['p_gram'] + $cart['p_other'] + $makec) * $cart['ca_qty'] * 1.03);
 		}
+		
 		// $total = 1000;
-		$this->main->update(['u_id' => $this->user_id], $post, $this->table);
+		$update = $this->main->update(['u_id' => $this->user_id], $post, $this->table);
 
-		$paykun = new Payment($this->config->item('merchant_id'), $this->config->item('access_token'), $this->config->item('api_key'), PAYMENT);
+		// razorpay payment gateway start
+		$name = $this->user['u_f_name'].' '.$this->user['u_m_name'].' '.$this->user['u_l_name'];
+		$response = $update ? ['error' => false, 'message' => ($total + $ship), 'name' => $name, 'mobile' => $this->user['u_mobile'], 'email' => $this->user['u_email']] 
+							: ['error' => true, 'message' => "NOT OK"];
+		die(json_encode($response));
+		
+		// razorpay payment gateway end
+
+		// paykun payment gateway start
+		/* $paykun = new Payment($this->config->item('merchant_id'), $this->config->item('access_token'), $this->config->item('api_key'), PAYMENT);
 		$this->load->helper('string');
 
         // Initializing Order
@@ -228,10 +241,85 @@ class User extends Public_controller  {
         $paykun->addBillingAddress('India', $post['u_state'], $post['u_city'], $post['u_postcode'], $post['u_address']);
         $paykun->setCustomFields(array('udf_1' => $this->input->post('note') ? $this->input->post('note').'-' : 'NA-'));
         
-        echo $paykun->submit();
+        echo $paykun->submit(); */
+		// paykun payment gateway end
 	}
 
-	public function payment()
+	public function save_order()
+	{
+		if (!$this->input->is_ajax_request()) die;
+
+		$payment_id = $this->input->post('payment_id');
+		$api = new Api($this->config->item('api_key'), $this->config->item('api_secret'));
+		$response = $api->payment->fetch($payment_id);
+		
+		if (!empty($response) && $response->status == 'authorized') {
+			if(!$this->main->check('orders', ['o_payment' => $payment_id], 'o_payment')):
+				$total = 0;
+				foreach ($this->cart as $k => $v):
+					$details[$k]['prod_id'] = $v['ca_pro_id'];
+					$details[$k]['qty'] = $v['ca_qty'];
+					$details[$k]['price'] = round($v[$v['p_carat']] * $v['p_gram']);
+					$details[$k]['size'] = ($v['ca_size']) ? $v['ca_size'] : 'NA';
+					$details[$k]['shipping'] = round($v['p_shipping'] * 1.03);
+					$makec = $v['p_l_char'];
+					if (isset($this->session->coupen_id)):
+						$makec = $makec * (100 - $this->session->discount) / 100;
+					endif;
+					$makec = round($makec);
+					$details[$k]['other'] = $v['p_other'];
+					$details[$k]['making'] = $makec;
+					$details[$k]['total'] = round(($v[$v['p_carat']] * $v['p_gram'] + $v['p_other'] + $makec) * $v['ca_qty'] * 1.03);
+					$details[$k]['pre'] = $v['p_pre'];
+					$total += round(($v[$v['p_carat']] * $v['p_gram'] + $v['p_other'] + $makec) * $v['ca_qty'] * 1.03);
+					$total += round($v['p_shipping'] * 1.03);
+				endforeach;
+				$order = [
+					'o_details' => json_encode($details),
+					'o_u_id' 	=> $this->user_id,
+					'o_total'	=> $total,
+					'o_date'	=> date('d-m-Y', $response->created_at),
+					'o_time'	=> date('h:i:s A', $response->created_at),
+					'o_address'	=> $this->user['u_address'],
+					'o_city'	=> $this->user['u_city'],
+					'o_state'	=> $this->user['u_state'],
+					'o_country'	=> "India",
+					'o_pin'		=> $this->user['u_postcode'],
+					'o_note'	=> $this->input->post('note'),
+					'o_status'	=> 0,
+					'o_invoice'	=> 'NAD'.rand(1000,9999),
+					'o_return'	=> 0,
+					'o_payment'	=> $payment_id,
+					'o_pancard' => $this->user['u_pancard']
+				];
+				$status = $this->main->saveOrder($order, $this->cart, $this->user['u_mobile']);
+				$response = $status ? ['error' => false, 'message' => "Order saved success.", 'redirect' => "payment-status/$payment_id"] : ['error' => true, 'message' => "Something going wrong. Try again."];
+			else:
+				$response = ['error' => false, 'message' => "Order saved success."];
+			endif;
+		}else
+			$response = ['error' => true, 'message' => "Something going wrong. Try againss."];
+		
+		die(json_encode($response));
+	}
+
+	public function payment_status($pay_id)
+	{
+		$api = new Api($this->config->item('api_key'), $this->config->item('api_secret'));
+		$response = $api->payment->fetch($pay_id);
+		
+		if ($response) {
+			$data['name'] = 'payment';
+			$data['title'] = 'payment details';
+			$data['breadcrumb'] = 'payment details';
+			$data['data'] = $response;
+			
+			return $this->template->load('template', 'razor_pay', $data);
+		}else{
+			return $this->error_404();
+		}
+	}
+	/* public function payment()
 	{
 		$payment_id = $this->input->get('payment-id');
 		$paykun = new Payment($this->config->item('merchant_id'), $this->config->item('access_token'), $this->config->item('api_key'), PAYMENT);
@@ -290,7 +378,7 @@ class User extends Public_controller  {
 		}else{
 			return $this->error_404();
 		}
-	}
+	} */
 
 	public function logout()
 	{

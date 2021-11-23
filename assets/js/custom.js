@@ -345,3 +345,66 @@ $(".delete-wish").click(function(e) {
         }
     });
 });
+
+function checkout(form) {
+    var data = $(form).serialize();
+    $(form).find('button[type=submit]').prop('disabled', true);
+    $.ajax({
+        url: $(form).attr('action'),
+        type: 'POST',
+        dataType: 'json',
+        data: data,
+        success: function(response) {
+            if (response.error == true) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: response.message
+                }).then((result) => {
+                    $(form).find('button[type=submit]').prop('disabled', false);
+                });
+                return;
+            } else {
+                var totalAmount = response.message;
+                var options = {
+                    /*live api key*/
+                    "key": "rzp_live_Jf7dJMbtMe1xSC",
+                    "secret": "7QSfgUjxMW5xWKY3ingxBgWN",
+                    /*testing api key*/
+                    /* "key": "rzp_test_Ih6FtVWFIhWHOC",
+                    "secret": "rLPBMsXLE70mTDiciFObL64u", */
+                    "amount": (totalAmount * 100), // 2000 paise = INR 20
+                    "description": "Payment",
+                    "prefill": {
+                        "name": response.name,
+                        "contact": response.mobile,
+                        "email": response.email,
+                    },
+                    "handler": function(response) {
+                        data += "&payment_id=" + response.razorpay_payment_id;
+                        $.ajax({
+                            url: base_url + 'save-order',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: data,
+                            success: function(msg) {
+                                Swal.fire({
+                                    icon: msg.error ? 'error' : 'success',
+                                    title: msg.error ? 'Oops...' : 'Success',
+                                    text: msg.message
+                                }).then((result) => {
+                                    $(form).find('button[type=submit]').prop('disabled', false);
+                                    if (msg.redirect) window.location.href = msg.redirect;
+                                });
+                                return;
+                            }
+                        });
+                    },
+                };
+                var rzp1 = new Razorpay(options);
+                rzp1.open();
+                return;
+            }
+        }
+    });
+}
