@@ -7,8 +7,11 @@
       $price = $_POST['price'];
       $price_22 = $_POST['price_22'];
       $price_18 = $_POST['price_18'];
+      $seo_title = $_POST['seo_title'];
+      $seo_description = $_POST['seo_description'];
+      $seo_keywords = $_POST['seo_keywords'];
 
-    	$qry="INSERT INTO `category`(`c_name`,`c_price`,`c_price_22`,`c_price_18`) VALUES ('$name','$price','$price_22','$price_18')";
+    	$qry="INSERT INTO `category`(`c_name`,`c_price`,`c_price_22`,`c_price_18`, `seo_title`, `seo_description`, `seo_keywords`) VALUES ('$name','$price','$price_22','$price_18', '$seo_title', '$seo_description', '$seo_keywords')";
     	$run = $connect->query($qry)or die("not insert Data");
 
 		if($run == true)
@@ -97,6 +100,25 @@
                 <input class="form-control" name="price_18" type="text" required="true" placeholder="Enter Price 18 Carat" />
                 </div>
               </div>
+              <h4 class="card-title col-12">Add SEO keywords</h4>
+              <div class="col-md-6">
+      					<div class="form-group has-label">
+      					<label>Keyword title</label>
+      					<input class="form-control" name="seo_title" type="text" placeholder="Enter Keyword title" />
+      					</div>
+      				</div>
+              <div class="col-md-6">
+      					<div class="form-group has-label">
+      					<label>Keyword description</label>
+      					<input class="form-control" name="seo_description" type="text" placeholder="Enter Keyword description" />
+      					</div>
+      				</div>
+              <div class="col-md-6">
+      					<div class="form-group has-label">
+      					<label>Keywords</label>
+                <input type="text" class="tagsinput" data-role="tagsinput" data-color="primary" name="seo_keywords" placeholder="Enter Keywords" />
+      					</div>
+      				</div>
       				<div class="col-md-12">
 		            <div class="card-footer text-right">
 		              <button type="submit" name="submit" class="btn btn-primary">Submit</button>

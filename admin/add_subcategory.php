@@ -5,8 +5,11 @@
    	{ 
 		  $cat = $_POST['cat'];
       $name = $_POST['name'];
+      $seo_title = $_POST['seo_title'];
+      $seo_description = $_POST['seo_description'];
+      $seo_keywords = $_POST['seo_keywords'];
 
-    	$qry="INSERT INTO `subcategory`(`sc_c_id`, `sc_name`) VALUES ('$cat','$name')";
+    	$qry="INSERT INTO `subcategory`(`sc_c_id`, `sc_name`, `seo_title`, `seo_description`, `seo_keywords`) VALUES ('$cat','$name', '$seo_title', '$seo_description', '$seo_keywords')";
     	$run = $connect->query($qry)or die("not insert Data");
 
 		if($run == true)
@@ -89,6 +92,25 @@
       					<div class="form-group has-label">
       					<label>Category Name</label>
       					<input class="form-control" name="name" type="text" required="true" placeholder="Enter Category Name" />
+      					</div>
+      				</div>
+              <h4 class="card-title col-12">Add SEO keywords</h4>
+              <div class="col-md-6">
+      					<div class="form-group has-label">
+      					<label>Keyword title</label>
+      					<input class="form-control" name="seo_title" type="text" placeholder="Enter Keyword title" />
+      					</div>
+      				</div>
+              <div class="col-md-6">
+      					<div class="form-group has-label">
+      					<label>Keyword description</label>
+      					<input class="form-control" name="seo_description" type="text" placeholder="Enter Keyword description" />
+      					</div>
+      				</div>
+              <div class="col-md-6">
+      					<div class="form-group has-label">
+      					<label>Keywords</label>
+                <input type="text" class="tagsinput" data-role="tagsinput" data-color="primary" name="seo_keywords" placeholder="Enter Keywords" />
       					</div>
       				</div>
       				<div class="col-md-12">

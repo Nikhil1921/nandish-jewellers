@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-title text-center">
-                    <h2 class="title">Jewellery Colletion</h2>
+                    <h2 class="title">Jewellery Collection</h2>
                     <p class="sub-title">Leading Jewellery Brand For Over 100 Years</p>
                 </div>
             </div>

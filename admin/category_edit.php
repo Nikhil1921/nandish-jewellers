@@ -13,8 +13,11 @@
     $price = $_POST['price'];
     $price_22 = $_POST['price_22'];
     $price_18 = $_POST['price_18'];
+    $seo_title = $_POST['seo_title'];
+    $seo_description = $_POST['seo_description'];
+    $seo_keywords = $_POST['seo_keywords'];
 
-    $qry = "UPDATE category SET c_name = '$name', c_price = '$price', c_price_22 = '$price_22', c_price_18 = '$price_18' WHERE c_id = '$id'";      
+    $qry = "UPDATE category SET c_name = '$name', c_price = '$price', c_price_22 = '$price_22', c_price_18 = '$price_18', seo_title = '$seo_title', seo_description = '$seo_description', seo_keywords = '$seo_keywords' WHERE c_id = '$id'";      
     if($connect->query($qry) === TRUE)
     {
 ?>
@@ -105,6 +108,25 @@
                 <input class="form-control" value="<?= $data['c_price_18']; ?>" name="price_18" type="text" required="true" placeholder="Enter Price 18 Carat" />
                 </div>
               </div>
+              <h4 class="card-title col-12">Add SEO keywords</h4>
+              <div class="col-md-6">
+      					<div class="form-group has-label">
+      					<label>Keyword title</label>
+      					<input class="form-control" name="seo_title" type="text" value="<?= $data['seo_title'] ?>" placeholder="Enter Keyword title" />
+      					</div>
+      				</div>
+              <div class="col-md-6">
+      					<div class="form-group has-label">
+                  <label>Keyword description</label>
+                  <input class="form-control" name="seo_description" type="text" value="<?= $data['seo_description'] ?>" placeholder="Enter Keyword description" />
+      					</div>
+      				</div>
+              <div class="col-md-6">
+      					<div class="form-group has-label">
+                  <label>Keywords</label>
+                  <input type="text" class="tagsinput" data-role="tagsinput" data-color="primary" name="seo_keywords" value="<?= $data['seo_keywords'] ?>" placeholder="Enter Keywords" />
+      					</div>
+      				</div>
       				<div class="col-md-12">
 		            <div class="card-footer text-right">
 		              <button type="submit" name="submit" class="btn btn-primary">Submit</button>

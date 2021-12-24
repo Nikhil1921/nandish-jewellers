@@ -11,7 +11,11 @@
   { 
     $cat = $_POST['cat'];
     $name = $_POST['name'];
-    $qry = "UPDATE subcategory SET sc_c_id = '$cat', sc_name = '$name' WHERE sc_id = '$id'";      
+    $seo_title = $_POST['seo_title'];
+    $seo_description = $_POST['seo_description'];
+    $seo_keywords = $_POST['seo_keywords'];
+    
+    $qry = "UPDATE subcategory SET sc_c_id = '$cat', sc_name = '$name', seo_title = '$seo_title', seo_description = '$seo_description', seo_keywords = '$seo_keywords' WHERE sc_id = '$id'";      
     if($connect->query($qry) === TRUE)
     {            
 ?>
@@ -96,6 +100,25 @@
       					<div class="form-group has-label">
       					<label>Sub Category Name</label>
       					<input class="form-control" value="<?= $data['sc_name']; ?>" name="name" type="text" required="true" placeholder="Enter Sub Category Name" />
+      					</div>
+      				</div>
+              <h4 class="card-title col-12">Add SEO keywords</h4>
+              <div class="col-md-6">
+      					<div class="form-group has-label">
+      					<label>Keyword title</label>
+      					<input class="form-control" name="seo_title" type="text" value="<?= $data['seo_title'] ?>" placeholder="Enter Keyword title" />
+      					</div>
+      				</div>
+              <div class="col-md-6">
+      					<div class="form-group has-label">
+                  <label>Keyword description</label>
+                  <input class="form-control" name="seo_description" type="text" value="<?= $data['seo_description'] ?>" placeholder="Enter Keyword description" />
+      					</div>
+      				</div>
+              <div class="col-md-6">
+      					<div class="form-group has-label">
+                  <label>Keywords</label>
+                  <input type="text" class="tagsinput" data-role="tagsinput" data-color="primary" name="seo_keywords" value="<?= $data['seo_keywords'] ?>" placeholder="Enter Keywords" />
       					</div>
       				</div>
       				<div class="col-md-12">

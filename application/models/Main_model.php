@@ -71,7 +71,15 @@ class Main_model extends Public_model
 
 	public function product_list($where)
 	{
-		$select = ['p_id', 'p_detail', 'p_name', 'sc_name', 'i_name', 'c_name', 'p_gram', 'p_image', 'c_price', 'c_price_22', 'c_price_18', 'p_carat', 'p_l_char', 'p_other', 'p_code', 'seo_title', 'seo_description', 'seo_keywords'];
+		$select = ['p_id', 'p_detail', 'p_name', 'sc_name', 'i_name', 'c_name', 'p_gram', 'p_image', 'c_price', 'c_price_22', 'c_price_18', 'p_carat', 'p_l_char', 'p_other', 'p_code'];
+		
+		if (isset($where['i_name']))
+			array_push($select, 'ic.seo_title', 'ic.seo_description', 'ic.seo_keywords');
+		elseif (isset($where['sc_name']))
+			array_push($select, 'sc.seo_title', 'sc.seo_description', 'sc.seo_keywords');
+		else
+			array_push($select, 'c.seo_title', 'c.seo_description', 'c.seo_keywords');
+		
 		$this->db->select($select)
 				 ->from('product p')
 				 ->where($where);
