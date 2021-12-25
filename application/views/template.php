@@ -1,4 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); 
+/* header('Cache-Control: max-age=31536000'); */
 if (!isset($cats)):
     $cats = array_map(function($arr){
         return (object) [

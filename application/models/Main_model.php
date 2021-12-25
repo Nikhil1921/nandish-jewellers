@@ -22,7 +22,7 @@ class Main_model extends Public_model
 						->join('category c', 'c.c_id = p.p_cat')
 						->join('subcategory sc', 'sc.sc_id = p.p_subcat')
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
-						// ->limit(12)
+						->limit(12)
 						->order_by('last_update DESC')
 						->order_by('p_id DESC')
 						->get()
@@ -48,7 +48,7 @@ class Main_model extends Public_model
 						->join('category c', 'c.c_id = p.p_cat')
 						->join('subcategory sc', 'sc.sc_id = p.p_subcat')
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
-						// ->limit(8)
+						->limit(8)
 						->order_by('last_update DESC')
 						->order_by('p_id DESC')
 						->get()
@@ -63,7 +63,7 @@ class Main_model extends Public_model
 						->join('category c', 'c.c_id = p.p_cat')
 						->join('subcategory sc', 'sc.sc_id = p.p_subcat')
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
-						// ->limit(15)
+						->limit(15)
 						->order_by('p_id DESC')
 						->get()
 						->result();
@@ -181,7 +181,7 @@ class Main_model extends Public_model
 
 	public function prod($prod)
 	{
-		return $this->db->select('p_id, p_name, c_name, p_gram, p_image, c_price, c_price_22, c_price_18, p_carat, p_l_char, p_other, p_code, p_detail, p_pre, p_size_type, p_sub_detail, p_size, p_g_wei, p_l_wei, p_gram, p_carat, p_make_gram, p_notes, seo_title, seo_description, seo_keywords')
+		return $this->db->select('p_id, p_name, c_name, p_gram, p_image, c_price, c_price_22, c_price_18, p_carat, p_l_char, p_other, p_code, p_detail, p_pre, p_size_type, p_sub_detail, p_size, p_g_wei, p_l_wei, p_gram, p_carat, p_make_gram, p_notes, ic.seo_title, ic.seo_description, ic.seo_keywords')
 						->from('product p')
 						->where(['p_qty_avail >' => 0, 'p_id' => $prod])
 						->join('category c', 'c.c_id = p.p_cat')
