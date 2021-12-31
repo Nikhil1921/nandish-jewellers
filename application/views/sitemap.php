@@ -40,7 +40,8 @@ $dom->formatOutput = true;
 
                         $url->appendChild($loc);
 
-                        $lastmod = $dom->createElement('lastmod', date('Y-m-d h:i:s'));
+                        $lastmod = $dom->createElement('lastmod', date('Y-m-dTH:i:sP'));
+                        // $lastmod = $dom->createElement('lastmod', date('Y-m-d h:i:s'));
                         // '2020-09-29T09:49:07+00:00'
                         $url->appendChild($lastmod);
 
