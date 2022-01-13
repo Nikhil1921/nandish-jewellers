@@ -106,7 +106,7 @@ class Home extends Public_controller  {
 		return $this->template->load('template', 'page', $data);
 	}
 	
-	public function product_list($cat='', $subcat='', $inner='')
+	public function product_list($cat='', $subcat='', $inner='', $sub_inner='')
 	{
 		$this->load->library('pagination');
 		
@@ -125,10 +125,10 @@ class Home extends Public_controller  {
 							}, $this->main->getall('subcategory', 'sc_id, sc_name', ['sc_c_id' => $arr->c_id]))
 						];
 				}, $this->main->getall('category', 'c_id, c_name', []));
-				
 		$url = base_url();
 		$where = ['p_qty_avail >' => 0];
 		$data['breadcrumb_shop'] = [];
+		
 		if ($cat){
 			$url .= "/$cat";
 			$where['c_name'] = str_replace('-', ' ', $cat);
@@ -147,6 +147,12 @@ class Home extends Public_controller  {
 			array_push($data['breadcrumb_shop'], "<a href='".make_slug($cat."/".$subcat."/".$inner)."'>".str_replace('-', ' ', $inner)."</a>");
 			$inn_id = $this->main->check('innercategory', ['i_name' => str_replace('-', ' ', $inner)], 'i_id');
 			if($inn_id) $data['banners'] = $this->main->getall('banner', 'b_image', ['b_cat_id' => $inn_id], 'b_id DESC');
+		}
+		
+		if ($sub_inner){
+			$url .= "/$sub_inner";
+			$where['si_name'] = str_replace('-', ' ', $sub_inner);
+			array_push($data['breadcrumb_shop'], "<a href='".make_slug($cat."/".$subcat."/".$inner."/".$sub_inner)."'>".str_replace('-', ' ', $sub_inner)."</a>");
 		}
 		
 		foreach ($this->input->get() as $k => $get) {
@@ -189,8 +195,16 @@ class Home extends Public_controller  {
 		$data['from'] = $offset + 1;
 		$data['to'] = $offset + $config['per_page'] <= $config['total_rows'] ? $offset + $config['per_page'] : $config['total_rows'];
 		$data['title'] = $data['prods'] && $data['prods'][0]['seo_title'] ? $data['prods'][0]['seo_title'] : 'shop';
-
+		
 		if ($data['prods']) {
+			if ($cat && $subcat && $inner){
+				$url = "$cat/$subcat/$inner";
+				$get['si_cat_id'] = $data['prods'][0]['p_cat'];
+				$get['si_subcat_id'] = $data['prods'][0]['p_subcat'];
+				$get['si_innercat_id'] = $data['prods'][0]['p_innercat'];
+				$data['sub_inns'] = $this->main->getall('sub_innercategory', 'CONCAT("'."$cat/$subcat/$inner/".'", si_name) AS si_url, si_name',$get);
+			}
+
 			$data['seo'] = [
 					'title' => $data['prods'][0]['seo_title'],
 					'desc' => $data['prods'][0]['seo_description'],
@@ -203,7 +217,7 @@ class Home extends Public_controller  {
 		return $this->template->load('template', 'product_list', $data);
 	}
 	
-	public function product($cat, $subcat, $inner, $prod)
+	public function product($cat, $subcat, $inner, $sub_inner, $prod)
 	{
 		$prod = explode('-', $prod);
 		$prod_id = end($prod);
@@ -228,6 +242,7 @@ class Home extends Public_controller  {
 			"<a href='".make_slug($cat)."'>".str_replace('-', ' ', $cat)."</a>",
 			"<a href='".make_slug($cat."/".$subcat)."'>".str_replace('-', ' ', $subcat)."</a>",
 			"<a href='".make_slug($cat."/".$subcat."/".$inner)."'>".str_replace('-', ' ', $inner)."</a>",
+			"<a href='".make_slug($cat."/".$subcat."/".$inner."/".$sub_inner)."'>".str_replace('-', ' ', $sub_inner)."</a>",
 			$data['title']];
 		return $this->template->load('template', 'prod', $data);
 	}
@@ -596,10 +611,14 @@ class Home extends Public_controller  {
 								return (object) [
 									'sc_name' => $arr->sc_name,
 									'inner_cats' => array_map(function($arr){
-										$limit = $this->main->products_all_count(['p_innercat' => $arr->i_id]);
 										return (object) [
 											'i_name' => $arr->i_name,
-											'prods' => $this->main->getall('product', 'p_id, p_name', ['p_innercat' => $arr->i_id])
+											'sub_inners' => array_map(function($arr){
+												return (object) [
+													'si_name' => $arr->si_name,
+													'prods' => $this->main->getall('product', 'p_id, p_name', ['p_subinner' => $arr->si_id])
+												];
+											}, $this->main->getall('sub_innercategory', 'si_id, si_name', ['si_innercat_id' => $arr->i_id]))
 										];
 									}, $this->main->getall('innercategory', 'i_id, i_name', ['i_sub_id' => $arr->sc_id]))
 								];

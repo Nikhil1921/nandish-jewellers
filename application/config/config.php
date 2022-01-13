@@ -17,7 +17,7 @@ $config['merchant_id'] = PAYMENT ? '027005431694377' : '638730950659186'; */
 
 // razorpay payment gateway start
 $config['api_key'] = $_SERVER['HTTP_HOST'] == 'localhost' ? 'rzp_test_Ih6FtVWFIhWHOC' : 'rzp_live_Jf7dJMbtMe1xSC';
-$config['api_secret'] = $_SERVER['HTTP_HOST'] == 'localhost' ? 'rLPBMsXLE70mTDiciFObL64u' : '7QSfgUjxMW5xWKY3ingxBgWN  ';
+$config['api_secret'] = $_SERVER['HTTP_HOST'] == 'localhost' ? 'rLPBMsXLE70mTDiciFObL64u' : '7QSfgUjxMW5xWKY3ingxBgWN';
 // razorpay payment gateway end
 
 $config['mobile'] = '+91 80001 04444';

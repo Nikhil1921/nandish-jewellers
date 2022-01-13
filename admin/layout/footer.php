@@ -303,49 +303,68 @@
 <script type="text/javascript">
     $("#cat").change(function(){
 
-        $("#subcat").html('');
+        $("#subcat").html('<option value="">Select Sub Category</option>');
         var cat = $('#cat').val();
         var htmlData  = '';
 
         $.ajax({
-    type: "POST",
-    url: "category.php",
-    data: {cat: cat},
-    dataType: "json",
-    cache: false,
-    success: function(response)
-    {
-      $.each(response , function(index, val) {
-        htmlData += '<option value="'+val['sc_id']+'">'+val['sc_name']+'</option>';
-      });
-      console.log(htmlData);
-      $("#subcat").append(htmlData);
-    }
+          type: "GET",
+          url: "category.php",
+          data: {cat: cat},
+          dataType: "json",
+          cache: false,
+          success: function(response)
+          {
+            $.each(response , function(index, val) {
+              htmlData += '<option value="'+val['sc_id']+'">'+val['sc_name']+'</option>';
+            });
+            $("#subcat").append(htmlData);
+          }
+        });
     });
-    });
-
 
     $("#subcat").change(function(){
 
-        $("#innercat").html('');
+        $("#innercat").html('<option value="">Select Inner Category</option>');
         var subcat = $('#subcat').val();
         var htmlData  = '';
 
         $.ajax({
-    type: "POST",
-    url: "innercategory.php",
-    data: {subcat: subcat},
-    dataType: "json",
-    cache: false,
-    success: function(response)
-    {
-      $.each(response , function(index, val) {
-        htmlData += '<option value="'+val['i_id']+'">'+val['i_name']+'</option>';
-      });
-      console.log(htmlData);
-      $("#innercat").append(htmlData);
-    }
+          type: "GET",
+          url: "innercategory.php",
+          data: {subcat: subcat},
+          dataType: "json",
+          cache: false,
+          success: function(response)
+          {
+            $.each(response , function(index, val) {
+              htmlData += '<option value="'+val['i_id']+'">'+val['i_name']+'</option>';
+            });
+            $("#innercat").append(htmlData);
+          }
+        });
     });
+
+    $("#innercat").change(function(){
+
+        $("#subinnercat").html('<option value="">Select Sub Inner Category</option>');
+        var innercat = $('#innercat').val();
+        var htmlData  = '';
+
+        $.ajax({
+          type: "GET",
+          url: "innercat.php",
+          data: {innercat: innercat},
+          dataType: "json",
+          cache: false,
+          success: function(response)
+          {
+            $.each(response , function(index, val) {
+              htmlData += '<option value="'+val['si_id']+'">'+val['si_name']+'</option>';
+            });
+            $("#subinnercat").append(htmlData);
+          }
+        });
     });
 </script>
 </body>

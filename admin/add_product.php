@@ -2,52 +2,55 @@
 include("layout/header.php");
 if(isset($_POST['submit']))
 {
-$cat = $_POST['cat'];
-$subcat = $_POST['subcat'];
-$innercat = $_POST['innercat'];
-$name = $_POST['name'];
-$price = $_POST['price'];
-$detail = $_POST['detail'];
-$subdetail = $_POST['subdetail'];
-$invoice = null;
-// $invoice = $_POST['invoice'];
-$notes = $_POST['notes'];
-$show = $_POST['show'];
-$size_cat = $_POST['size_cat'];
-$size = $_POST['size'];
-$g_wei = $_POST['g_wei'];
-$l_wei = $_POST['l_wei'];
-$l_char = $_POST['l_char'];
-$p_carat = $_POST['p_carat'];
-$p_code = $_POST['p_code'];
-$p_shipping = $_POST['p_shipping'];
-$p_qty_avail = $_POST['p_qty_avail'];
-$p_make_gram = $_POST['p_make_gram'];
-$p_other = $_POST['p_other'];
-$p_pre = (isset($_POST['p_pre'])) ? 1 : 0;
-$countfiles = count($_FILES['image']['name']);
-$imgs = [];
-if ($_FILES['image']['name'][0]):
-for($i=0; $i<$countfiles; $i++)
-{
-$image = explode('.', $_FILES['image']['name'][$i]);
-$filename = time().$i.'.'.end($image);
-$imgs[$i] = $filename;
-move_uploaded_file($_FILES['image']['tmp_name'][$i], 'image/product/'.$filename);
-}
-endif;
-$img = implode(",", $imgs);
-$qry="INSERT INTO `product`( `p_cat`, `p_subcat`, `p_innercat`, `p_name`, `p_gram`, `p_image`, `p_detail`, `p_sub_detail`, `p_invoice`, `p_notes`, `p_show`, `p_size_type`, `p_size`, `p_g_wei`, `p_l_wei`, `p_l_char`, `p_carat`, `p_code`, `p_shipping`, `p_qty_avail`, `p_make_gram`, `p_other`, `p_pre`) VALUES ('$cat','$subcat','$innercat','$name','$price','$img','$detail','$subdetail','$invoice','$notes','$show','$size_cat','$size','$g_wei','$l_wei','$l_char','$p_carat','$p_code','$p_shipping','$p_qty_avail','$p_make_gram','$p_other','$p_pre')";
-$run = $connect->query($qry)or die("not insert Data");
-if($run == true)
-{
-?>
-<script>
-alert('data inserted successfully');
-window.open('add_product.php','_self');
-</script>
-<?php
-}
+  $cat = $_POST['cat'];
+  $subcat = $_POST['subcat'];
+  $innercat = $_POST['innercat'];
+  $subinnercat = $_POST['subinnercat'];
+  $name = $_POST['name'];
+  $price = $_POST['price'];
+  $detail = $_POST['detail'];
+  $subdetail = $_POST['subdetail'];
+  $invoice = null;
+  // $invoice = $_POST['invoice'];
+  $notes = $_POST['notes'];
+  $show = $_POST['show'];
+  $size_cat = $_POST['size_cat'];
+  $size = $_POST['size'];
+  $g_wei = $_POST['g_wei'];
+  $l_wei = $_POST['l_wei'];
+  $l_char = $_POST['l_char'];
+  $p_carat = $_POST['p_carat'];
+  $p_code = $_POST['p_code'];
+  $p_shipping = $_POST['p_shipping'];
+  $p_qty_avail = $_POST['p_qty_avail'];
+  $p_make_gram = $_POST['p_make_gram'];
+  $p_other = $_POST['p_other'];
+  $p_pre = (isset($_POST['p_pre'])) ? 1 : 0;
+  $countfiles = count($_FILES['image']['name']);
+  $imgs = [];
+  if ($_FILES['image']['name'][0]):
+    for($i=0; $i<$countfiles; $i++)
+    {
+      $image = explode('.', $_FILES['image']['name'][$i]);
+      $filename = time().$i.'.'.end($image);
+      $imgs[$i] = $filename;
+      move_uploaded_file($_FILES['image']['tmp_name'][$i], 'image/product/'.$filename);
+    }
+  endif;
+
+  $img = implode(",", $imgs);
+  $qry="INSERT INTO `product`( `p_cat`, `p_subcat`, `p_innercat`, `p_subinner`, `p_name`, `p_gram`, `p_image`, `p_detail`, `p_sub_detail`, `p_invoice`, `p_notes`, `p_show`, `p_size_type`, `p_size`, `p_g_wei`, `p_l_wei`, `p_l_char`, `p_carat`, `p_code`, `p_shipping`, `p_qty_avail`, `p_make_gram`, `p_other`, `p_pre`) VALUES ('$cat','$subcat','$innercat','$subinnercat','$name','$price','$img','$detail','$subdetail','$invoice','$notes','$show','$size_cat','$size','$g_wei','$l_wei','$l_char','$p_carat','$p_code','$p_shipping','$p_qty_avail','$p_make_gram','$p_other','$p_pre')";
+  $run = $connect->query($qry)or die("not insert Data");
+  
+  if($run == true)
+  {
+  ?>
+    <script>
+      alert('data inserted successfully');
+      window.open('add_product.php','_self');
+    </script>
+  <?php
+  }
 }
 ?>
 <div class="main-panel">
@@ -104,7 +107,7 @@ window.open('add_product.php','_self');
                 <div class="col-md-6">
                   <label>Category</label>
                   <select class="form-control" name="cat" id="cat" data-style="btn btn-primary btn-round" title="Select Category" required>
-                    <option value="Disable">Select Category</option>
+                    <option value="">Select Category</option>
                     <?php
                     $sql = "SELECT * FROM category";
                     $run1 = $connect->query($sql);
@@ -124,6 +127,11 @@ window.open('add_product.php','_self');
                 <div class="col-md-6">
                   <label>Inner Category</label>
                   <select class="form-control" name="innercat" data-style="btn btn-primary btn-round" title="Select Sub Category" id="innercat" required>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label>Sub Inner Category</label>
+                  <select class="form-control" name="subinnercat" data-style="btn btn-primary btn-round" title="Select Sub Inner Category" id="subinnercat" required>
                   </select>
                 </div>
                 <div class="col-md-6">

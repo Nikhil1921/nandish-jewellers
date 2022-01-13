@@ -129,7 +129,7 @@
                                         </tr>
                                         <tr>
                                         <td>Rate (Per Grams)</td>
-                                        <td><?= round($data[$data['p_carat']]) ?></td>
+                                        <td><?= ($data[$data['p_carat']]) ?></td>
                                         </tr>
                                         <tr>
                                         <td>Making Charge (Per Grams)</td>
@@ -201,7 +201,7 @@
                <div class="product-item">
                   <figure class="related-thumb">
                      <?php $imge = explode(",", $relat['p_image']); ?>
-                     <a href="<?= make_slug($relat['c_name']."/".$relat['sc_name']."/".$relat['i_name']."/".$relat['p_name']."-".e_id($relat['p_id'])) ?>">
+                     <a href="<?= make_slug($relat['c_name']."/".$relat['sc_name']."/".$relat['i_name']."/".$relat['si_name']."/".$relat['p_name']."-".e_id($relat['p_id'])) ?>">
                      <img class="pri-img" src="<?= base_url() ?>admin/image/product/<?= reset($imge) ?>" alt="Jewellery">
                      </a>
                      <div class="button-group">
@@ -233,10 +233,10 @@
                   </figure>
                   <div class="product-caption text-center">
                      <div class="product-identity">
-                        <p class="manufacturer-name"><a href="<?= make_slug($relat['c_name']."/".$relat['sc_name']."/".$relat['i_name']."/".$relat['p_name']."-".e_id($relat['p_id'])) ?>"><?= $relat['i_name'] ?></a></p>
+                        <p class="manufacturer-name"><a href="<?= make_slug($relat['c_name']."/".$relat['sc_name']."/".$relat['i_name']."/".$relat['si_name']."/".$relat['p_name']."-".e_id($relat['p_id'])) ?>"><?= $relat['i_name'] ?></a></p>
                      </div>
                      <h6 class="product-name">
-                        <a href="<?= make_slug($relat['c_name']."/".$relat['sc_name']."/".$relat['i_name']."/".$relat['p_name']."-".e_id($relat['p_id'])) ?>"><?= $relat['p_name'] ?></a>
+                        <a href="<?= make_slug($relat['c_name']."/".$relat['sc_name']."/".$relat['i_name']."/".$relat['si_name']."/".$relat['p_name']."-".e_id($relat['p_id'])) ?>"><?= $relat['p_name'] ?></a>
                      </h6>
                      <div class="price-box">
                         <span class="price-regular"><i class="fa fa-inr" aria-hidden="true"></i><?= round(($relat[$relat['p_carat']] * $relat['p_gram'] + $relat['p_other'] + $relat['p_l_char']) * 1.03) ?></span>

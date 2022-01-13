@@ -19,6 +19,7 @@ endif;
 <!DOCTYPE html>
 <html class="no-js" lang="en">
    <head>
+        <meta name="google-site-verification" content="NKAEUoTpiQ-hACw9MT63YljwnaID4x8ckD3GIwBabUk" />
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <?php if(is_array($title)): ?>
@@ -46,8 +47,19 @@ endif;
         <link rel="stylesheet" href="<?= base_url('assets/css/custom.css?v=1.0.2') ?>">
         <link rel="stylesheet" href="<?= base_url('assets/css/responsive.css?v=1.0.1') ?>">
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/xzoom.css') ?>" media="all" />
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-MMCPFHR');</script>
+        <!-- End Google Tag Manager -->
    </head>
    <body>
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MMCPFHR"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
         <header class="header-area">
             <div class="main-header d-none d-lg-block">
                 <div class="header-main-area sticky">
@@ -938,13 +950,17 @@ endif;
         <script src="<?= base_url('assets/js/plugins/instagramfeed.min.js') ?>"></script>
         <script src="<?= base_url('assets/js/plugins/ajaxchimp.js') ?>"></script>
         <script src="<?= base_url('assets/js/plugins/ajax-mail.js') ?>"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfmCVTjRI007pC1Yk2o2d_EhgkjTsFVN8"></script>
-        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <?php if($name == 'contact_us'): ?>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfmCVTjRI007pC1Yk2o2d_EhgkjTsFVN8"></script>
+        <?php endif ?>
+        <?php if($name == 'checkout'): ?>
+            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <?php endif ?>
         <script src="<?= base_url('assets/js/plugins/google-map.js') ?>"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="<?= base_url('assets/js/jquery.validate.js') ?>"></script>
-        <script src="<?= base_url('assets/js/main.js?v=1.0.1') ?>"></script>
-        <script src="<?= base_url('assets/js/custom.js?v=1.0.2') ?>"></script>
+        <script src="<?= base_url('assets/js/main.js?v=1.0.5') ?>"></script>
+        <script src="<?= base_url('assets/js/custom.js?v=1.0.3') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/js/xzoom.min.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/js/jquery.hammer.min.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/js/setup.js') ?>"></script>

@@ -76,8 +76,8 @@
         responsive: [{
             breakpoint: 992,
             settings: {
-                arrows: false,
-                dots: true
+                arrows: true,
+                dots: false
             }
         }]
     });
@@ -176,42 +176,75 @@
     // product carousel active
     $('.product-carousel-4_2').slick({
         speed: 1000,
+        infinite: true,
         slidesToShow: 4,
-        autoplay: false,
         rows: 3,
-        adaptiveHeight: true,
         prevArrow: '<button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>',
         nextArrow: '<button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>',
+        slidesToScroll: 3,
         responsive: [{
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 3,
-                    rows: 3
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 3,
+                        rows: 3
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 3,
+                        arrows: false,
+                        rows: 3
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 3,
+                        arrows: false,
+                        rows: 3
+                    }
                 }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 3,
-                    arrows: false,
-                    rows: 3
+            ]
+            /* speed: 1000,
+            slidesToShow: 4,
+            autoplay: false,
+            rows: 3,
+            adaptiveHeight: true,
+            prevArrow: '<button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>',
+            nextArrow: '<button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>',
+            responsive: [{
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 3,
+                        rows: 3
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 3,
+                        arrows: false,
+                        rows: 3
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 3,
+                        arrows: false,
+                        rows: 3
+                    }
                 }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 3,
-                    arrows: false,
-                    rows: 3
-                }
-            }
-        ]
+            ] */
     });
 
 
     // product banner active js
     $('.product-banner-carousel').slick({
         autoplay: true,
+        infinite: true,
+        slidesToScroll: 3,
         speed: 1000,
         arrows: false,
         slidesToShow: 4,
@@ -219,19 +252,22 @@
         responsive: [{
                 breakpoint: 992,
                 settings: {
-                    slidesToShow: 3
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
                 }
             },
             {
                 breakpoint: 768,
                 settings: {
-                    slidesToShow: 2
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
                 }
             },
             {
                 breakpoint: 480,
                 settings: {
-                    slidesToShow: 1
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
                 }
             }
         ]
@@ -269,25 +305,57 @@
     $('.group-list-carousel--3').slick({
         autoplay: true,
         speed: 1000,
-        rows: 3,
+        infinite: true,
         slidesToShow: 3,
-        adaptiveHeight: true,
+        rows: 3,
+        slidesToScroll: 3,
         prevArrow: '<button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>',
         nextArrow: '<button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>',
         responsive: [{
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 2
+                    breakpoint: 992,
+                    settings: {
+                        slidesToScroll: 3,
+                        slidesToShow: 2
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        /* arrows: false, */
+                        slidesToScroll: 3,
+                        slidesToShow: 1
+                    }
+                },
+                {
+                    /* arrows: false, */
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    }
                 }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    arrows: false,
-                    slidesToShow: 1
+            ]
+            /* autoplay: true,
+            speed: 1000,
+            rows: 3,
+            slidesToShow: 3,
+            adaptiveHeight: true,
+            prevArrow: '<button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>',
+            nextArrow: '<button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>',
+            responsive: [{
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 2
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        arrows: false,
+                        slidesToShow: 1
+                    }
                 }
-            }
-        ]
+            ] */
     });
 
     // blog carousel active start

@@ -11,6 +11,7 @@ if(isset($_POST['submit']))
 $cat = $_POST['cat'];
 $subcat = $_POST['subcat'];
 $innercat = $_POST['innercat'];
+$subinnercat = $_POST['subinnercat'];
 $name = $_POST['name'];
 $price = $_POST['price'];
 $detail = $_POST['detail'];
@@ -44,7 +45,7 @@ if ($_FILES['image']['name'][0]):
 endif;
 $images = explode(",", $image);
 $imgs = implode(',', array_merge($imgs, $images));
-$qry = "UPDATE product SET p_cat = '$cat', p_subcat = '$subcat', p_innercat = '$innercat', p_name = '$name', p_gram = '$price', p_image = '$imgs', p_detail = '$detail', p_sub_detail = '$subdetail', p_invoice = '$invoice', p_notes = '$notes', p_show = '$show', p_size_type = '$size_cat', p_size = '$size', p_g_wei = '$g_wei', p_l_wei = '$l_wei', p_l_char = '$l_char', p_carat = '$p_carat', p_code = '$p_code', p_shipping = '$p_shipping', p_qty_avail = '$p_qty_avail', p_make_gram = '$p_make_gram', p_pre = '$p_pre' WHERE p_id = '$id'";
+$qry = "UPDATE product SET p_cat = '$cat', p_subcat = '$subcat', p_innercat = '$innercat', p_subinner = '$subinnercat', p_name = '$name', p_gram = '$price', p_image = '$imgs', p_detail = '$detail', p_sub_detail = '$subdetail', p_invoice = '$invoice', p_notes = '$notes', p_show = '$show', p_size_type = '$size_cat', p_size = '$size', p_g_wei = '$g_wei', p_l_wei = '$l_wei', p_l_char = '$l_char', p_carat = '$p_carat', p_code = '$p_code', p_shipping = '$p_shipping', p_qty_avail = '$p_qty_avail', p_make_gram = '$p_make_gram', p_pre = '$p_pre' WHERE p_id = '$id'";
 if($connect->query($qry) === TRUE)
 {
 ?>
@@ -151,6 +152,20 @@ alert('data Not Update successfully');
                     {
                     ?>
                     <option value="<?php echo $data2['i_id']; ?>" <?php if($data['p_innercat'] == $data2['i_id']) { echo "SELECTED"; } ?>><?php echo $data2['i_name']; ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label>Sub Inner Category</label>
+                  <select class="form-control" name="subinnercat" id="subinnercat" data-style="btn btn-primary btn-round" title="Select Sub Inner Category" required>
+                    <?php
+                    $subinner = $data['p_innercat'];
+                    $sql2 = "SELECT * FROM sub_innercategory where si_innercat_id = '$subinner'";
+                    $run2 = $connect->query($sql2);
+                    while ($data2 = $run2->fetch_assoc())
+                    {
+                    ?>
+                    <option value="<?php echo $data2['si_id']; ?>" <?php if($data['p_subinner'] == $data2['si_id']) { echo "SELECTED"; } ?>><?php echo $data2['si_name']; ?></option>
                     <?php } ?>
                   </select>
                 </div>

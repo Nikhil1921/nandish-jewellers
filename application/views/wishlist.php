@@ -24,12 +24,12 @@
                                 ?>
                                 <tr>
                                     <td class="pro-thumbnail">
-                                        <a href="<?= make_slug($data['c_name']."/".$data['sc_name']."/".$data['i_name']."/".$data['p_name']."-".e_id($data['p_id'])) ?>">
+                                        <a href="<?= make_slug($data['c_name']."/".$data['sc_name']."/".$data['i_name']."/".$data['si_name']."/".$data['p_name']."-".e_id($data['p_id'])) ?>">
                                             <img class="img-fluid" src="<?= base_url() ?>admin/image/product/<?= reset($imge) ?>" alt="Jewellery" />
                                         </a>
                                     </td>
                                     <td class="pro-title">
-                                        <a href="<?= make_slug($data['c_name']."/".$data['sc_name']."/".$data['i_name']."/".$data['p_name']."-".e_id($data['p_id'])) ?>"><?= $data['p_name'] ?></a>
+                                        <a href="<?= make_slug($data['c_name']."/".$data['sc_name']."/".$data['i_name']."/".$data['si_name']."/".$data['p_name']."-".e_id($data['p_id'])) ?>"><?= $data['p_name'] ?></a>
                                     </td>
                                     <td class="pro-price">
                                         <span>

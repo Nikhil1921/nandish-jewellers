@@ -400,11 +400,36 @@ function checkout(form) {
                             }
                         });
                     },
+                    "modal": {
+                        "ondismiss": function() {
+                            $(form).find('button[type=submit]').prop('disabled', false);
+                        }
+                    }
                 };
                 var rzp1 = new Razorpay(options);
                 rzp1.open();
                 return;
             }
+        }
+    });
+}
+
+function checkout_develop(form) {
+    var data = $(form).serialize();
+    $.ajax({
+        url: base_url + 'save-order',
+        type: 'POST',
+        dataType: 'json',
+        data: data,
+        success: function(msg) {
+            Swal.fire({
+                icon: msg.error ? 'error' : 'success',
+                title: msg.error ? 'Oops...' : 'Success',
+                text: msg.message
+            }).then((result) => {
+                if (msg.redirect) window.location.href = msg.redirect;
+            });
+            return;
         }
     });
 }

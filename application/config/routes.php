@@ -6,6 +6,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['about-us'] = 'home/about_us';
 $route['save-order'] = 'user/save_order';
+$route['save_order_developer'] = 'user/save_order_developer';
 $route['payment-status/(:any)'] = 'user/payment_status/$1';
 $route['contact-us'] = 'home/contact_us';
 $route['privacy'] = 'home/privacy';
@@ -36,5 +37,7 @@ $route['otp']['post'] = 'home/otp';
 $route['forgot-password'] = 'home/forgot_password';
 $route['change-password'] = 'home/change_password';
 $route['sitemap'] = 'home/sitemap';
-$route['(:any)(/:any)?(/:any)?'] = 'home/product_list/$1$2$3';
-$route['(:any)/(:any)/(:any)/(:any)'] = 'home/product/$1/$2/$3/$4';
+/* $route['(:any)(/:any)?(/:any)?'] = 'home/product_list/$1$2$3';
+$route['(:any)/(:any)/(:any)/(:any)'] = 'home/product/$1/$2/$3/$4'; */
+$route['(:any)(/:any)?(/:any)?(/:any)?'] = 'home/product_list/$1$2$3$4';
+$route['(:any)/(:any)/(:any)/(:any)/(:any)'] = 'home/product/$1/$2/$3/$4/$5';

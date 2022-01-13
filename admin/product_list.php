@@ -48,6 +48,15 @@
           <div class="card-body table-responsive">
             <div class="toolbar">
             </div>
+            <?php 
+            /* $sql = "SELECT p_id, p_cat, p_subcat, p_innercat, si_id, si_cat_id, si_subcat_id, si_innercat_id FROM product p JOIN sub_innercategory si ON p.p_innercat = si.si_innercat_id";
+            $result = $connect->query($sql)->fetch_all(MYSQLI_ASSOC);
+            foreach ($result as $v) {
+              $v = (object) $v;
+              $sql = "UPDATE `product` SET p_subinner = '$v->si_id' WHERE p_id = '$v->p_id'";
+              $connect->query($sql);
+            } */
+            ?>
             <table id="products_list" class="table table-striped table-bordered" cellspacing="0" width="100%">
               <thead>
                 <tr>

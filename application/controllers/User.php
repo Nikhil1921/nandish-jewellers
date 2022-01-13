@@ -202,14 +202,15 @@ class User extends Public_controller  {
 			'u_postcode' => $this->input->post('pin'),
 			'u_pancard'  => $this->input->post('pancard') ? $this->input->post('pancard') : 'NA'
 		];
-
-		$ship = $total = 0;
+		die(json_encode($_POST));
+		$ship = $total = $disc = 0;
 
 		foreach ($this->cart as $cart) {
-			$makec = $cart['p_l_char'];
-			if ($this->session->coupen_id):
+			/* $makec = $cart['p_l_char']; */
+			/* if ($this->session->coupen_id):
 			$makec = $makec * (100 - $this->session->discount) / 100;
-			endif;
+			endif; */
+			$disc += round($cart['p_l_char'] * ($this->session->discount) / 100) * $cart['ca_qty'];
 			$ship += round($cart['p_shipping'] * 1.03);
 			$total += round(($cart[$cart['p_carat']] * $cart['p_gram'] + $cart['p_other'] + $makec) * $cart['ca_qty'] * 1.03);
 		}
@@ -219,7 +220,7 @@ class User extends Public_controller  {
 
 		// razorpay payment gateway start
 		$name = $this->user['u_f_name'].' '.$this->user['u_m_name'].' '.$this->user['u_l_name'];
-		$response = $update ? ['error' => false, 'message' => ($total + $ship), 'name' => $name, 'mobile' => $this->user['u_mobile'], 'email' => $this->user['u_email']] 
+		$response = $update ? ['error' => false, 'message' => ($total + $ship - $disc), 'name' => $name, 'mobile' => $this->user['u_mobile'], 'email' => $this->user['u_email']] 
 							: ['error' => true, 'message' => "NOT OK"];
 		die(json_encode($response));
 		
@@ -248,14 +249,14 @@ class User extends Public_controller  {
 	public function save_order()
 	{
 		if (!$this->input->is_ajax_request()) die;
-
+		
 		$payment_id = $this->input->post('payment_id');
 		$api = new Api($this->config->item('api_key'), $this->config->item('api_secret'));
 		$response = $api->payment->fetch($payment_id);
 		
-		if (!empty($response) && $response->status == 'authorized') {
+		if (!empty($response) && $response->captured === true) {
 			if(!$this->main->check('orders', ['o_payment' => $payment_id], 'o_payment')):
-				$total = 0;
+				$total = $disc = 0;
 				foreach ($this->cart as $k => $v):
 					$details[$k]['prod_id'] = $v['ca_pro_id'];
 					$details[$k]['qty'] = $v['ca_qty'];
@@ -263,9 +264,10 @@ class User extends Public_controller  {
 					$details[$k]['size'] = ($v['ca_size']) ? $v['ca_size'] : 'NA';
 					$details[$k]['shipping'] = round($v['p_shipping'] * 1.03);
 					$makec = $v['p_l_char'];
-					if (isset($this->session->coupen_id)):
+					$disc += round($v['p_l_char'] * ($this->session->discount) / 100) * $v['ca_qty'];
+					/* if (isset($this->session->coupen_id)):
 						$makec = $makec * (100 - $this->session->discount) / 100;
-					endif;
+					endif; */
 					$makec = round($makec);
 					$details[$k]['other'] = $v['p_other'];
 					$details[$k]['making'] = $makec;
@@ -277,7 +279,7 @@ class User extends Public_controller  {
 				$order = [
 					'o_details' => json_encode($details),
 					'o_u_id' 	=> $this->user_id,
-					'o_total'	=> $total,
+					'o_total'	=> $total - $disc,
 					'o_date'	=> date('d-m-Y', $response->created_at),
 					'o_time'	=> date('h:i:s A', $response->created_at),
 					'o_address'	=> $this->user['u_address'],
@@ -292,13 +294,14 @@ class User extends Public_controller  {
 					'o_payment'	=> $payment_id,
 					'o_pancard' => $this->user['u_pancard']
 				];
+				
 				$status = $this->main->saveOrder($order, $this->cart, $this->user['u_mobile']);
 				$response = $status ? ['error' => false, 'message' => "Order saved success.", 'redirect' => "payment-status/$payment_id"] : ['error' => true, 'message' => "Something going wrong. Try again."];
 			else:
 				$response = ['error' => false, 'message' => "Order saved success."];
 			endif;
 		}else
-			$response = ['error' => true, 'message' => "Something going wrong. Try againss."];
+			$response = ['error' => true, 'message' => "Something going wrong. Try again."];
 		
 		die(json_encode($response));
 	}
@@ -384,5 +387,16 @@ class User extends Public_controller  {
 	{
 		session_destroy();
 		return redirect('login-register');
+	}
+
+	public function save_order_developer()
+	{
+		if(!$this->cart) return redirect('');
+		
+		$data['name'] = 'checkout';
+		$data['title'] = 'checkout';
+		$data['breadcrumb'] = ["<a href='".front_url("cart")."'>Cart</a>", 'checkout'];
+        
+		return $this->template->load('template', 'save_order_developer', $data);
 	}
 }

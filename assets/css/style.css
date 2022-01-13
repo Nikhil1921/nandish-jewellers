@@ -1539,7 +1539,7 @@ only screen and (max-width: 767.98px) {
 }
 
 .main-menu ul li ul.megamenu {
-   width: 50%;
+    width: 50%;
     max-width: 100%;
     height: auto;
     max-height: 100vh;
@@ -1554,6 +1554,7 @@ only screen and (max-width: 767.98px) {
 .main-menu ul li ul.megamenu::-webkit-scrollbar {
     display: none;
 }
+
 
 /*@media only screen and (min-width: 992px) and (max-width: 1199.98px) {
     .main-menu ul li ul.megamenu {
@@ -1836,6 +1837,7 @@ only screen and (max-width: 767.98px) {
     -webkit-justify-content: space-around;
     -ms-flex-pack: justify;
     justify-content: space-around;
+    line-height: 36px;
 }
 
 .mobile-main-header .mobile-menu-toggler {
@@ -2023,7 +2025,7 @@ only screen and (max-width: 767.98px) {
 /*------ offcanvas widget area start ------*/
 
 .offcanvas-widget-area {
-    margin-top: auto;
+    /* margin-top: auto; */
     padding-bottom: 30px;
 }
 
@@ -2939,9 +2941,9 @@ only screen and (max-width: 767.98px) {
 }
 
 .banner-content_style2 {
-    left: 40px;
+    left: 15px;
     top: auto;
-    bottom: 40px;
+    bottom: 17px;
     -webkit-transform: translateY(0);
     -ms-transform: translateY(0);
     transform: translateY(0);
@@ -2954,7 +2956,9 @@ only screen and (max-width: 767.98px) {
 }
 
 .banner-content_style2 .banner-text3 a {
-    color: #5f5aa5;
+    color: #FFFFFF;
+    font-size: 17px;
+    text-transform: uppercase;
     pointer-events: visible;
 }
 
@@ -3613,12 +3617,13 @@ only screen and (max-width: 479.98px) {
     margin: auto;
 }
 
-.related-thumb{
+.related-thumb {
     position: relative;
     width: 180px;
-    height:auto;
+    height: auto;
     margin: auto;
 }
+
 .product-thumb img,
 .category-tumb img,
 .related-thumb img {

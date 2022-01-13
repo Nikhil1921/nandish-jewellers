@@ -65,6 +65,10 @@
                                 <label for="postcode" class="required">Postcode / ZIP</label>
                                 <input type="text" id="postcode" name="pin" placeholder="Postcode / ZIP" value="<?= $this->user['u_postcode'] ?>" />
                             </div>
+                            <div class="single-input-item">
+                                <label for="payment_id" class="required">payment id</label>
+                                <input type="text" id="payment_id" name="payment_id" placeholder="payment id" value="" />
+                            </div>
                             <?php if ($total > 200000): ?>
                             <div class="single-input-item">
                                 <label for="pancard" class="required">Pan No.</label>
@@ -138,7 +142,7 @@
                             </div>
                             <div class="order-payment-method">
                                 <div class="summary-footer-area">
-                                    <button type="submit" onclick="checkout(this.form); return false;" class="btn btn-sqr">Place Order</button>
+                                    <button type="submit" onclick="checkout_develop(this.form); return false;" class="btn btn-sqr">Place Order</button>
                                 </div>
                             </div>
                         </div>

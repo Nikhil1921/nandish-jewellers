@@ -43,7 +43,6 @@ if(! function_exists('meta_tags')){
             $url = base_url();
         }
 
-
         if($enable['general']){
             $output .= '<meta name="description" content="'.$desc.'" />';
         }
@@ -55,7 +54,6 @@ if(! function_exists('meta_tags')){
         } else {
             $output .= '<meta name="robots" content="noindex,nofollow" />';
         }
-
 
         //open graph
         if($enable['og']){

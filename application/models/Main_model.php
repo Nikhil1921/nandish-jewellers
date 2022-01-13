@@ -16,12 +16,13 @@ class Main_model extends Public_model
 
 	public function getNewProds()
 	{
-		return $this->db->select('p_id, p_name, sc_name, i_name, c_name, p_gram, p_image, c_price, c_price_22, c_price_18, p_carat, p_l_char, p_other')
+		return $this->db->select('p_id, p_name, sc_name, i_name, c_name, p_gram, p_image, c_price, c_price_22, c_price_18, p_carat, p_l_char, p_other, si_name')
 						->from('product p')
 						->where(['p_show' => 'New', 'p_qty_avail >' => 0])
 						->join('category c', 'c.c_id = p.p_cat')
 						->join('subcategory sc', 'sc.sc_id = p.p_subcat')
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
+						->join('sub_innercategory si', 'si.si_id = p.p_subinner')
 						->limit(12)
 						->order_by('last_update DESC')
 						->order_by('p_id DESC')
@@ -42,12 +43,13 @@ class Main_model extends Public_model
 
 	public function getBestProds($p_cat)
 	{
-		return $this->db->select('p_id, p_name, sc_name, i_name, c_name, p_gram, p_image, c_price, c_price_22, c_price_18, p_carat, p_l_char, p_other')
+		return $this->db->select('p_id, p_name, sc_name, i_name, c_name, p_gram, p_image, c_price, c_price_22, c_price_18, p_carat, p_l_char, p_other, si_name')
 						->from('product p')
 						->where(['p_show' => 'Best', 'p_qty_avail >' => 0, 'p_cat' => $p_cat])
 						->join('category c', 'c.c_id = p.p_cat')
 						->join('subcategory sc', 'sc.sc_id = p.p_subcat')
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
+						->join('sub_innercategory si', 'si.si_id = p.p_subinner')
 						->limit(8)
 						->order_by('last_update DESC')
 						->order_by('p_id DESC')
@@ -57,12 +59,13 @@ class Main_model extends Public_model
 
 	public function getRelatedProds($inner, $p_id)
 	{
-		return $this->db->select('p_id, p_name, sc_name, i_name, c_name, p_gram, p_image, c_price, c_price_22, c_price_18, p_carat, p_l_char, p_other')
+		return $this->db->select('p_id, p_name, sc_name, i_name, c_name, p_gram, p_image, c_price, c_price_22, c_price_18, p_carat, p_l_char, p_other, si_name')
 						->from('product p')
 						->where(['p_qty_avail >' => 0, 'i_name' => $inner, 'p_id !=' => $p_id])
 						->join('category c', 'c.c_id = p.p_cat')
 						->join('subcategory sc', 'sc.sc_id = p.p_subcat')
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
+						->join('sub_innercategory si', 'si.si_id = p.p_subinner')
 						->limit(15)
 						->order_by('p_id DESC')
 						->get()
@@ -71,12 +74,14 @@ class Main_model extends Public_model
 
 	public function product_list($where)
 	{
-		$select = ['p_id', 'p_detail', 'p_name', 'sc_name', 'i_name', 'c_name', 'p_gram', 'p_image', 'c_price', 'c_price_22', 'c_price_18', 'p_carat', 'p_l_char', 'p_other', 'p_code'];
+		$select = ['p_id', 'p_detail', 'p_name', 'sc_name', 'i_name', 'c_name', 'p_gram', 'p_image', 'c_price', 'c_price_22', 'c_price_18', 'p_carat', 'p_l_char', 'p_other', 'p_code', 'p_cat', 'p_subcat', 'p_innercat', 'p_subinner', 'si_name'];
 		
 		if (isset($where['i_name']))
 			array_push($select, 'ic.seo_title', 'ic.seo_description', 'ic.seo_keywords');
 		elseif (isset($where['sc_name']))
 			array_push($select, 'sc.seo_title', 'sc.seo_description', 'sc.seo_keywords');
+		elseif (isset($where['si_name']))
+			array_push($select, 'si.seo_title', 'si.seo_description', 'si.seo_keywords');
 		else
 			array_push($select, 'c.seo_title', 'c.seo_description', 'c.seo_keywords');
 		
@@ -104,7 +109,8 @@ class Main_model extends Public_model
 		
 		return $this->db->join('category c', 'c.c_id = p.p_cat')
 						->join('subcategory sc', 'sc.sc_id = p.p_subcat')
-						->join('innercategory ic', 'ic.i_id = p.p_innercat');
+						->join('innercategory ic', 'ic.i_id = p.p_innercat')
+						->join('sub_innercategory si', 'si.si_id = p.p_subinner', 'left');
 	}
 
 	public function products_all_count($where)
@@ -153,12 +159,13 @@ class Main_model extends Public_model
 
 	public function getCart($user)
 	{
-		return $this->db->select('p_qty_avail, ca_pro_id, p_pre, p_shipping, ca_id, ca_qty, ca_size, ca_pre_order, p_id, p_name, sc_name, i_name, c_name, p_gram, p_image, c_price, c_price_22, c_price_18, p_carat, p_l_char, p_other')
+		return $this->db->select('p_qty_avail, ca_pro_id, p_pre, p_shipping, ca_id, ca_qty, ca_size, ca_pre_order, p_id, p_name, sc_name, i_name, c_name, p_gram, p_image, c_price, c_price_22, c_price_18, p_carat, p_l_char, p_other, si_name')
 						->from('product p')
 						->where(['p_qty_avail >' => 0, 'ca_u_id' => $user])
 						->join('category c', 'c.c_id = p.p_cat')
 						->join('subcategory sc', 'sc.sc_id = p.p_subcat')
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
+						->join('sub_innercategory si', 'si.si_id = p.p_subinner')
 						->join('cart ca', 'ca.ca_pro_id = p.p_id')
 						->order_by('p_id DESC')
 						->get()
@@ -167,12 +174,13 @@ class Main_model extends Public_model
 
 	public function getWishlist($user)
 	{
-		return $this->db->select('w_id, p_id, p_name, sc_name, i_name, c_name, p_gram, p_image, c_price, c_price_22, c_price_18, p_carat, p_l_char, p_other')
+		return $this->db->select('w_id, p_id, p_name, sc_name, i_name, si_name, c_name, p_gram, p_image, c_price, c_price_22, c_price_18, p_carat, p_l_char, p_other')
 						->from('product p')
 						->where(['p_qty_avail >' => 0, 'w_u_id' => $user])
 						->join('category c', 'c.c_id = p.p_cat')
 						->join('subcategory sc', 'sc.sc_id = p.p_subcat')
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
+						->join('sub_innercategory si', 'si.si_id = p.p_subinner')
 						->join('wish w', 'w.w_p_id = p.p_id')
 						->order_by('p_id DESC')
 						->get()
@@ -181,12 +189,13 @@ class Main_model extends Public_model
 
 	public function prod($prod)
 	{
-		return $this->db->select('p_id, p_name, c_name, p_gram, p_image, c_price, c_price_22, c_price_18, p_carat, p_l_char, p_other, p_code, p_detail, p_pre, p_size_type, p_sub_detail, p_size, p_g_wei, p_l_wei, p_gram, p_carat, p_make_gram, p_notes, ic.seo_title, ic.seo_description, ic.seo_keywords')
+		return $this->db->select('p_id, p_name, c_name, p_gram, p_image, c_price, c_price_22, c_price_18, p_carat, p_l_char, p_other, p_code, p_detail, p_pre, p_size_type, p_sub_detail, p_size, p_g_wei, p_l_wei, p_gram, p_carat, p_make_gram, p_notes, si.seo_title, si.seo_description, si.seo_keywords')
 						->from('product p')
 						->where(['p_qty_avail >' => 0, 'p_id' => $prod])
 						->join('category c', 'c.c_id = p.p_cat')
 						/* ->join('subcategory sc', 'sc.sc_id = p.p_subcat') */
-						->join('innercategory ic', 'ic.i_id = p.p_innercat')
+						/* ->join('innercategory ic', 'ic.i_id = p.p_innercat') */
+						->join('sub_innercategory si', 'si.si_id = p.p_subinner')
 						->order_by('p_id DESC')
 						->get()
 						->row_array();

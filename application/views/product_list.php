@@ -97,6 +97,9 @@
                                             <?php if ($this->input->get('search') != ''): ?>
                                             <input type="hidden" name="search" value="<?= $this->input->get('search') ?>">
                                             <?php endif ?>
+                                            <?php if ($this->input->get('sub') != ''): ?>
+                                            <input type="hidden" name="sub" value="<?= $this->input->get('sub') ?>">
+                                            <?php endif ?>
                                             <select class="nice-select" name="sortby" onchange="document.getElementById('sort-form').submit()">
                                                 <option <?= $this->input->get('sortby') == 'latest' ? 'selected' : '' ?> value="latest">Latest</option>
                                                 <option <?= $this->input->get('sortby') == 'carat_asc' ? 'selected' : '' ?> value="carat_asc">Carat Low - High</option>
@@ -110,6 +113,13 @@
                                     </div>
                                 </div>
                             </div>
+                            <?php if(isset($sub_inns)): ?>
+                            <div class="col-lg-12 col-md-12 col-12">
+                                <?php foreach($sub_inns as $sub_inn): ?>
+                                    <a href="<?= make_slug($sub_inn->si_url) ?>" ><?= $sub_inn->si_name ?></a>
+                                <?php endforeach ?>
+                            </div>
+                            <?php endif ?>
                         </div>
                     </div>
                     <div class="shop-product-wrap grid-view row mbn-30">
@@ -119,7 +129,7 @@
                         <div class="col-md-4 col-sm-4 col-12">
                             <div class="product-item">
                                 <figure class="product-thumb">
-                                    <a href="<?= make_slug($prod['c_name']."/".$prod['sc_name']."/".$prod['i_name']."/".$prod['p_name']."-".e_id($prod['p_id'])) ?>">
+                                    <a href="<?= make_slug($prod['c_name']."/".$prod['sc_name']."/".$prod['i_name']."/".$prod['si_name']."/".$prod['p_name']."-".e_id($prod['p_id'])) ?>">
                                         <?= img(['class' => "pri-img", 'src' => "admin/image/product/".reset($imge), 'alt' => "Jewellery"]) ?>
                                     </a>
                                     <div class="button-group">
@@ -144,7 +154,7 @@
                                     </figure>
                                     <div class="product-caption text-center">
                                         <h6 class="product-name">
-                                        <a href="<?= make_slug($prod['c_name']."/".$prod['sc_name']."/".$prod['i_name']."/".$prod['p_name']."-".e_id($prod['p_id'])) ?>"><?= $prod['p_name']; ?></a>
+                                        <a href="<?= make_slug($prod['c_name']."/".$prod['sc_name']."/".$prod['i_name']."/".$prod['si_name']."/".$prod['p_name']."-".e_id($prod['p_id'])) ?>"><?= $prod['p_name']; ?></a>
                                         </h6>
                                         <div class="price-box">
                                             <span class="price-regular"><i class="fa fa-inr" aria-hidden="true"></i><?= round(($prod[$prod['p_carat']] * $prod['p_gram'] + $prod['p_other'] + $prod['p_l_char']) * 1.03) ?></span>
@@ -153,7 +163,7 @@
                                 </div>
                                 <div class="product-list-item">
                                     <figure class="product-thumb">
-                                        <a href="<?= make_slug($prod['c_name']."/".$prod['sc_name']."/".$prod['i_name']."/".$prod['p_name']."-".e_id($prod['p_id'])) ?>">
+                                        <a href="<?= make_slug($prod['c_name']."/".$prod['sc_name']."/".$prod['i_name']."/".$prod['si_name']."/".$prod['p_name']."-".e_id($prod['p_id'])) ?>">
                                             <?= img(['class' => "pri-img", 'src' => "admin/image/product/".reset($imge), 'alt' => "Jewellery"]) ?>
                                         </a>
                                         <div class="button-group">
@@ -177,7 +187,7 @@
                                             </div>
                                         </figure>
                                         <div class="product-content-list">
-                                            <h5 class="product-name"><a href="<?= make_slug($prod['c_name']."/".$prod['sc_name']."/".$prod['i_name']."/".$prod['p_name']."-".e_id($prod['p_id'])) ?>"><?= $prod['p_name']; ?></a></h5>
+                                            <h5 class="product-name"><a href="<?= make_slug($prod['c_name']."/".$prod['sc_name']."/".$prod['i_name']."/".$prod['si_name']."/".$prod['p_name']."-".e_id($prod['p_id'])) ?>"><?= $prod['p_name']; ?></a></h5>
                                             <div class="price-box">
                                                 <span class="price-regular"><i class="fa fa-inr" aria-hidden="true"></i><?= round(($prod[$prod['p_carat']] * $prod['p_gram'] + $prod['p_other'] + $prod['p_l_char']) * 1.03) ?></span>
                                             </div>
@@ -188,9 +198,11 @@
                                 </div>
                                 <?php endforeach ?>
                             </div>
+                            <?php if($this->pagination->create_links()): ?>
                             <div class="paginatoin-area text-center">
                                 <?= $this->pagination->create_links() ?>
                             </div>
+                            <?php endif ?>
                         </div>
                     </div>
                 </div>

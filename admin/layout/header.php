@@ -191,6 +191,30 @@
             </div>
           </li>
           <li>
+            <a data-toggle="collapse" href="#sub_inner">
+              <i class="nc-icon nc-book-bookmark"></i>
+              <p>
+                Sub Inner Category<b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse " id="sub_inner">
+              <ul class="nav">
+                <li>
+                  <a href="add_sub_innercategory.php">
+                    <span class="sidebar-mini-icon">AI</span>
+                    <span class="sidebar-normal">Add Sub Inner Category </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="subinnercategory_list.php">
+                    <span class="sidebar-mini-icon">IL</span>
+                    <span class="sidebar-normal"> Sub Inner Category List </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
             <a data-toggle="collapse" href="#size">
               <i class="nc-icon nc-book-bookmark"></i>
               <p>

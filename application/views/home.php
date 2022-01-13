@@ -106,7 +106,7 @@
                     <div class="group-slide-item">
                         <div class="group-item">
                             <div class="group-item-thumb">
-                                <a href="<?= make_slug($new->c_name."/".$new->sc_name."/".$new->i_name."/$new->p_name-".e_id($new->p_id)) ?>">
+                                <a href="<?= make_slug($new->c_name."/".$new->sc_name."/".$new->i_name."/$new->si_name/$new->p_name-".e_id($new->p_id)) ?>">
                                     <?php if (file_exists("admin/image/product/".reset($img)) && !is_dir("admin/image/product/".reset($img))): ?>
                                     <?= img(['src' => "admin/image/product/".reset($img), 'alt' => $new->p_name]) ?>
                                     <?php else: ?>
@@ -116,7 +116,7 @@
                             </div>
                             <div class="group-item-desc">
                                 <h5 class="group-product-name">
-                                    <a href="<?= make_slug($new->c_name."/".$new->sc_name."/".$new->i_name."/$new->p_name-".e_id($new->p_id)) ?>"><?= $new->p_name; ?></a>
+                                    <a href="<?= make_slug($new->c_name."/".$new->sc_name."/".$new->i_name."/$new->si_name/$new->p_name-".e_id($new->p_id)) ?>"><?= $new->p_name; ?></a>
                                 </h5>
                                 <div class="price-box">
                                     <span class="price-regular"><i class="fa fa-inr" aria-hidden="true"></i><?= round(($new->$carat * $new->p_gram + $new->p_other + $new->p_l_char) * 1.03) ?></span>
@@ -198,7 +198,7 @@
                             <div class="group-slide-item" >
                                 <div class="group-item">
                                     <div class="group-item-thumb">
-                                        <a href="<?= make_slug($best->c_name."/".$best->sc_name."/".$best->i_name."/$best->p_name-".e_id($best->p_id)) ?>">
+                                        <a href="<?= make_slug($best->c_name."/".$best->sc_name."/".$best->i_name."/$best->si_name/$best->p_name-".e_id($best->p_id)) ?>">
                                             <?php if (file_exists("admin/image/product/".reset($imge)) && !is_dir("admin/image/product/".reset($imge))): ?>
                                             <?= img(['src' => "admin/image/product/".reset($imge), 'alt' => $best->p_name]) ?>
                                             <?php else: ?>
@@ -207,7 +207,7 @@
                                         </a>
                                     </div>
                                     <div class="group-item-desc" >
-                                        <h5 class="group-product-name"><a href="<?= make_slug($best->c_name."/".$best->sc_name."/".$best->i_name."/$best->p_name-".e_id($best->p_id)) ?>"><?= $best->p_name ?></a></h5>
+                                        <h5 class="group-product-name"><a href="<?= make_slug($best->c_name."/".$best->sc_name."/".$best->i_name."/$best->si_name/$best->p_name-".e_id($best->p_id)) ?>"><?= $best->p_name ?></a></h5>
                                         <div class="price-box">
                                             <span class="price-regular"><i class="fa fa-inr" aria-hidden="true"></i><?= round(($best->$carat * $best->p_gram + $best->p_other + $best->p_l_char) * 1.03) ?></span>
                                         </div>
