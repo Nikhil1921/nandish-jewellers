@@ -9,7 +9,7 @@ if(isset($_POST['submit']))
 { 
     $post = (object) $_POST;
     
-    $qry = "UPDATE `sub_innercategory` SET `si_cat_id`='$post->cat',`si_subcat_id`='$post->subcat',`si_innercat_id`='$post->innercat',`si_name`='$post->name',`seo_title`='$post->seo_title',`seo_description`='$post->seo_description',`seo_keywords`='$post->seo_keywords' WHERE si_id = '$id'";
+    $qry = "UPDATE `sub_innercategory` SET `si_cat_id`='$post->cat',`si_subcat_id`='$post->subcat',`si_innercat_id`='$post->innercat',`si_name`='$post->name',`seo_title`='$post->seo_title',`seo_description`='$post->seo_description',`seo_keywords`='$post->seo_keywords',`seo_detail`='$post->detail' WHERE si_id = '$id'";
 if($connect->query($qry) === TRUE)
 {
 ?>
@@ -141,6 +141,12 @@ if($connect->query($qry) === TRUE)
                                         <div class="form-group has-label">
                                             <label>Keywords</label>
                                             <input type="text" class="tagsinput" data-role="tagsinput" data-color="primary" name="seo_keywords" value="<?= $data['seo_keywords'] ?>" placeholder="Enter Keywords" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group has-label">
+                                          <label>Detail</label>
+                                          <textarea class="form-control ckeditor" name="detail"><?= $data['seo_detail'] ?></textarea>
                                         </div>
                                     </div>
                                 <div class="col-md-12">

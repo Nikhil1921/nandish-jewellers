@@ -348,7 +348,7 @@ $(".delete-wish").click(function(e) {
 
 function checkout(form) {
     var data = $(form).serialize();
-    $(form).find('button[type=submit]').prop('disabled', true);
+    /* $(form).find('button[type=submit]').prop('disabled', true); */
     $.ajax({
         url: $(form).attr('action'),
         type: 'POST',
@@ -366,6 +366,7 @@ function checkout(form) {
                 return;
             } else {
                 var totalAmount = response.message;
+
                 var options = {
                     /*live api key*/
                     "key": "rzp_live_Jf7dJMbtMe1xSC",

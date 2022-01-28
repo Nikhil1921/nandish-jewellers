@@ -122,6 +122,11 @@
                                         <td class="pro-subtotal"><strong><i class="fa fa-inr" aria-hidden="true"></i> <?= $disc ?></strong>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td>Total Amount (With discount)</td>
+                                        <td class="pro-subtotal"><strong><i class="fa fa-inr" aria-hidden="true"></i> <?= $total - $disc ?></strong>
+                                        </td>
+                                    </tr>
                                     <?php endif ?>
                                     <tr>
                                         <td>Shipping Charge (Including GST)</td>
@@ -129,7 +134,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Total Amount (With discount)</td>
+                                        <td>Total Amount</td>
                                         <td class="pro-subtotal"><strong><i class="fa fa-inr" aria-hidden="true"></i> <?= $total + $shipping - $disc ?></strong>
                                         </td>
                                     </tr>

@@ -195,6 +195,8 @@ class User extends Public_controller  {
 	{
 		if (!$this->input->is_ajax_request()) die;
 
+		$this->check_pincode($this->input->post('pin'));
+		
 		$post = [
 			'u_address'  => $this->input->post('address'),
 			'u_city' 	 => $this->input->post('city'),
@@ -202,11 +204,11 @@ class User extends Public_controller  {
 			'u_postcode' => $this->input->post('pin'),
 			'u_pancard'  => $this->input->post('pancard') ? $this->input->post('pancard') : 'NA'
 		];
-		die(json_encode($_POST));
+		
 		$ship = $total = $disc = 0;
 
 		foreach ($this->cart as $cart) {
-			/* $makec = $cart['p_l_char']; */
+			$makec = $cart['p_l_char'];
 			/* if ($this->session->coupen_id):
 			$makec = $makec * (100 - $this->session->discount) / 100;
 			endif; */
@@ -222,6 +224,7 @@ class User extends Public_controller  {
 		$name = $this->user['u_f_name'].' '.$this->user['u_m_name'].' '.$this->user['u_l_name'];
 		$response = $update ? ['error' => false, 'message' => ($total + $ship - $disc), 'name' => $name, 'mobile' => $this->user['u_mobile'], 'email' => $this->user['u_email']] 
 							: ['error' => true, 'message' => "NOT OK"];
+		
 		die(json_encode($response));
 		
 		// razorpay payment gateway end
@@ -254,7 +257,8 @@ class User extends Public_controller  {
 		$api = new Api($this->config->item('api_key'), $this->config->item('api_secret'));
 		$response = $api->payment->fetch($payment_id);
 		
-		if (!empty($response) && $response->captured === true) {
+		if (!empty($response)) {
+		// if (!empty($response) && $response->captured === true) {
 			if(!$this->main->check('orders', ['o_payment' => $payment_id], 'o_payment')):
 				$total = $disc = 0;
 				foreach ($this->cart as $k => $v):
@@ -268,7 +272,7 @@ class User extends Public_controller  {
 					/* if (isset($this->session->coupen_id)):
 						$makec = $makec * (100 - $this->session->discount) / 100;
 					endif; */
-					$makec = round($makec);
+					
 					$details[$k]['other'] = $v['p_other'];
 					$details[$k]['making'] = $makec;
 					$details[$k]['total'] = round(($v[$v['p_carat']] * $v['p_gram'] + $v['p_other'] + $makec) * $v['ca_qty'] * 1.03);
@@ -398,5 +402,45 @@ class User extends Public_controller  {
 		$data['breadcrumb'] = ["<a href='".front_url("cart")."'>Cart</a>", 'checkout'];
         
 		return $this->template->load('template', 'save_order_developer', $data);
+	}
+
+	public function check_pincode($pin)
+	{
+		require_once APPPATH . 'third_party/DebugSoapClient.php';
+		
+		$soap = new DebugSoapClient('http://netconnect.bluedart.com/Ver1.10/ShippingAPI/Finder/ServiceFinderQuery.svc?wsdl',
+				[
+                    'trace' 	   => 1,  
+                    'style'		   => SOAP_DOCUMENT,
+                    'use'		   => SOAP_LITERAL,
+                    'soap_version' => SOAP_1_2
+                ]);
+				
+		$soap->__setLocation("http://netconnect.bluedart.com/Ver1.10/ShippingAPI/Finder/ServiceFinderQuery.svc");
+
+		$soap->sendRequest = true;
+		$soap->printRequest = false;
+		$soap->formatXML = true;
+
+		$actionHeader = new SoapHeader('http://www.w3.org/2005/08/addressing','Action','http://tempuri.org/IServiceFinderQuery/GetServicesforPincode',true);
+		$soap->__setSoapHeaders($actionHeader);
+
+		$params = [
+						'pinCode' => $pin,
+						'profile' => [
+										'Api_type' => 'S',
+										'LicenceKey'=>'qmifmqgkpudkoqmmqers3ukj1tjrgqso',
+										'LoginID'=>'GDL53336',
+										'Version'=>'1.3'
+									]
+					];
+
+		$result = $soap->__soapCall('GetServicesforPincode', [$params]);
+		
+		if ($result && $result->GetServicesforPincodeResult->IsError === true) {
+			die(json_encode(['error' => true, 'message' => $result->GetServicesforPincodeResult->ErrorMessage]));	
+		}else{
+			return true;
+		}
 	}
 }

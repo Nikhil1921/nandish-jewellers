@@ -17,13 +17,14 @@
     $seo_title = $_POST['seo_title'];
     $seo_description = $_POST['seo_description'];
     $seo_keywords = $_POST['seo_keywords'];
+    $detail = $_POST['detail'];
 
     if (!empty($_FILES['image']['name']))
     {
       $tempimage = $_FILES['image']['tmp_name'];                
       move_uploaded_file($tempimage, "image/category/$image");
     }
-    $qry = "UPDATE innercategory SET i_cat_id = '$cat', i_sub_id = '$subcat' , i_name = '$name' , i_image = '$image', i_show = '$sele', seo_title = '$seo_title', seo_description = '$seo_description', seo_keywords = '$seo_keywords' WHERE i_id = '$id'";
+    $qry = "UPDATE innercategory SET i_cat_id = '$cat', i_sub_id = '$subcat' , i_name = '$name' , i_image = '$image', i_show = '$sele', seo_title = '$seo_title', seo_description = '$seo_description', seo_keywords = '$seo_keywords', seo_detail = '$detail' WHERE i_id = '$id'";
     
     if($connect->query($qry) === TRUE)
     {
@@ -169,6 +170,12 @@
                   <input type="text" class="tagsinput" data-role="tagsinput" data-color="primary" name="seo_keywords" value="<?= $data['seo_keywords'] ?>" placeholder="Enter Keywords" />
       					</div>
       				</div>
+              <div class="col-md-6">
+                <div class="form-group has-label">
+                  <label>Detail</label>
+                  <textarea class="form-control ckeditor" name="detail"><?= $data['seo_detail'] ?></textarea>
+                </div>
+              </div>
       				<div class="col-md-12">
 		            <div class="card-footer text-right">
 		              <button type="submit" name="submit" class="btn btn-primary">Submit</button>

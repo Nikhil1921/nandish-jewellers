@@ -206,5 +206,10 @@
                         </div>
                     </div>
                 </div>
+                <?php if($prods): ?>
+                    <div class="">
+                        <?= $prods[0]['seo_detail']; ?>
+                    </div>
+                <?php endif ?>
             </div>
         </div>
