@@ -1,4 +1,16 @@
-<?php include("layout/header.php") ?>
+<?php
+if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'sort') {
+  include("layout/connect.php");
+  
+  foreach ($_POST['sort'] as $v) {
+    $sql = "UPDATE product SET p_sort = '".$v['position']."' WHERE p_id = '".$v['id']."'";
+    $connect->query($sql);
+  }
+  
+  die(json_encode(['message' => "Sort successfull."]));
+}
+
+include("layout/header.php") ?>
 <div class="main-panel">
   <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
     <div class="container-fluid">
@@ -50,8 +62,8 @@
             </div>
             <?php 
             /* $sql = "SELECT p_id, p_cat, p_subcat, p_innercat, si_id, si_cat_id, si_subcat_id, si_innercat_id FROM product p JOIN sub_innercategory si ON p.p_innercat = si.si_innercat_id";
-            $result = $connect->query($sql)->fetch_all(MYSQLI_ASSOC);
-            foreach ($result as $v) {
+            $result = $connect->query($sql);
+            while($v = $result->fetch_assoc()) {
               $v = (object) $v;
               $sql = "UPDATE `product` SET p_subinner = '$v->si_id' WHERE p_id = '$v->p_id'";
               $connect->query($sql);
@@ -66,7 +78,6 @@
                   <th>Jewellery Name</th>
                   <th>S.K.U. Code</th>
                   <th>Jewellery Gram</th>
-                  <th>Jewellery Image</th>
                   <th class="disabled-sorting text-right">Actions</th>
                 </tr>
               </thead>

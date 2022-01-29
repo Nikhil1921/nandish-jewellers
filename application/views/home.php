@@ -16,7 +16,7 @@
             <div class="col-12">
                 <div class="section-title text-center">
                     <h2 class="title">Jewellery Collection</h2>
-                    <p class="sub-title">Leading Jewellery Brand For Over 100 Years</p>
+                    <p class="sub-title">4th Generation Leading Jewellery Brand</p>
                 </div>
             </div>
         </div>
@@ -58,23 +58,23 @@
                         <div class="tab-pane fade" id="<?= $cat->c_name ?>">
                             <div class="product-carousel-4_2 slick-row-10 slick-arrow-style">
                                 <?php foreach($cat->sub_cats as $subcat): ?>
-                                    <?php foreach($subcat->inner_cats as $inner): ?>
-                                    <div class="product-item">
-                                        <figure class="category-thumb">
-                                            <a href="<?= make_slug($cat->c_name."/".$subcat->sc_name."/".$inner->i_name) ?>">
-                                                <?php if (file_exists("admin/image/category/$inner->i_image") && !is_dir("admin/image/category/$inner->i_image")): ?>
-                                                <?= img(['src' => "admin/image/category/$inner->i_image", 'alt' => $inner->i_name, 'class' => "pri-img"]) ?>
-                                                <?php else: ?>
-                                                <?= img(['src' => "admin/image/noproduct.png", 'alt' => $inner->i_name, 'class' => "pri-img"]) ?>
-                                                <?php endif ?>
-                                            </a>
-                                        </figure>
-                                        <div class="product-caption text-center">
-                                            <h6 class="product-name">
-                                            <a href="<?= make_slug($cat->c_name."/".$subcat->sc_name."/".$inner->i_name) ?>"><?= $inner->i_name ?></a>
-                                            </h6>
+                                    <?php foreach($innerCats as $innerCat): if($innerCat->c_name != $cat->c_name) continue; ?>
+                                        <div class="product-item">
+                                            <figure class="category-thumb">
+                                                <a href="<?= make_slug($innerCat->c_name."/".$innerCat->sc_name."/".$innerCat->i_name) ?>">
+                                                    <?php if (file_exists("admin/image/category/$innerCat->i_image") && !is_dir("admin/image/category/$innerCat->i_image")): ?>
+                                                    <?= img(['src' => "admin/image/category/$innerCat->i_image", 'alt' => $innerCat->i_name, 'class' => "pri-img"]) ?>
+                                                    <?php else: ?>
+                                                    <?= img(['src' => "admin/image/noproduct.png", 'alt' => $innerCat->i_name, 'class' => "pri-img"]) ?>
+                                                    <?php endif ?>
+                                                </a>
+                                            </figure>
+                                            <div class="product-caption text-center">
+                                                <h6 class="product-name">
+                                                <a href="<?= make_slug($innerCat->c_name."/".$innerCat->sc_name."/".$innerCat->i_name) ?>"><?= $innerCat->i_name ?></a>
+                                                </h6>
+                                            </div>
                                         </div>
-                                    </div>
                                     <?php endforeach ?>
                                 <?php endforeach ?>
                             </div>
@@ -92,7 +92,7 @@
             <div class="col-12">
                 <div class="section-title text-center">
                     <h2 class="title">New Arrivals</h2>
-                    <p class="sub-title">Crafted By Seasoned Craftsman</p>
+                    <p class="sub-title">Crafted By Seasoned Best Craftmen & Craftmanship</p>
                 </div>
             </div>
         </div>
@@ -186,7 +186,7 @@
             <div class="col-lg-6 section-padding">
                 <div class="categories-group-wrapper">
                     <div class="section-title-append">
-                        <h4>best Jewellery in <?= $c->c_name ?></h4>
+                        <h4><?= $c->c_name ?></h4>
                         <div class="slick-append"></div>
                     </div>
                     <div class="group-list-item-wrapper" >

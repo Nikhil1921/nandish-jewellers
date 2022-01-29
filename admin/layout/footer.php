@@ -230,37 +230,89 @@
   </script>
   <script>
     $(document).ready(function() {
-      $('#datatable').DataTable({
-        "pagingType": "full_numbers",
-        "lengthMenu": [
-          [10, 25, 50, -1],
-          [10, 25, 50, "All"]
-        ],
-        responsive: true,
-        language: {
-          search: "_INPUT_",
-          searchPlaceholder: "Search records",
-        }
-      });
+      if ($('#datatable').length > 0) {
+        $('#datatable').DataTable({
+          "pagingType": "full_numbers",
+          "lengthMenu": [
+            [10, 25, 50, -1],
+            [10, 25, 50, "All"]
+          ],
+          responsive: true,
+          language: {
+            search: "_INPUT_",
+            searchPlaceholder: "Search records",
+          }
+        });
+      }
+
+      if ($('#products_list').length > 0) {
+        var table = $('#products_list').DataTable({
+          "pagingType": "full_numbers",
+          "rowReorder": true,
+          "lengthMenu": [
+            [10, 25, 50, -1],
+            [10, 25, 50, "All"]
+          ],
+          "processing":true,
+          "serverSide":true,
+          "order":[],
+          "ajax":{
+            url:"products.php",
+            type:"GET"
+          },
+          language: {
+            search: "_INPUT_",
+            searchPlaceholder: "Search records",
+          }
+        });
+      }
       
-      $('#products_list').DataTable({
-        "pagingType": "full_numbers",
-        "lengthMenu": [
-          [10, 25, 50, -1],
-          [10, 25, 50, "All"]
-        ],
-        "processing":true,
-        "serverSide":true,
-        "order":[],
-        "ajax":{
-          url:"products.php",
-          type:"GET"
-        },
-        language: {
-          search: "_INPUT_",
-          searchPlaceholder: "Search records",
-        }
-      });
+      if ($('#innercat_list').length > 0) {
+        var table = $('#innercat_list').DataTable({
+          "pagingType": "full_numbers",
+          "rowReorder": true,
+          "lengthMenu": [
+            [10, 25, 50, -1],
+            [10, 25, 50, "All"]
+          ],
+          "processing":true,
+          "serverSide":true,
+          "order":[],
+          "ajax":{
+            url:"innercat_list.php",
+            type:"GET"
+          },
+          language: {
+            search: "_INPUT_",
+            searchPlaceholder: "Search records",
+          }
+        });
+      }
+      
+      if (table != undefined) {
+        table.on('row-reorder', function(e, diff, edit) {
+
+          var result = [];
+          
+          for (var i = 0, ien = diff.length; i < ien; i++)
+              result.push({ id: $(table.row(diff[i].node).data()[1]).attr('id'), position: diff[i].newData });
+          if (result.length > 0) {
+              $.ajax({
+                  url: '?action=sort',
+                  type: 'POST',
+                  data: { sort: result },
+                  dataType: "JSON",
+                  success: function(result) {
+                    alert(result.message);
+                    table.ajax.reload();
+                  },
+                  error: function(xhr, ajaxOptions, thrownError) {
+                    alert("Something is not going good. Try again.");
+                  }
+              });
+          }
+        });
+      }
 
       /* var table = $('#datatable').DataTable();
 

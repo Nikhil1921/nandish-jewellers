@@ -24,8 +24,8 @@ class Main_model extends Public_model
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
 						->join('sub_innercategory si', 'si.si_id = p.p_subinner')
 						->limit(12)
-						->order_by('last_update DESC')
-						->order_by('p_id DESC')
+						/* ->order_by('last_update DESC') */
+						->order_by('p_sort ASC')
 						->get()
 						->result();
 	}
@@ -36,7 +36,7 @@ class Main_model extends Public_model
 						->from('innercategory ic')
 						->join('category c', 'c.c_id = ic.i_cat_id')
 						->join('subcategory sc', 'sc.sc_id = ic.i_sub_id')
-						->order_by('i_id ASC')
+						->order_by('i_sort ASC')
 						->get()
 						->result();
 	}
@@ -51,8 +51,8 @@ class Main_model extends Public_model
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
 						->join('sub_innercategory si', 'si.si_id = p.p_subinner')
 						->limit(8)
-						->order_by('last_update DESC')
-						->order_by('p_id DESC')
+						// ->order_by('last_update DESC')
+						->order_by('p_sort ASC')
 						->get()
 						->result();
 	}
@@ -67,7 +67,7 @@ class Main_model extends Public_model
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
 						->join('sub_innercategory si', 'si.si_id = p.p_subinner')
 						->limit(15)
-						->order_by('p_id DESC')
+						->order_by('p_sort ASC')
 						->get()
 						->result();
 	}
@@ -151,9 +151,11 @@ class Main_model extends Public_model
 					$this->db->order_by('p_id DESC');
 					break;
 			}
-		}
-
+		}else
+		    $this->db->order_by('p_sort ASC');
+		
 		$this->db->limit($limit, $offset);
+		
 		return $this->db->get()->result_array();
 	}
 
@@ -167,7 +169,7 @@ class Main_model extends Public_model
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
 						->join('sub_innercategory si', 'si.si_id = p.p_subinner')
 						->join('cart ca', 'ca.ca_pro_id = p.p_id')
-						->order_by('p_id DESC')
+						->order_by('p_sort ASC')
 						->get()
 						->result_array();
 	}
@@ -182,7 +184,7 @@ class Main_model extends Public_model
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
 						->join('sub_innercategory si', 'si.si_id = p.p_subinner')
 						->join('wish w', 'w.w_p_id = p.p_id')
-						->order_by('p_id DESC')
+						->order_by('p_sort ASC')
 						->get()
 						->result_array();
 	}
@@ -196,7 +198,6 @@ class Main_model extends Public_model
 						/* ->join('subcategory sc', 'sc.sc_id = p.p_subcat') */
 						/* ->join('innercategory ic', 'ic.i_id = p.p_innercat') */
 						->join('sub_innercategory si', 'si.si_id = p.p_subinner')
-						->order_by('p_id DESC')
 						->get()
 						->row_array();
 	}

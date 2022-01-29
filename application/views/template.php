@@ -43,7 +43,7 @@ endif;
         <link rel="stylesheet" href="<?= base_url('assets/css/plugins/animate.css') ?>">
         <link rel="stylesheet" href="<?= base_url('assets/css/plugins/nice-select.css') ?>">
         <link rel="stylesheet" href="<?= base_url('assets/css/plugins/jqueryui.min.css') ?>">
-        <link rel="stylesheet" href="<?= base_url('assets/css/style.css?v=1.0.1') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/style.css?v=1.0.2') ?>">
         <link rel="stylesheet" href="<?= base_url('assets/css/custom.css?v=1.0.2') ?>">
         <link rel="stylesheet" href="<?= base_url('assets/css/responsive.css?v=1.0.1') ?>">
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/xzoom.css') ?>" media="all" />
@@ -696,21 +696,21 @@ endif;
                         </div>
                         </div>
                         <div class="col-lg-3 col-md-6">
-                        <div class="widget-item">
-                            <h6 class="widget-title">Information</h6>
-                            <div class="widget-body">
-                                <ul class="info-list">
-                                    <li><a href="<?= front_url('about-us') ?>">about us</a></li>
-                                    <li><a href="<?= front_url('contact-us') ?>">contact us</a></li>
-                                    <li><a href="<?= front_url('privacy') ?>">Privacy Policy</a></li>
-                                    <li><a href="<?= front_url('terms') ?>">Terms & Condition</a></li>
-                                    <li><a href="javascript:;">Shipping & Delivery</a></li>
-                                    <li><a href="javascript:;">Customer Service</a></li>
-                                    <li><a href="<?= front_url('refund') ?>">Exchange, Returns & Refunds</a></li>
-                                    <li><a target="_blank" href="https://g.page/nandishjewellers/review?av">Write Review</a></li>
-                                </ul>
+                            <div class="widget-item">
+                                <h6 class="widget-title">Information</h6>
+                                <div class="widget-body">
+                                    <ul class="info-list">
+                                        <li><a href="<?= front_url('about-us') ?>">about us</a></li>
+                                        <li><a href="<?= front_url('contact-us') ?>">contact us</a></li>
+                                        <li><a href="<?= front_url('privacy') ?>">Privacy Policy</a></li>
+                                        <li><a href="<?= front_url('terms') ?>">Terms & Condition</a></li>
+                                        <li><a href="javascript:;">Shipping & Delivery</a></li>
+                                        <li><a href="javascript:;">Customer Service</a></li>
+                                        <li><a href="<?= front_url('refund') ?>">Returns & Refunds</a></li>
+                                        <li><a target="_blank" href="https://g.page/nandishjewellers/review?av">Write Review</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
                         </div>
                         <div class="col-lg-3 col-md-6">
                         <div class="widget-item">
@@ -936,7 +936,6 @@ endif;
         gtag('js', new Date());
 
         gtag('config', 'G-E1DLP9MBQS');
-        
         </script>
         <script src="<?= base_url('assets/js/vendor/modernizr-3.6.0.min.js') ?>"></script>
         <script src="<?= base_url('assets/js/vendor/jquery-3.3.1.min.js') ?>"></script>
@@ -955,6 +954,18 @@ endif;
         <?php endif ?>
         <?php if($name == 'checkout'): ?>
             <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <?php endif ?>
+        <?php if($_SERVER['HTTP_HOST'] != 'localhost'): ?>
+        <script>
+        $(document).keydown(function(e){ 
+            if(e.which === 123){ 
+                return false; 
+            } 
+        });
+        $(document).bind("contextmenu",function(e) {  
+            e.preventDefault(); 
+        }); 
+        </script>
         <?php endif ?>
         <script src="<?= base_url('assets/js/plugins/google-map.js') ?>"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

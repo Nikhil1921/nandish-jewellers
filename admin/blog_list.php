@@ -18,7 +18,7 @@
           <span class="navbar-toggler-bar bar3"></span>
         </button>
       </div>
-      <a class="navbar-brand" href="">Sub Inner Category List</a>
+      <a class="navbar-brand" href="">Blog List</a>
     </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -45,7 +45,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title">Sub Inner Category List</h4>
+          <h4 class="card-title">Blog List</h4>
         </div>
         <div class="card-body">
           <div class="toolbar">
@@ -53,51 +53,36 @@
           <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
               <tr>
-                <th>No</th>
-                <th>Sub Inner Category Name</th>
-                <th>Inner Category Name</th>
-                <th>Sub Category Name</th>
-                <th>Category Name</th>
+                <th>Sr. No</th>
+                <th>Blog Title</th>
+                <th>Blog Image</th>
                 <th class="disabled-sorting text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
-          	<?php
-                /*  $sql = "SELECT * FROM innercategory";
-                $result = $connect->query($sql);
-                $sql = "INSERT INTO `sub_innercategory`(`si_cat_id`, `si_subcat_id`, `si_innercat_id`, `si_name`, `seo_title`, `seo_description`, `seo_keywords`) VALUES ";
-                while($v = $result->fetch_assoc()) {
-                  $v = (object) $v;
-                  $sql .= "('$v->i_cat_id', '$v->i_sub_id', '$v->i_id', 'New', '$v->seo_title', '$v->seo_description', '$v->seo_keywords'), ";
-                }
-                re($sql); */
-                $sql = "SELECT * FROM sub_innercategory si
-                join category c on si.si_cat_id = c.c_id
-                join subcategory sc on si.si_subcat_id = sc.sc_id
-                join innercategory ic on si.si_innercat_id = ic.i_id";
-                $result = $connect->query($sql); 
-                $i = 1;
-                while($data = $result->fetch_assoc())
-                {
-            ?>
+          	<?php 
+				      $sql = "SELECT * FROM blog";
+      				$result = $connect->query($sql); 
+      				$i = 1;
+      				while($data = $result->fetch_assoc())
+      				{
+      			?>
             <tr>
               <td><?= $i++;?></td>
-              <td><?= $data['si_name']; ?></td>
-              <td><?= $data['i_name']; ?></td>
-              <td><?= $data['sc_name']; ?></td>
-              <td><?= $data['c_name']; ?></td>
+              <td><?= $data['title']; ?></td>
+              <td><img src="image/blog/<?= $data['image']; ?>" height="100px" width="100px"></td>
               <td class="text-right">
-                  <a href="sub_innercategory_edit.php?si_id=<?= $data['si_id']; ?>" class="btn btn-warning btn-link btn-icon"><i class="fa fa-edit"></i></a>
-                  <a href="sub_innercategory_delete.php?si_id=<?= $data['si_id']; ?>" class="btn btn-danger btn-link btn-icon"><i class="fa fa-times"></i></a>
+                  <a href="blog_edit.php?bid=<?= $data['id']; ?>" class="btn btn-warning btn-link btn-icon"><i class="fa fa-edit"></i></a>
+                  <a href="blog_delete.php?bid=<?= $data['id']; ?>&image=<?= $data['image'] ?>" class="btn btn-danger btn-link btn-icon"><i class="fa fa-times"></i></a>
               </td>
             </tr>
             <?php } ?>
             </tbody>
           </table>
-        </div>
-      </div>
-    </div>
-  </div>
+        </div><!-- end content-->
+      </div><!--  end card  -->
+    </div> <!-- end col-md-12 -->
+  </div> <!-- end row -->
 </div>
 <?php
     include("layout/footer.php");

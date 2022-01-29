@@ -35,7 +35,7 @@ class Home extends Public_controller  {
 								return (object) [
 									'sc_id' => $arr->sc_id,
 									'sc_name' => $arr->sc_name,
-									'inner_cats' => (object) $this->main->getall('innercategory', 'i_id, i_name, i_image, i_show', ['i_sub_id' => $arr->sc_id], 'i_id ASC')
+									'inner_cats' => (object) $this->main->getall('innercategory', 'i_id, i_name, i_image, i_show', ['i_sub_id' => $arr->sc_id], 'i_sort ASC')
 								];
 							}, $this->main->getall('subcategory', 'sc_id, sc_name', ['sc_c_id' => $arr->c_id]))
 						];
@@ -199,12 +199,11 @@ class Home extends Public_controller  {
 		if ($data['prods']) {
 			if ($cat && $subcat && $inner){
 				$url = "$cat/$subcat/$inner";
-				$get['si_cat_id'] = $data['prods'][0]['p_cat'];
-				$get['si_subcat_id'] = $data['prods'][0]['p_subcat'];
-				$get['si_innercat_id'] = $data['prods'][0]['p_innercat'];
-				$data['sub_inns'] = $this->main->getall('sub_innercategory', 'CONCAT("'."$cat/$subcat/$inner/".'", si_name) AS si_url, si_name',$get);
+				$sub_inners['si_cat_id'] = $data['prods'][0]['p_cat'];
+				$sub_inners['si_subcat_id'] = $data['prods'][0]['p_subcat'];
+				$sub_inners['si_innercat_id'] = $data['prods'][0]['p_innercat'];
+				$data['sub_inns'] = $this->main->getall('sub_innercategory', 'CONCAT("'."$cat/$subcat/$inner/".'", si_name) AS si_url, si_name',$sub_inners);
 			}
-
 			$data['seo'] = [
 					'title' => $data['prods'][0]['seo_title'],
 					'desc' => $data['prods'][0]['seo_description'],

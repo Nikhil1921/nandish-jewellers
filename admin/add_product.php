@@ -2,6 +2,7 @@
 include("layout/header.php");
 if(isset($_POST['submit']))
 {
+  $p_sort = ($connect->query('SELECT p_id FROM product')->num_rows + 1);
   $cat = $_POST['cat'];
   $subcat = $_POST['subcat'];
   $innercat = $_POST['innercat'];
@@ -39,8 +40,9 @@ if(isset($_POST['submit']))
   endif;
 
   $img = implode(",", $imgs);
-  $qry="INSERT INTO `product`( `p_cat`, `p_subcat`, `p_innercat`, `p_subinner`, `p_name`, `p_gram`, `p_image`, `p_detail`, `p_sub_detail`, `p_invoice`, `p_notes`, `p_show`, `p_size_type`, `p_size`, `p_g_wei`, `p_l_wei`, `p_l_char`, `p_carat`, `p_code`, `p_shipping`, `p_qty_avail`, `p_make_gram`, `p_other`, `p_pre`) VALUES ('$cat','$subcat','$innercat','$subinnercat','$name','$price','$img','$detail','$subdetail','$invoice','$notes','$show','$size_cat','$size','$g_wei','$l_wei','$l_char','$p_carat','$p_code','$p_shipping','$p_qty_avail','$p_make_gram','$p_other','$p_pre')";
-  $run = $connect->query($qry)or die("not insert Data");
+  
+  $qry="INSERT INTO `product`( `p_cat`, `p_subcat`, `p_innercat`, `p_subinner`, `p_name`, `p_gram`, `p_image`, `p_detail`, `p_sub_detail`, `p_invoice`, `p_notes`, `p_show`, `p_size_type`, `p_size`, `p_g_wei`, `p_l_wei`, `p_l_char`, `p_carat`, `p_code`, `p_shipping`, `p_qty_avail`, `p_make_gram`, `p_other`, `p_pre`, `p_sort`) VALUES ('$cat','$subcat','$innercat','$subinnercat','$name','$price','$img','$detail','$subdetail','$invoice','$notes','$show','$size_cat','$size','$g_wei','$l_wei','$l_char','$p_carat','$p_code','$p_shipping','$p_qty_avail','$p_make_gram','$p_other','$p_pre', '$p_sort')";
+  $run = $connect->query($qry) or die("not insert Data");
   
   if($run == true)
   {

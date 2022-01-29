@@ -340,8 +340,10 @@ textarea:focus {
 }
 
 .slick-arrow-style button.slick-arrow.slick-next {
-    left: auto;
-    right: 0;
+    /* left: auto;
+    right: 0; */
+    position: absolute;
+    right: 0 !important;
 }
 
 .slick-arrow-style button.slick-arrow:hover {
@@ -358,8 +360,10 @@ textarea:focus {
 }
 
 .slick-arrow-style:hover button.slick-arrow.slick-prev {
-    left: -60px;
-    right: auto;
+    /* left: -60px;
+    right: auto; */
+    position: absolute;
+    left: 0 !important;
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1499.98px),

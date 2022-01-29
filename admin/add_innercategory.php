@@ -3,20 +3,29 @@
 
     if(isset($_POST['submit']))
    	{ 
+      $i_sort = ($connect->query('SELECT i_id FROM innercategory')->num_rows + 1);
+      
 		  $cat = $_POST['cat'];
       $subcat = $_POST['subcat'];
       $name = $_POST['name'];
-      $sele = $_POST['sele'];
-      $image = explode('.', $_FILES['image']['name']);
-      $img = time().'.'.end($image);
-      $tempimage = $_FILES['image']['tmp_name'];
-      
-      move_uploaded_file($tempimage, "image/category/$img");
+      $sele = isset($_POST['sele']) ? $_POST['sele'] : '';
+      if (!empty($_FILES['image']['name']))
+      {
+        require "layout/thumbimage.php";
+
+        $tempimage = $_FILES['image']['tmp_name'];
+        $image = "IMG-".time().".".pathinfo($_FILES['image']['name'],PATHINFO_EXTENSION);
+        move_uploaded_file($tempimage, "image/category/$image");
+        $objThumbImage = new ThumbImage("image/category/$image");
+        $objThumbImage->createThumb("image/category/$image", 350);
+        /* $img = $objThumbImage->convert_webp("image/category/", $image, "IMG-".time());
+        if (file_exists("image/category/$image")) unlink("image/category/$image"); */
+      }
       $seo_title = $_POST['seo_title'];
       $seo_description = $_POST['seo_description'];
       $seo_keywords = $_POST['seo_keywords'];
       $detail = $_POST['detail'];
-      $qry = "INSERT INTO `innercategory`(`i_cat_id`, `i_sub_id`, `i_name`, `i_image`, `i_show`, `seo_title`, `seo_description`, `seo_keywords`, `seo_detail`) VALUES ('$cat','$subcat','$name','$img','$sele', '$seo_title', '$seo_description', '$seo_keywords', '$detail')";
+      $qry = "INSERT INTO `innercategory`(`i_cat_id`, `i_sub_id`, `i_name`, `i_image`, `i_show`, `seo_title`, `seo_description`, `seo_keywords`, `seo_detail`, `i_sort`) VALUES ('$cat','$subcat','$name','$image','$sele', '$seo_title', '$seo_description', '$seo_keywords', '$detail', '$i_sort')";
     	$run = $connect->query($qry);
       
 		if($run == true) { ?>

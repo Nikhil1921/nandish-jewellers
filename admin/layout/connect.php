@@ -1,8 +1,24 @@
 <?php
 date_default_timezone_set('Asia/Kolkata');
-$db_user = $_SERVER['HTTP_HOST'] != 'localhost' ? 'nandish' : 'root';
-$db_pass = $_SERVER['HTTP_HOST'] != 'localhost' ? 'c?T4mAs*.3+.' : '';
-$db = $_SERVER['HTTP_HOST'] != 'localhost' ? 'denseeqq_nandish' : 'nandish';
+switch ($_SERVER['HTTP_HOST']) {
+	case 'localhost':
+		$db_user = 'root';
+		$db_pass = '';
+		$db = 'nandish';
+		break;
+	case 'nandish.in':
+	case 'www.nandish.in':
+		$db_user = 'nandish';
+		$db_pass = 'c?T4mAs*.3+.';
+		$db = 'denseeqq_nandish';
+		break;
+	
+	default:
+		$db_user = 'nandish';
+		$db_pass = 'c?T4mAs*.3+.';
+		$db = 'test_nandish';
+		break;
+}
 
 $connect = mysqli_connect("localhost", $db_user, $db_pass, $db) or die("database is not connected");
 
