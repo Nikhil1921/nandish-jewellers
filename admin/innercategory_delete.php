@@ -1,7 +1,7 @@
 <?php
 	include("layout/connect.php");                    
 	$id = $_REQUEST['iid'];
-    die;
+    
  	$qry = "DELETE from innercategory where i_id = '$id'";
  	$run = $connect->query($qry);
    	if($run == true)

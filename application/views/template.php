@@ -873,7 +873,7 @@ endif;
                                     <?php foreach ($this->cart as $data_foot): $imge = explode(",", $data_foot['p_image']) ?>
                                     <li class="minicart-item">
                                         <div class="minicart-thumb">
-                                            <?= img(['src' => 'admin/image/product/'.reset($imge), 'alt' => "Jewellery"]) ?>
+                                            <?= img(['src' => 'admin/image/product/thumb_120_'.reset($imge), 'alt' => "Jewellery"]) ?>
                                         </div>
                                         <div class="minicart-content">
                                             <h3 class="product-name">

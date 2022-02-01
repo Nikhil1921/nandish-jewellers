@@ -6,12 +6,18 @@
       $title = $_POST['title'];
       $detail = $_POST['detail'];
 
-      $image = explode('.', $_FILES['image']['name']);
-      $img = time().'.'.end($image);
-      $tempimage = $_FILES['image']['tmp_name'];
-      move_uploaded_file($tempimage, "image/blog/$img");
+      if (!empty($_FILES['image']['name']))
+      {
+        require "layout/thumbimage.php";
 
-    	$qry="INSERT INTO `blog`(`title`, `detail`, `image`) VALUES ('$title','$detail','$img')";
+        $tempimage = $_FILES['image']['tmp_name'];
+        $image = "IMG-".time().".".pathinfo($_FILES['image']['name'],PATHINFO_EXTENSION);
+        move_uploaded_file($tempimage, "image/blog/$image");
+        $objThumbImage = new ThumbImage("image/blog/$image");
+        $objThumbImage->createThumb("image/blog/thumb_$image", 350);
+      }
+
+    	$qry="INSERT INTO `blog`(`title`, `detail`, `image`) VALUES ('$title','$detail','$image')";
     	$run = $connect->query($qry)or die("not insert Data");
 
 		if($run == true)

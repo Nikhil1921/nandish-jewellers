@@ -1,12 +1,12 @@
 <?php
-    include("layout/header.php");
+  include("layout/header.php");
 
-    $id = $_REQUEST['bid'];
+  $id = $_REQUEST['bid'];
 
-    $sql = "SELECT * FROM blog Where id = $id";
-    $result = $connect->query($sql);
-    $data = $result->fetch_assoc();
-    $image = $data['image'];
+  $sql = "SELECT * FROM blog Where id = $id";
+  $result = $connect->query($sql);
+  $data = $result->fetch_assoc();
+  $image = $unlink = $data['image'];
 
   if (isset($_POST['submit'])) 
   {
@@ -15,14 +15,17 @@
 
     if (!empty($_FILES['image']['name'])) 
     {
-        unlink('image/blog/'.$image);
-        $image = explode('.', $_FILES['image']['name']);
-        $img = time().'.'.end($image);
-        $tempimage = $_FILES['image']['tmp_name'];
-        move_uploaded_file($tempimage, "image/blog/$img");
+      require "layout/thumbimage.php";
+      $tempimage = $_FILES['image']['tmp_name'];
+      $image = "IMG-".time().".".pathinfo($_FILES['image']['name'],PATHINFO_EXTENSION);
+      move_uploaded_file($tempimage, "image/blog/$image");
+      $objThumbImage = new ThumbImage("image/blog/$image");
+      $objThumbImage->createThumb("image/blog/thumb_$image", 350);
+      if(is_file('image/blog/thumb_'.$unlink)) unlink('image/blog/thumb_'.$unlink);
+      if(is_file('image/blog/'.$unlink)) unlink('image/blog/'.$unlink);
     }
 
-    $qr = "UPDATE `blog` set `title`='$title',`detail`='$detail',`image`='$img' where id = '$id'";
+    $qr = "UPDATE `blog` set `title`='$title',`detail`='$detail',`image`='$image' where id = '$id'";
     $run = $connect->query($qr)or die("not insert Data");
     if ($run == true) 
     {

@@ -25,6 +25,7 @@ class Home extends Public_controller  {
 		$data['testimonials'] = $this->main->getall('testimonial', 't_image, t_name, t_detail', []);
 		$data['new_prods'] = $this->main->getNewProds();
 		$data['innerCats'] = $this->main->getInners();
+		$data['blogs'] = $this->main->getall('blog', 'title, id, CONCAT("admin/image/blog/thumb_", image) image', [], 'id DESC');
 		
 		$data['cats'] = array_map(function($arr){
 					return (object) [
@@ -228,7 +229,7 @@ class Home extends Public_controller  {
 			$data['seo'] = [
 				'title' => $data['data']['seo_title'],
 				'desc' => $data['data']['seo_description'],
-				'image' => base_url('admin/image/product/'.reset($img)),
+				'image' => base_url('admin/image/product/thumb_'.reset($img)),
 				'url' => current_url(),
 				'keywords' => $data['data']['seo_keywords']
 			];
@@ -244,6 +245,26 @@ class Home extends Public_controller  {
 			"<a href='".make_slug($cat."/".$subcat."/".$inner."/".$sub_inner)."'>".str_replace('-', ' ', $sub_inner)."</a>",
 			$data['title']];
 		return $this->template->load('template', 'prod', $data);
+	}
+	
+	public function blog($blog)
+	{
+		$blog = explode('-', $blog);
+		$blog_id = end($blog);
+		$data['name'] = 'blog';
+		$data['data'] = $this->main->get('blog', 'title, detail, CONCAT("admin/image/blog/", image) image', ['id' => d_id($blog_id)]);
+		
+		if($data['data']){
+			$data['title'] = $data['data']['title'];
+			$data['breadcrumb'] = [
+				"blog",
+				$data['data']['title']
+			];
+			
+			return $this->template->load('template', 'blog', $data);
+		}
+		else
+			return $this->error_404();
 	}
 	
 	public function prod_info()

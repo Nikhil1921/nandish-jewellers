@@ -4,7 +4,7 @@ $id = $_REQUEST['pid'];
 $sql = "SELECT * FROM product Where p_id = $id";
 $result = $connect->query($sql);
 $data = $result->fetch_assoc();
-$image = $data['p_image'];
+$p_image = $data['p_image'];
 
 if(isset($_POST['submit']))
 { 
@@ -35,16 +35,25 @@ $imge = implode(",", $_FILES['image']['name']);
 $countfiles = count($_FILES['image']['name']);
 $imgs = [];
 if ($_FILES['image']['name'][0]):
+  require "layout/thumbimage.php";
   for($i=0; $i<$countfiles; $i++)
   {
-    $img = explode('.', $_FILES['image']['name'][$i]);
+    /* $img = explode('.', $_FILES['image']['name'][$i]);
     $filename = time().$i.'.'.end($img);
     $imgs[$i] = $filename;
-    move_uploaded_file($_FILES['image']['tmp_name'][$i], 'image/product/'.$filename);
+    move_uploaded_file($_FILES['image']['tmp_name'][$i], 'image/product/'.$filename); */
+    $tempimage = $_FILES['image']['tmp_name'][$i];
+    $image = "IMG-".time().$i.".".pathinfo($_FILES['image']['name'][$i],PATHINFO_EXTENSION);
+    move_uploaded_file($tempimage, "image/product/$image");
+    $objThumbImage = new ThumbImage("image/product/$image");
+    $objThumbImage->createThumb("image/product/thumb_$image", 260);
+    $objThumbImage->createThumb("image/product/thumb_120_$image", 120);
+    $imgs[$i] = $image;
   }
 endif;
-$images = explode(",", $image);
-$imgs = implode(',', array_merge($imgs, $images));
+$images = explode(",", $p_image);
+$imgs = implode(',', ($images[0] ? array_merge($imgs, $images) : $imgs));
+
 $qry = "UPDATE product SET p_cat = '$cat', p_subcat = '$subcat', p_innercat = '$innercat', p_subinner = '$subinnercat', p_name = '$name', p_gram = '$price', p_image = '$imgs', p_detail = '$detail', p_sub_detail = '$subdetail', p_invoice = '$invoice', p_notes = '$notes', p_show = '$show', p_size_type = '$size_cat', p_size = '$size', p_g_wei = '$g_wei', p_l_wei = '$l_wei', p_l_char = '$l_char', p_carat = '$p_carat', p_code = '$p_code', p_shipping = '$p_shipping', p_qty_avail = '$p_qty_avail', p_make_gram = '$p_make_gram', p_pre = '$p_pre' WHERE p_id = '$id'";
 if($connect->query($qry) === TRUE)
 {

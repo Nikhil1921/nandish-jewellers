@@ -287,6 +287,30 @@
             </div>
           </li>
           <li>
+            <a data-toggle="collapse" href="#blog">
+              <i class="nc-icon nc-book-bookmark"></i>
+              <p>
+                Blog<b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse " id="blog">
+              <ul class="nav">
+                <li>
+                  <a href="add_blog.php">
+                    <span class="sidebar-mini-icon">AB</span>
+                    <span class="sidebar-normal">Add Blog </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="blog_list.php">
+                    <span class="sidebar-mini-icon">BL</span>
+                    <span class="sidebar-normal"> Blog List </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
             <a data-toggle="collapse" href="#testimonial">
               <i class="nc-icon nc-book-bookmark"></i>
               <p>

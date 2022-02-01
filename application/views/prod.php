@@ -17,7 +17,7 @@
                             {
                             ?>
                                 <a href="<?= base_url('admin/image/product/'.$value) ?>">
-                                    <img class="xzoom-gallery" width="80" height="80" src="<?= base_url('admin/image/product/'.$value) ?>" xpreview="<?= base_url('admin/image/product/'.$value) ?>" title="<?= $data['p_name']; ?>">
+                                    <img class="xzoom-gallery" width="80" height="80" src="<?= base_url('admin/image/product/thumb_120_'.$value) ?>" xpreview="<?= base_url('admin/image/product/'.$value) ?>" title="<?= $data['p_name']; ?>">
                                 </a>
                                 <?php } ?>
                             </div>
@@ -202,7 +202,7 @@
                   <figure class="related-thumb">
                      <?php $imge = explode(",", $relat['p_image']); ?>
                      <a href="<?= make_slug($relat['c_name']."/".$relat['sc_name']."/".$relat['i_name']."/".$relat['si_name']."/".$relat['p_name']."-".e_id($relat['p_id'])) ?>">
-                     <img class="pri-img" src="<?= base_url() ?>admin/image/product/<?= reset($imge) ?>" alt="Jewellery">
+                     <img class="pri-img" src="<?= base_url() ?>admin/image/product/thumb_120_<?= reset($imge) ?>" alt="Jewellery">
                      </a>
                      <div class="button-group">
                         <a href="javascript:void(0)" onclick="addWishlist(this)" data-toggle="tooltip" data-placement="left" title="Add to wishlist" data-p_id="<?= e_id($relat['p_id']) ?>">
