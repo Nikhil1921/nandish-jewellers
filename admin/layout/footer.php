@@ -265,6 +265,25 @@
             searchPlaceholder: "Search records",
           }
         });
+
+        $("#excel-upload").change(function(){
+          $(this).siblings().html("Loading");
+          
+          $.ajax({
+            type: "POST",
+            data: {action: "excel-upload"},
+            data: new FormData(this.form),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response)
+            {
+              alert(response);
+              $(this).siblings().html("Upload");
+            }
+          });
+          $("#excel-upload").val('');
+        });
       }
       
       if ($('#innercat_list').length > 0) {

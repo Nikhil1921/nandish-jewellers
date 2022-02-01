@@ -1,6 +1,86 @@
 <?php
+require dirname(__DIR__) . '/vendor/autoload.php';
+include_once("layout/connect.php");
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
+if(isset($_REQUEST['action']) && $_REQUEST['action'] == 'excel-upload'){
+  if(!empty($_FILES["excel"]["name"])){
+    $headers = [
+      'p_name', 'p_gram', 'p_size', 'p_g_wei', 'p_l_wei', 'p_l_char', 'p_make_gram', 'p_code', 'p_shipping', 'p_other', 'p_qty_avail'
+    ];
+    set_time_limit(0);
+    $path = $_FILES["excel"]["tmp_name"];
+    $object = \PhpOffice\PhpSpreadsheet\IOFactory::load($path);
+    foreach($object->getWorksheetIterator() as $worksheet)
+    {
+        $highestRow = $worksheet->getHighestRow();
+        $highestColumn = $worksheet->getHighestColumn();
+        for($row=1; $row <= $highestRow; $row++)
+        {
+          $id = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+          $sql = "SELECT p_id FROM product WHERE p_id = '$id'";
+          
+          if ($connect->query($sql)->num_rows > 0) {
+            $sql = "UPDATE product SET ";
+            foreach ($headers as $k => $v) {
+              $k++;
+              $sql .= "$v = '".$worksheet->getCellByColumnAndRow(++$k, $row)->getValue()."'";
+              $sql .= $k != (count($headers) + 1) ? ', ' : ' ';
+            }
+            $sql .= "WHERE p_id = '".$id."'";
+            $connect->query($sql);
+          }
+        }
+    }
+  }
+  die("Data updated.");
+}
+
+if(isset($_REQUEST['action']) && $_REQUEST['action'] == 'excel-download'){
+  
+
+  try {
+    $spreadsheet = new Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+    $headers = [
+      'p_id', 'p_name', 'p_gram', 'p_size', 'p_g_wei', 'p_l_wei', 'p_l_char', 'p_make_gram', 'p_code', 'p_shipping', 'p_other', 'p_qty_avail'
+    ];
+
+    for ($i = 0, $l = sizeof($headers); $i < $l; $i++) {
+        $sheet->setCellValueByColumnAndRow($i + 1, 1, $headers[$i]);
+    }
+    
+    $sql = "SELECT `p_id`, `p_name`, `p_gram`, `p_size`, `p_g_wei`, `p_l_wei`, `p_l_char`, `p_make_gram`, `p_code`, `p_shipping`, `p_other`, `p_qty_avail` FROM product";
+    $result = $connect->query($sql); 
+    $i = 1;
+    
+    while($data = $result->fetch_assoc())
+    {
+      $j = 0;
+      foreach ($headers as $v) { // column $j
+          $sheet->setCellValueByColumnAndRow($j + 1, ($i + 1), $data[$v]);
+          $j++;
+      }
+      $i++;
+    }
+    
+    $writer = new Xlsx($spreadsheet);
+    $writer->save('products.xlsx');
+    $filename = 'products.xlsx';
+    $content = file_get_contents($filename);
+  } catch(Exception $e) {
+    exit($e->getMessage());
+  }
+
+  header("Content-Disposition: attachment; filename=".$filename);
+
+  unlink($filename);
+  exit($content);
+}
+
 if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'sort') {
-  include("layout/connect.php");
+  
   
   foreach ($_POST['sort'] as $v) {
     $sql = "UPDATE product SET p_sort = '".$v['position']."' WHERE p_id = '".$v['id']."'";
@@ -55,7 +135,21 @@ include("layout/header.php") ?>
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h4 class="card-title">Jewellery List</h4>
+            <div class="row">
+              <div class="col-3">
+                <h4 class="card-title">Jewellery List</h4>
+              </div>
+              <div class="col-3">
+                <a href="?action=excel-download" class="btn btn-success">Download</a>
+              </div>
+              <div class="col-3">
+                <form method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="action" value="excel-upload" />
+                  <input type="file" name="excel" id="excel-upload" style="display:none;" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                  <label for="excel-upload" class="btn btn-primary">Upload</label>
+                </form>
+              </div>
+            </div>
           </div>
           <div class="card-body table-responsive">
             <div class="toolbar">
@@ -65,7 +159,7 @@ include("layout/header.php") ?>
             $result = $connect->query($sql);
             while($v = $result->fetch_assoc()) {
               $v = (object) $v;
-              $sql = "UPDATE `product` SET p_subinner = '$v->si_id' WHERE p_id = '$v->p_id'";
+              $sql = "UPDATE 'product' SET p_subinner = '$v->si_id' WHERE p_id = '$v->p_id'";
               $connect->query($sql);
             } */
             ?>

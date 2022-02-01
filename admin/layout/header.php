@@ -1,5 +1,5 @@
 <?php
-  include("connect.php");
+  include_once("connect.php");
     session_start();
     
     if(empty($_SESSION['uid']))
