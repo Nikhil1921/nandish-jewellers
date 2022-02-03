@@ -67,8 +67,7 @@
         $sub_array[] = $row['p_code'];
         $sub_array[] = $row['p_gram'];
         $sub_array[] = '<a href="product_image.php?pid='.$row["p_id"].'" class="btn btn-warning btn-link btn-icon"><i class="fa fa-image"></i></a>
-                        <a href="product_edit.php?pid='.$row["p_id"].'" class="btn btn-warning btn-link btn-icon"><i class="fa fa-edit"></i></a>
-                        <a href="product_delete.php?pid='.$row["p_id"].'" class="btn btn-danger btn-link btn-icon"><i class="fa fa-times"></i></a>';
+                        <a href="product_edit.php?pid='.$row["p_id"].'" class="btn btn-warning btn-link btn-icon"><i class="fa fa-edit"></i></a>';
         $output[] = $sub_array;
     }
 

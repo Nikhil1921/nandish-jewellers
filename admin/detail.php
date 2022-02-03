@@ -23,7 +23,7 @@
 <body>
     <div class="content bg-gray-lighter">
         <center>
-            <button type="button" onclick="printDiv('prnt')"><i class="si si-printer"></i> Print Original</button>
+            <button type="button" onclick="printDiv('prnt')"><i class="si si-printer"></i> Print</button>
         </center>
         <br>
         <div id="prnt" style="overflow:auto" >
@@ -70,12 +70,27 @@
                                             <table border="0"  width="100%" align="center" cellspacing="0" cellpadding="1">
                                                 <?php
                                                     $pro = json_decode($data['o_details']);
-                                                    $shipping = 0;
-                                                    foreach ($pro as $k => $v): $shipping += $v->shipping;
-                                                    $sql_pr = "SELECT * FROM product where p_id = '$v->prod_id'";
-                                                    $result_pr = $connect->query($sql_pr);
-                                                    $data_pr = $result_pr->fetch_assoc();
-                                                    // $img = explode(',', $data_pr['p_image']);
+                                                    $price['gold'] = $making['gold'] = $shipping['gold'] = $other['gold'] = $total['gold'] = 0;
+                                                    $price['silver'] = $making['silver'] = $shipping['silver'] = $other['silver'] = $total['silver'] = 0;
+                                                    foreach ($pro as $k => $v): 
+                                                        $sql_pr = "SELECT * FROM product p INNER JOIN category c ON p.p_cat = c.c_id WHERE p_id = '$v->prod_id'";
+                                                        $result_pr = $connect->query($sql_pr);
+                                                        $data_pr = $result_pr->fetch_assoc();
+                                                        
+                                                        if ($data_pr['c_name'] == 'Silver') {
+                                                            $shipping['silver'] += $v->shipping;
+                                                            $price['silver'] += $v->price;
+                                                            $making['silver'] += $v->making;
+                                                            $other['silver'] += $v->other;
+                                                            $total['silver'] += $v->total;
+                                                        }else if ($data_pr['c_name'] == 'Gold') {
+                                                            $shipping['gold'] += $v->shipping;
+                                                            $price['gold'] += $v->price;
+                                                            $making['gold'] += $v->making;
+                                                            $other['gold'] += $v->other;
+                                                            $total['gold'] += $v->total;
+                                                        }
+                                                        // $img = explode(',', $data_pr['p_image']);
                                                 ?>
                                                 <tr>
                                                     <td width="10px" style="padding-left: 5px" align="center"><b style="font-size: medium"><?= $k+1 ?></b></td>
@@ -86,7 +101,7 @@
                                                     <td width="80px" align="center" style="padding-right: 5px"><b style="font-size: medium"><?= $v->price; ?></b></td>
                                                     <td width="90px" align="center" style="padding-right: 5px"><b style="font-size: medium"><?= $v->making; ?></b></td>
                                                     <td width="90px" align="center" style="padding-right: 5px"><b style="font-size: medium"><?= $v->other; ?></b></td>
-                                                    <td width="130px" align="center" style="padding-right: 10px"><b style="font-size: medium"><?= $v->total ?></b></td>
+                                                    <td width="130px" align="center" style="padding-right: 10px"><b style="font-size: medium"><?= $v->total; ?></b></td>
                                                 </tr>
                                                 <?php endforeach ?>
                                             </table>
@@ -94,47 +109,46 @@
                                     </tr>
                                     <tr style="height: 200px;">
                                         <td colspan="9" valign="bottom">
-                                            <b style="margin-left: 50px;top: 170px;position: relative">Gold Purity: 22 CARAT (916)</b>
+                                            <b style="margin-left: 50px;top: 170px;position: relative">Discount on order : ₹ <?= $total['gold'] + $total['silver'] + $shipping['gold'] + $shipping['silver'] - $data['o_total'] ?> </b>
                                             <table align="right" style="margin-right: 4px;" border="0" width="450px" cellpadding="0" cellspacing="0">
                                                 <tr>
                                                     <td width="90px"></td>
                                                     <td width="90px" align="right">
-                                                        <b></b>
+                                                        <b> <?= $price['silver'] ?> </b>
                                                     </td>
                                                     <td width="90px"></td>
                                                     <td width="90px" align="right">
-                                                        <b>  2775000.00 </b>
+                                                        <b> <?= $price['gold'] ?> </b>
                                                     </td>
                                                 </tr>
                                                 <tr height="27px">
                                                     <td width="90px"></td>
                                                     <td width="90px" align="right">
-                                                        <b> </b>
+                                                        <b> <?= $making['silver'] ?> </b>
                                                     </td>
                                                     <td width="90px"></td>
                                                     <td width="90px" align="right">
-                                                        <b>  14500.00 </b>
+                                                        <b> <?= $making['gold'] ?> </b>
                                                     </td>
                                                 </tr>
                                                 <tr height="25px">
                                                     <td width="90px"></td>
                                                     <td width="90px" align="right">
-                                                        <b></b>
+                                                        <b><?=  $other['silver'] ?></b>
                                                     </td>
                                                     <td width="90px"></td>
                                                     <td width="90px" align="right">
-                                                        <b> 30.00 </b>
+                                                        <b> <?= $other['gold'] ?> </b>
                                                     </td>
                                                 </tr>
                                                 <tr height="20px">
                                                     <td width="90px"></td>
                                                     <td width="90px" align="right">
-                                                        <b></b>                                                           
+                                                        <b><?=  $shipping['silver'] ?></b>                                                           
                                                     </td>
                                                     <td width="90px"></td>
                                                     <td width="90px" align="right">
-                                                        <b>                                                            500.00
-                                                        </b>
+                                                        <b> <?= $shipping['gold']; ?></b>
                                                     </td>
                                                 </tr>
 
@@ -143,52 +157,49 @@
                                                     <td width="90px"></td>
                                                     <td width="90px" align="right">
                                                         
-                                                        <b>                                                            
-                                                                                                                        </b>
+                                                        <b> ------- </b>
                                                     </td>
                                                     <td width="90px"></td>
                                                     <td width="90px" align="right">
                                                         
-                                                        <b> 2790030.00 </b>
+                                                        <b> ------- </b>
                                                     </td>
                                                 </tr>
                                                 <tr height="25px">
                                                     <td width="90px"></td>
                                                     <td width="90px" align="right">
-                                                        <b></b>
+                                                        <b> ------- </b>
                                                     </td>
                                                     <td width="90px"></td>
                                                     <td width="90px" align="right">
-                                                        <b> 41850.45 </b>
+                                                        <b> ------- </b>
                                                     </td>
                                                 </tr>
                                                 <tr height="25px">
                                                     <td width="90px"></td>
                                                     <td width="90px" align="right">
-                                                        <b></b>
+                                                        <b> ------- </b>
                                                     </td>
                                                     <td width="90px"></td>
                                                     <td width="90px" align="right">
-                                                        <b> 41850.45 </b>
+                                                        <b> ------- </b>
                                                     </td>
                                                 </tr>
                                                 <tr height="26px">
                                                     <td width="90px"></td>
                                                     <td width="90px" align="right">
-                                                        <b></b>
+                                                        <b> ₹ <?= $total['silver'] ?> </b>
                                                     </td>
                                                     <td width="90px"></td>
                                                     <td width="90px" align="right">
-                                                        <b> <?= round($data['o_total']) ?> </b>
+                                                        <b> ₹ <?= $total['gold'] ?> </b>
                                                     </td>
                                                 </tr>
 
                                                 <tr>
                                                     <td></td>
                                                     <td colspan="3" align="center" style="padding-top: 0px">
-                                                        <b style="font-size: 20px">
-                                                                                                                            &nbsp;
-                                                                                                                    </b>
+                                                        <b style="font-size: 20px">₹&nbsp;<?= $data['o_total'] ?></b>
                                                     </td>
                                                 </tr>
 

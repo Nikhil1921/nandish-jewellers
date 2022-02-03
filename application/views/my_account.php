@@ -162,7 +162,8 @@
                                           </div>
                                        </div>
                                        <div class="single-input-item">
-                                          <button class="btn btn-sqr" type="submit">Save The Changes</button>
+                                          <button class="btn btn-sqr" type="submit">Save The Changes</button>&nbsp&nbsp&nbsp
+                                          <?= anchor('my-account', 'Cancel', 'class="btn btn-sqr"') ?>
                                        </div>
                                     </form>
                                  </div>

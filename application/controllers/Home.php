@@ -63,18 +63,23 @@ class Home extends Public_controller  {
 	
 	public function contact_us()
 	{
-		$data['name'] = 'contact_us';
-		$data['title'] = 'contact us | Gold & Silver Jewellery Brand';
-		$data['breadcrumb'] = 'contact us';
-		$data['seo'] = [
-			'title' => APP_NAME. ' | contact us | Gold & Silver Jewellery Brand',
-			'desc' => 'Reach out us at E-mail: nandish.jewellers@gmail.com or at +91 80001 04444 for any of inquiry Nandish Jewellers.',
-			'image' => base_url('admin/image/logo.png'),
-			'url' => current_url(),
-			'keywords' => 'Top Jewellery Brand in India, Nandish Jewellers, Gold Jewellery, Silver Jewellery, About Nandish, Gold Necklaces, Gold Bangles, Silver Ornaments, Gold Coin, Silver Coin'
-		];
-        
-		return $this->template->load('template', 'contact_us', $data);
+		if ($this->input->is_ajax_request()) {
+
+			die("Order cancel not success.");
+		}else{
+			$data['name'] = 'contact_us';
+			$data['title'] = 'contact us | Gold & Silver Jewellery Brand';
+			$data['breadcrumb'] = 'contact us';
+			$data['seo'] = [
+				'title' => APP_NAME. ' | contact us | Gold & Silver Jewellery Brand',
+				'desc' => 'Reach out us at E-mail: nandish.jewellers@gmail.com or at +91 80001 04444 for any of inquiry Nandish Jewellers.',
+				'image' => base_url('admin/image/logo.png'),
+				'url' => current_url(),
+				'keywords' => 'Top Jewellery Brand in India, Nandish Jewellers, Gold Jewellery, Silver Jewellery, About Nandish, Gold Necklaces, Gold Bangles, Silver Ornaments, Gold Coin, Silver Coin'
+			];
+			
+			return $this->template->load('template', 'contact_us', $data);
+		}
 	}
 	
 	public function privacy()
@@ -100,8 +105,8 @@ class Home extends Public_controller  {
 	public function refund()
 	{
 		$data['name'] = 'refund';
-		$data['title'] = 'Exchange, Returns & Refunds';
-		$data['breadcrumb'] = 'Exchange, Returns & Refunds';
+		$data['title'] = 'Returns & Refunds';
+		$data['breadcrumb'] = 'Returns & Refunds';
 		$data['data'] = $this->main->get('page', 'details', ['p_page' => 'refund']);
         
 		return $this->template->load('template', 'page', $data);
@@ -312,14 +317,14 @@ class Home extends Public_controller  {
 			if ($u_id = $this->main->check("user", $post, 'u_id')){
 				$this->session->set_userdata('user_id', $u_id);
 				$response = [
-					'message' => "Login successfull.",
+					'message' => "Login is successfull.",
 					'redirect' => front_url('my-account'),
 					'error' => false
 				];
 			}
 			else
 				$response = [
-					'message' => "Login not successfull. Try again.",
+					'message' => "Login is not successfull. Try again.",
 					'error' => true
 				];
 		}

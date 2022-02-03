@@ -8,26 +8,39 @@
                         <h5>Sign In</h5>
                         <form method="post" action="<?= base_url('login') ?>" id="login-form">
                             <div class="single-input-item">
-                                <input type="text" placeholder="Enter Mobile" name="mobile" maxlength="10" />
+                                <input type="text" placeholder="Enter Mobile No." name="mobile" maxlength="10" />
                             </div>
                             <div class="single-input-item">
-                                <input type="password" placeholder="Enter your Password" name="password" />
+                                <input type="password" placeholder="Password" name="password" id="password" />
                             </div>
                             <div class="single-input-item">
-                                <button class="btn btn-sqr" type="submit">Login</button>
+                                <div class="form-group">
+                                    <input type="checkbox" id="view-password" onclick="if(this.checked === true) document.getElementById('password').type = ('text'); else document.getElementById('password').type = ('password')" /> 
+                                    <label for="view-password">View password</label>
+                                </div>
+                            </div>
+                            
+                            <div class="single-input-item">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <button class="btn btn-sqr" type="submit">Login</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="single-input-item">
+                                            <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                                                <?= anchor('forgot-password', 'Forgot Password?', 'class="forget-pwd"') ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </form>
-                        <div class="single-input-item">
-                            <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
-                                <?= anchor('forgot-password', 'Forget Password?', 'class="forget-pwd"') ?>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <?php if(!$this->session->verified): ?>
                 <div class="col-lg-6">
                     <div class="login-reg-form-wrap">
-                        <h5>Singup</h5>
+                        <h5>Sign up</h5>
                         <form method="post" action="<?= base_url('otp') ?>" id="otp-form">
                             <?php if($this->session->mobile_check): ?>
                             <input type="hidden" name="action" value="check_otp" />
@@ -36,7 +49,7 @@
                             </div>
                             <?php else: ?>
                             <div class="single-input-item">
-                                <input type="text" placeholder="Enter Mobile" name="mobile" maxlength="10" />
+                                <input type="text" placeholder="Enter Mobile No." name="mobile" maxlength="10" />
                             </div>
                             <?php endif ?>
                             <div class="single-input-item">
@@ -78,12 +91,12 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="single-input-item">
-                                        <input type="password" id="password" placeholder="Enter your Password" name="password" />
+                                        <input type="password" id="password" placeholder="Enter Password" name="password" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="single-input-item">
-                                        <input type="password" placeholder="Repeat your Password" name="re_password" />
+                                        <input type="password" placeholder="Confirm Password" name="re_password" />
                                     </div>
                                 </div>
                             </div>

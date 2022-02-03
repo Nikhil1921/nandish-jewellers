@@ -1,5 +1,18 @@
 /* document.getElementById('vid').play();*/
 var base_url = $('#base_url').val();
+$body = $("body");
+$(document).keydown(function(e) {
+    if (e.which === 123) {
+        return false;
+    }
+});
+
+$(document).bind("contextmenu", function(e) {
+    e.preventDefault();
+});
+
+
+$body.removeClass("loading");
 
 $("#signup-form").validate({
     ignore: ".ignore",
@@ -135,20 +148,31 @@ function saveData(form) {
         async: false,
         beforeSend: function() {
             $(form).find(':submit').hide();
+            $body.addClass("loading");
         },
         success: function(res) {
+            let timerInterval
             Swal.fire({
                 icon: res.error ? 'error' : 'success',
                 title: res.error ? 'Oops...' : 'Success',
-                text: res.message
+                text: res.message,
+                timer: 2000,
+                // timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading();
+                },
+                willClose: () => {
+                    clearInterval(timerInterval);
+                }
             }).then((result) => {
-                if (!res.error && result.isConfirmed && res.redirect) {
+                if (!res.error && res.redirect) {
                     window.location.href = res.redirect;
                 }
             });
         },
         complete: function() {
             $(form).find(':submit').show();
+            $body.removeClass("loading");
         }
     });
     return;
@@ -434,3 +458,7 @@ function checkout_develop(form) {
         }
     });
 }
+
+$('input[name=password]').bind("cut copy paste", function(e) {
+    e.preventDefault();
+});

@@ -28,7 +28,7 @@ class User extends Public_controller  {
 	{
 		$data['name'] = 'invoice';
 		$data['title'] = 'invoice';
-		$data['data'] = $this->main->get('orders', 'o_invoice, o_address, o_city, o_state, o_country, o_pancard, o_details, o_id, o_date, o_time, o_status, o_total', ['o_id' => d_id($id)]);
+		$data['id'] = d_id($id);
         
 		return $this->load->view('invoice', $data);
 	}

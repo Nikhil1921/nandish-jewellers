@@ -77,7 +77,6 @@
               <td><?= $data['c_price_18']; ?></td>
               <td class="text-right">
                   <a href="category_edit.php?cid=<?= $data['c_id']; ?>" class="btn btn-warning btn-link btn-icon"><i class="fa fa-edit"></i></a>
-                  <a href="category_delete.php?cid=<?= $data['c_id']; ?>" class="btn btn-danger btn-link btn-icon"><i class="fa fa-times"></i></a>
               </td>
             </tr>
             <?php } ?>

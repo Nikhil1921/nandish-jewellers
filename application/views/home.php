@@ -327,6 +327,7 @@
                             <?php foreach($testimonials as $testimonial): ?>
                             <div class="testimonial-content">
                                 <h5 class="testimonial-author"><?= $testimonial->t_name ?></h5>
+                                <br>
                                 <p>
                                     <?= $testimonial->t_detail ?>
                                 </p>
