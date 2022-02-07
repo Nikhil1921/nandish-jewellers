@@ -76,12 +76,12 @@ class Main_model extends Public_model
 	{
 		$select = ['p_id', 'p_detail', 'p_name', 'sc_name', 'i_name', 'c_name', 'p_gram', 'p_image', 'c_price', 'c_price_22', 'c_price_18', 'p_carat', 'p_l_char', 'p_other', 'p_code', 'p_cat', 'p_subcat', 'p_innercat', 'p_subinner', 'si_name'];
 		
-		if (isset($where['i_name']))
+		if (isset($where['si_name']))
+			array_push($select, 'si.seo_title', 'si.seo_description', 'si.seo_keywords','si.seo_detail');
+		elseif (isset($where['i_name']))
 			array_push($select, 'ic.seo_title', 'ic.seo_description', 'ic.seo_keywords','ic.seo_detail');
 		elseif (isset($where['sc_name']))
 			array_push($select, 'sc.seo_title', 'sc.seo_description', 'sc.seo_keywords','sc.seo_detail');
-		elseif (isset($where['si_name']))
-			array_push($select, 'si.seo_title', 'si.seo_description', 'si.seo_keywords','si.seo_detail');
 		else
 			array_push($select, 'c.seo_title', 'c.seo_description', 'c.seo_keywords','c.seo_detail');
 		

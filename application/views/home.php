@@ -89,7 +89,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-title text-center">
-                    <h1 class="title">Online Jewellery Store</h1>
+                    <h1 class="">Online Jewellery Store</h1>
+                    <hr>
                 </div>
                 <p class="text-justify">
                     Nandish Jewellers is one of the best jewellery brands in India in terms of item collection and variety of
@@ -198,7 +199,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-title text-center">
-                    <h2 class="title">Gold Jewellery</h2>
+                    <h2 class="">Gold Jewellery</h2>
+                    <hr>
                 </div>
                 <p class="text-justify">
                     In terms of item collection and diversity of ornaments, <b>Nandish.in</b> is one of India's best jewellery
@@ -280,7 +282,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-title text-center">
-                    <h3 class="title">Silver Jewellery</h3>
+                    <h3 class="">Silver Jewellery</h3>
+                    <hr>
                 </div>
                 <p class="text-justify">
                     <b>Nandish.in</b> is the wonderful assortment of top silver jewellery buying online is also known as Chandi ki
