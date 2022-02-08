@@ -25,6 +25,7 @@ class Home extends Public_controller  {
 		$data['testimonials'] = $this->main->getall('testimonial', 't_image, t_name, t_detail', []);
 		$data['new_prods'] = $this->main->getNewProds();
 		$data['innerCats'] = $this->main->getInners();
+		$data['blogs'] = $this->main->getall('blog', 'title, id, CONCAT("admin/image/blog/thumb_", image) image', [], 'id DESC');
 		
 		$data['cats'] = array_map(function($arr){
 					return (object) [
@@ -35,7 +36,7 @@ class Home extends Public_controller  {
 								return (object) [
 									'sc_id' => $arr->sc_id,
 									'sc_name' => $arr->sc_name,
-									'inner_cats' => (object) $this->main->getall('innercategory', 'i_id, i_name, i_image, i_show', ['i_sub_id' => $arr->sc_id], 'i_id ASC')
+									'inner_cats' => (object) $this->main->getall('innercategory', 'i_id, i_name, i_image, i_show', ['i_sub_id' => $arr->sc_id], 'i_sort ASC')
 								];
 							}, $this->main->getall('subcategory', 'sc_id, sc_name', ['sc_c_id' => $arr->c_id]))
 						];
@@ -62,18 +63,23 @@ class Home extends Public_controller  {
 	
 	public function contact_us()
 	{
-		$data['name'] = 'contact_us';
-		$data['title'] = 'contact us | Gold & Silver Jewellery Brand';
-		$data['breadcrumb'] = 'contact us';
-		$data['seo'] = [
-			'title' => APP_NAME. ' | contact us | Gold & Silver Jewellery Brand',
-			'desc' => 'Reach out us at E-mail: nandish.jewellers@gmail.com or at +91 80001 04444 for any of inquiry Nandish Jewellers.',
-			'image' => base_url('admin/image/logo.png'),
-			'url' => current_url(),
-			'keywords' => 'Top Jewellery Brand in India, Nandish Jewellers, Gold Jewellery, Silver Jewellery, About Nandish, Gold Necklaces, Gold Bangles, Silver Ornaments, Gold Coin, Silver Coin'
-		];
-        
-		return $this->template->load('template', 'contact_us', $data);
+		if ($this->input->is_ajax_request()) {
+
+			die("Order cancel not success.");
+		}else{
+			$data['name'] = 'contact_us';
+			$data['title'] = 'contact us | Gold & Silver Jewellery Brand';
+			$data['breadcrumb'] = 'contact us';
+			$data['seo'] = [
+				'title' => APP_NAME. ' | contact us | Gold & Silver Jewellery Brand',
+				'desc' => 'Reach out us at E-mail: nandish.jewellers@gmail.com or at +91 80001 04444 for any of inquiry Nandish Jewellers.',
+				'image' => base_url('admin/image/logo.png'),
+				'url' => current_url(),
+				'keywords' => 'Top Jewellery Brand in India, Nandish Jewellers, Gold Jewellery, Silver Jewellery, About Nandish, Gold Necklaces, Gold Bangles, Silver Ornaments, Gold Coin, Silver Coin'
+			];
+			
+			return $this->template->load('template', 'contact_us', $data);
+		}
 	}
 	
 	public function privacy()
@@ -99,8 +105,8 @@ class Home extends Public_controller  {
 	public function refund()
 	{
 		$data['name'] = 'refund';
-		$data['title'] = 'Exchange, Returns & Refunds';
-		$data['breadcrumb'] = 'Exchange, Returns & Refunds';
+		$data['title'] = 'Returns & Refunds';
+		$data['breadcrumb'] = 'Returns & Refunds';
 		$data['data'] = $this->main->get('page', 'details', ['p_page' => 'refund']);
         
 		return $this->template->load('template', 'page', $data);
@@ -199,12 +205,11 @@ class Home extends Public_controller  {
 		if ($data['prods']) {
 			if ($cat && $subcat && $inner){
 				$url = "$cat/$subcat/$inner";
-				$get['si_cat_id'] = $data['prods'][0]['p_cat'];
-				$get['si_subcat_id'] = $data['prods'][0]['p_subcat'];
-				$get['si_innercat_id'] = $data['prods'][0]['p_innercat'];
-				$data['sub_inns'] = $this->main->getall('sub_innercategory', 'CONCAT("'."$cat/$subcat/$inner/".'", si_name) AS si_url, si_name',$get);
+				$sub_inners['si_cat_id'] = $data['prods'][0]['p_cat'];
+				$sub_inners['si_subcat_id'] = $data['prods'][0]['p_subcat'];
+				$sub_inners['si_innercat_id'] = $data['prods'][0]['p_innercat'];
+				$data['sub_inns'] = $this->main->getall('sub_innercategory', 'CONCAT("'."$cat/$subcat/$inner/".'", si_name) AS si_url, si_name',$sub_inners);
 			}
-
 			$data['seo'] = [
 					'title' => $data['prods'][0]['seo_title'],
 					'desc' => $data['prods'][0]['seo_description'],
@@ -229,7 +234,7 @@ class Home extends Public_controller  {
 			$data['seo'] = [
 				'title' => $data['data']['seo_title'],
 				'desc' => $data['data']['seo_description'],
-				'image' => base_url('admin/image/product/'.reset($img)),
+				'image' => base_url('admin/image/product/thumb_'.reset($img)),
 				'url' => current_url(),
 				'keywords' => $data['data']['seo_keywords']
 			];
@@ -245,6 +250,26 @@ class Home extends Public_controller  {
 			"<a href='".make_slug($cat."/".$subcat."/".$inner."/".$sub_inner)."'>".str_replace('-', ' ', $sub_inner)."</a>",
 			$data['title']];
 		return $this->template->load('template', 'prod', $data);
+	}
+	
+	public function blog($blog)
+	{
+		$blog = explode('-', $blog);
+		$blog_id = end($blog);
+		$data['name'] = 'blog';
+		$data['data'] = $this->main->get('blog', 'title, detail, CONCAT("admin/image/blog/", image) image', ['id' => d_id($blog_id)]);
+		
+		if($data['data']){
+			$data['title'] = $data['data']['title'];
+			$data['breadcrumb'] = [
+				"blog",
+				$data['data']['title']
+			];
+			
+			return $this->template->load('template', 'blog', $data);
+		}
+		else
+			return $this->error_404();
 	}
 	
 	public function prod_info()
@@ -292,14 +317,14 @@ class Home extends Public_controller  {
 			if ($u_id = $this->main->check("user", $post, 'u_id')){
 				$this->session->set_userdata('user_id', $u_id);
 				$response = [
-					'message' => "Login successfull.",
+					'message' => "Login is successfull.",
 					'redirect' => front_url('my-account'),
 					'error' => false
 				];
 			}
 			else
 				$response = [
-					'message' => "Login not successfull. Try again.",
+					'message' => "Login is not successfull. Try again.",
 					'error' => true
 				];
 		}

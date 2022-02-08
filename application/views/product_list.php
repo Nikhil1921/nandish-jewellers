@@ -114,9 +114,9 @@
                                 </div>
                             </div>
                             <?php if(isset($sub_inns)): ?>
-                            <div class="col-lg-12 col-md-12 col-12">
+                            <div class="col-lg-12 col-md-12 col-12 pt-4 text-center">
                                 <?php foreach($sub_inns as $sub_inn): ?>
-                                    <a href="<?= make_slug($sub_inn->si_url) ?>" ><?= $sub_inn->si_name ?></a>
+                                    <a class="btn btn-cart2 ml-3 mb-3" href="<?= make_slug($sub_inn->si_url) ?>" ><?= $sub_inn->si_name ?></a>
                                 <?php endforeach ?>
                             </div>
                             <?php endif ?>
@@ -130,7 +130,7 @@
                             <div class="product-item">
                                 <figure class="product-thumb">
                                     <a href="<?= make_slug($prod['c_name']."/".$prod['sc_name']."/".$prod['i_name']."/".$prod['si_name']."/".$prod['p_name']."-".e_id($prod['p_id'])) ?>">
-                                        <?= img(['class' => "pri-img", 'src' => "admin/image/product/".reset($imge), 'alt' => "Jewellery"]) ?>
+                                        <?= img(['class' => "pri-img", 'src' => "admin/image/product/thumb_".reset($imge), 'alt' => "Jewellery"]) ?>
                                     </a>
                                     <div class="button-group">
                                         <a href="javascript:void(0)" onclick="addWishlist(this)" data-toggle="tooltip" data-placement="left" title="Add to wishlist" data-p_id="<?= e_id($prod['p_id']) ?>"><i><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -164,7 +164,7 @@
                                 <div class="product-list-item">
                                     <figure class="product-thumb">
                                         <a href="<?= make_slug($prod['c_name']."/".$prod['sc_name']."/".$prod['i_name']."/".$prod['si_name']."/".$prod['p_name']."-".e_id($prod['p_id'])) ?>">
-                                            <?= img(['class' => "pri-img", 'src' => "admin/image/product/".reset($imge), 'alt' => "Jewellery"]) ?>
+                                            <?= img(['class' => "pri-img", 'src' => "admin/image/product/thumb_".reset($imge), 'alt' => "Jewellery"]) ?>
                                         </a>
                                         <div class="button-group">
                                             <a href="javascript:void(0)" onclick="addWishlist(this)" data-toggle="tooltip" data-placement="left" title="Add to wishlist" data-p_id="<?= e_id($prod['p_id']) ?>"><i><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -206,5 +206,10 @@
                         </div>
                     </div>
                 </div>
+                <?php if($prods): ?>
+                    <div class="">
+                        <?= $prods[0]['seo_detail']; ?>
+                    </div>
+                <?php endif ?>
             </div>
         </div>

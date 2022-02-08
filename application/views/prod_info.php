@@ -14,7 +14,7 @@
          <div class="pro-nav-new slick-row-10 slick-arrow-style">
             <?php foreach ($imge as $img): ?>
             <div class="pro-nav-thumb">
-               <img src="<?= base_url() ?>admin/image/product/<?= $img ?>" alt="Jewellery details" />
+               <img src="<?= base_url() ?>admin/image/product/thumb_120_<?= $img ?>" alt="Jewellery details" />
             </div>
             <?php endforeach ?>
          </div>

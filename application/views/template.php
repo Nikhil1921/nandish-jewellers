@@ -43,9 +43,9 @@ endif;
         <link rel="stylesheet" href="<?= base_url('assets/css/plugins/animate.css') ?>">
         <link rel="stylesheet" href="<?= base_url('assets/css/plugins/nice-select.css') ?>">
         <link rel="stylesheet" href="<?= base_url('assets/css/plugins/jqueryui.min.css') ?>">
-        <link rel="stylesheet" href="<?= base_url('assets/css/style.css?v=1.0.1') ?>">
-        <link rel="stylesheet" href="<?= base_url('assets/css/custom.css?v=1.0.2') ?>">
-        <link rel="stylesheet" href="<?= base_url('assets/css/responsive.css?v=1.0.1') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/style.css?v=1.0.3') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/custom.css?v=1.0.3') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/responsive.css?v=1.0.3') ?>">
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/xzoom.css') ?>" media="all" />
         <!-- Google Tag Manager -->
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -55,7 +55,7 @@ endif;
         })(window,document,'script','dataLayer','GTM-MMCPFHR');</script>
         <!-- End Google Tag Manager -->
    </head>
-   <body>
+   <body class="loading">
         <!-- Google Tag Manager (noscript) -->
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MMCPFHR"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -91,7 +91,7 @@ endif;
                                     <li class="header-search-container mr-0">
                                         <button class="search-trigger d-block"><i class="pe-7s-search"></i></button>
                                         <form class="header-search-box d-none animated jackInTheBox" action="<?= base_url() ?>">
-                                        <input type="text" placeholder="Search entire store hire" name="search" class="header-search-field">
+                                        <input type="text" placeholder="Search here" name="search" class="header-search-field">
                                         <button class="header-search-btn"><i class="pe-7s-search"></i></button>
                                         </form>
                                     </li>
@@ -369,7 +369,7 @@ endif;
                 <div class="off-canvas-inner">
                     <div class="search-box-offcanvas">
                         <form action="<?= base_url() ?>">
-                            <input type="text" placeholder="Search here..." name="search">
+                            <input type="text" placeholder="Search here" name="search">
                             <button class="search-btn"><i class="pe-7s-search"></i></button>
                         </form>
                     </div>
@@ -696,21 +696,21 @@ endif;
                         </div>
                         </div>
                         <div class="col-lg-3 col-md-6">
-                        <div class="widget-item">
-                            <h6 class="widget-title">Information</h6>
-                            <div class="widget-body">
-                                <ul class="info-list">
-                                    <li><a href="<?= front_url('about-us') ?>">about us</a></li>
-                                    <li><a href="<?= front_url('contact-us') ?>">contact us</a></li>
-                                    <li><a href="<?= front_url('privacy') ?>">Privacy Policy</a></li>
-                                    <li><a href="<?= front_url('terms') ?>">Terms & Condition</a></li>
-                                    <li><a href="javascript:;">Shipping & Delivery</a></li>
-                                    <li><a href="javascript:;">Customer Service</a></li>
-                                    <li><a href="<?= front_url('refund') ?>">Exchange, Returns & Refunds</a></li>
-                                    <li><a target="_blank" href="https://g.page/nandishjewellers/review?av">Write Review</a></li>
-                                </ul>
+                            <div class="widget-item">
+                                <h6 class="widget-title">Information</h6>
+                                <div class="widget-body">
+                                    <ul class="info-list">
+                                        <li><a href="<?= front_url('about-us') ?>">about us</a></li>
+                                        <li><a href="<?= front_url('contact-us') ?>">contact us</a></li>
+                                        <li><a href="<?= front_url('privacy-policy') ?>">Privacy Policy</a></li>
+                                        <li><a href="<?= front_url('terms-condition') ?>">Terms & Condition</a></li>
+                                        <li><a href="javascript:;">Shipping & Delivery</a></li>
+                                        <li><a href="javascript:;">Customer Service</a></li>
+                                        <li><a href="<?= front_url('returns-refunds') ?>">Returns & Refunds</a></li>
+                                        <li><a target="_blank" href="https://g.page/nandishjewellers/review?av">Write Review</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
                         </div>
                         <div class="col-lg-3 col-md-6">
                         <div class="widget-item">
@@ -873,7 +873,7 @@ endif;
                                     <?php foreach ($this->cart as $data_foot): $imge = explode(",", $data_foot['p_image']) ?>
                                     <li class="minicart-item">
                                         <div class="minicart-thumb">
-                                            <?= img(['src' => 'admin/image/product/'.reset($imge), 'alt' => "Jewellery"]) ?>
+                                            <?= img(['src' => 'admin/image/product/thumb_120_'.reset($imge), 'alt' => "Jewellery"]) ?>
                                         </div>
                                         <div class="minicart-content">
                                             <h3 class="product-name">
@@ -927,6 +927,7 @@ endif;
                     </div>
                 </div>
             </div>
+            <div class="loader"><!-- Place at bottom of page --></div>
             <input type="hidden" id="base_url" value="<?= base_url() ?>">
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1DLP9MBQS"></script>
@@ -936,7 +937,6 @@ endif;
         gtag('js', new Date());
 
         gtag('config', 'G-E1DLP9MBQS');
-        
         </script>
         <script src="<?= base_url('assets/js/vendor/modernizr-3.6.0.min.js') ?>"></script>
         <script src="<?= base_url('assets/js/vendor/jquery-3.3.1.min.js') ?>"></script>
@@ -959,8 +959,8 @@ endif;
         <script src="<?= base_url('assets/js/plugins/google-map.js') ?>"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="<?= base_url('assets/js/jquery.validate.js') ?>"></script>
-        <script src="<?= base_url('assets/js/main.js?v=1.0.5') ?>"></script>
-        <script src="<?= base_url('assets/js/custom.js?v=1.0.3') ?>"></script>
+        <script src="<?= base_url('assets/js/main.js?v=1.0.6') ?>"></script>
+        <script src="<?= base_url('assets/js/custom.js?v=1.0.6') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/js/xzoom.min.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/js/jquery.hammer.min.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/js/setup.js') ?>"></script>

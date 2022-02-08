@@ -340,8 +340,10 @@ textarea:focus {
 }
 
 .slick-arrow-style button.slick-arrow.slick-next {
-    left: auto;
-    right: 0;
+    /* left: auto;
+    right: 0; */
+    position: absolute;
+    right: 0 !important;
 }
 
 .slick-arrow-style button.slick-arrow:hover {
@@ -358,8 +360,10 @@ textarea:focus {
 }
 
 .slick-arrow-style:hover button.slick-arrow.slick-prev {
-    left: -60px;
-    right: auto;
+    /* left: -60px;
+    right: auto; */
+    position: absolute;
+    left: 0 !important;
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1499.98px),
@@ -4772,6 +4776,10 @@ only screen and (max-width: 767.98px) {
     background-color: #1DA1F2;
 }
 
+.blog-share-link .blog-social-icon a.whatsapp {
+    background-color: #25d366;
+}
+
 .blog-share-link .blog-social-icon a.pinterest {
     background-color: #CB2028;
 }
@@ -7115,6 +7123,25 @@ only screen and (max-width: 767.98px) {
 
 .rs-icon::before {
     content: "\f156"
+}
+
+.loader {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba( 255, 255, 255, .8) url('../img/loader.gif') 50% 50% no-repeat;
+}
+
+body.loading .loader {
+    overflow: hidden;
+}
+
+body.loading .loader {
+    display: block;
 }
 
 

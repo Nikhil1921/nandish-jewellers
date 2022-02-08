@@ -146,7 +146,7 @@
                                         </div>
                                         <div class="policy-content">
                                             <h6>Price</h6>
-                                            <p>We offers you Best Price</p>
+                                            <p>We Offer You The Best Price</p>
                                         </div>
                                     </div>
                                 </div>

@@ -1,29 +1,44 @@
 <?php
-    include("layout/header.php");
+  include("layout/header.php");
 
-    if(isset($_POST['submit']))
-   	{ 
-		  $cat = $_POST['cat'];
-      $name = $_POST['name'];
-      $seo_title = $_POST['seo_title'];
-      $seo_description = $_POST['seo_description'];
-      $seo_keywords = $_POST['seo_keywords'];
-      $detail = $_POST['detail'];
+  $id = $_REQUEST['bid'];
 
-    	$qry="INSERT INTO `subcategory`(`sc_c_id`, `sc_name`, `seo_title`, `seo_description`, `seo_keywords`, `seo_detail`) VALUES ('$cat','$name', '$seo_title', '$seo_description', '$seo_keywords', '$detail')";
-    	$run = $connect->query($qry)or die("not insert Data");
+  $sql = "SELECT * FROM blog Where id = $id";
+  $result = $connect->query($sql);
+  $data = $result->fetch_assoc();
+  $image = $unlink = $data['image'];
 
-		if($run == true)
-		{             
+  if (isset($_POST['submit'])) 
+  {
+    $title = $_POST['title'];
+    $detail = $_POST['detail'];
+
+    if (!empty($_FILES['image']['name'])) 
+    {
+      require "layout/thumbimage.php";
+      $tempimage = $_FILES['image']['tmp_name'];
+      $image = "IMG-".time().".".pathinfo($_FILES['image']['name'],PATHINFO_EXTENSION);
+      move_uploaded_file($tempimage, "image/blog/$image");
+      $objThumbImage = new ThumbImage("image/blog/$image");
+      $objThumbImage->createThumb("image/blog/thumb_$image", 350);
+      if(is_file('image/blog/thumb_'.$unlink)) unlink('image/blog/thumb_'.$unlink);
+      if(is_file('image/blog/'.$unlink)) unlink('image/blog/'.$unlink);
+    }
+
+    $qr = "UPDATE `blog` set `title`='$title',`detail`='$detail',`image`='$image' where id = '$id'";
+    $run = $connect->query($qr)or die("not insert Data");
+    if ($run == true) 
+    {
 ?>
-       		<script>
-       			alert('data inserted successfully');
-       			window.open('add_subcategory.php','_self');
-      		</script>
-<?php
-     	}
-  	}
-?>
+       <script>
+       alert('Data Updated Successfully');
+       window.open('blog_list.php','_self');
+      </script>
+<?php }else{ ?>
+      <script>
+       alert('data Not Update successfully');
+      </script>
+<?php } } ?>
 <div class="main-panel">
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
@@ -42,7 +57,7 @@
             <span class="navbar-toggler-bar bar3"></span>
           </button>
         </div>
-        <a class="navbar-brand" href="javascript:;">Sub Category Foram</a>
+        <a class="navbar-brand" href="javascript:;">Blog Foram</a>
       </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -71,53 +86,33 @@
         <form method="POST" enctype="multipart/form-data">
           <div class="card ">
             <div class="card-header ">
-              <h4 class="card-title">Add Sub Category</h4>
+              <h4 class="card-title">Blog Edit</h4>
             </div>
             <div class="card-body">
             <div class="row">
               <div class="col-md-6">
-                <label>Category</label>
-                <select class="selectpicker form-control" name="cat" data-style="btn btn-primary btn-round" title="Select Category" required>
-                  <?php 
-                    $sql = "SELECT * FROM category";
-                    $run1 = $connect->query($sql);
-                    while ($data = $run1->fetch_assoc()) 
-                    {  
-                  ?>
-                    <option value="<?php echo $data['c_id']; ?>"><?php echo 
-                    $data['c_name']; ?></option>
-                  <?php } ?>
-                </select>
+                <label>Title</label>
+                <input class="form-control" name="title" value="<?= $data['title']; ?>" type="text" required="true" placeholder="Enter Title" />
               </div>
             	<div class="col-md-6">
-      					<div class="form-group has-label">
-      					<label>Category Name</label>
-      					<input class="form-control" name="name" type="text" required="true" placeholder="Enter Category Name" />
-      					</div>
-      				</div>
-              <h4 class="card-title col-12">Add SEO keywords</h4>
-              <div class="col-md-6">
-      					<div class="form-group has-label">
-      					<label>Keyword title</label>
-      					<input class="form-control" name="seo_title" type="text" placeholder="Enter Keyword title" />
-      					</div>
-      				</div>
-              <div class="col-md-6">
-      					<div class="form-group has-label">
-      					<label>Keyword description</label>
-      					<input class="form-control" name="seo_description" type="text" placeholder="Enter Keyword description" />
-      					</div>
-      				</div>
-              <div class="col-md-6">
-      					<div class="form-group has-label">
-      					<label>Keywords</label>
-                <input type="text" class="tagsinput" data-role="tagsinput" data-color="primary" name="seo_keywords" placeholder="Enter Keywords" />
-      					</div>
-      				</div>
+                <div class="form-group has-label">
+                  <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                    <div>
+                      <span class="btn btn-rose btn-round btn-file">
+                        <span class="fileinput-new">Select Blog image</span>
+                        <span class="fileinput-exists">Change</span>
+                        <input type="file" value="<?= $data['image']; ?>" name="image" class="form-control" />
+                      </span>
+                      <a href="javascript:;" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="col-md-6">
                 <div class="form-group has-label">
-                  <label>Detail</label>
-                  <textarea class="form-control ckeditor" name="detail"></textarea>
+                  <label>Blog Detail</label>
+                  <textarea class="form-control ckeditor" name="detail"><?= $data['detail']; ?></textarea>
                 </div>
               </div>
       				<div class="col-md-12">

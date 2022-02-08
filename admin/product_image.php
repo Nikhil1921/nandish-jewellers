@@ -19,7 +19,10 @@ if(count($_POST))
   $qry = "UPDATE product SET p_image = '$imgs' WHERE p_id = '$id'";
   if($connect->query($qry) === TRUE)
   {
-    unlink('image/product/'.$img);
+    if (is_file('image/product/'.$img))
+      unlink('image/product/'.$img);
+    if (is_file('image/product/thumb_'.$img))
+      unlink('image/product/thumb_'.$img);
   ?>
   <script>
     alert('data Update successfully');

@@ -1,133 +1,232 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<!DOCTYPE html>
-<html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title><?= APP_NAME ?></title>
-    <meta name="robots" content="noindex, follow" />
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('admin/image/logo.png') ?>">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,900" rel="stylesheet">
-    <link rel="stylesheet" href="<?= base_url('assets/css/vendor/bootstrap.min.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/vendor/pe-icon-7-stroke.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/vendor/font-awesome.min.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/plugins/slick.min.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/plugins/animate.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/plugins/nice-select.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/plugins/jqueryui.min.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/custom.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/responsive.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/invoice.css') ?>">
-  </head><body>
-  <div class="container-fluid invoice-container">
-    <header>
-      <div class="row align-items-center">
-        <div class="col-sm-7 text-center text-sm-left mb-3 mb-sm-0">
-          <?= img(['id' => "logo", 'src' => 'assets/img/logo/logo.png', 'alt' => APP_NAME."Logo", 'onclick' => "window.location = 'my-account.php'"]) ?>
+<?php
+    $data = $this->db->select('*')
+                     ->from('orders o')
+                     ->join('user u', 'o.o_u_id = u.u_id')
+                     ->where(['o_id' => $id])
+                     ->get()
+                     ->row_array();
+?>
+<script>
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+</script>
+    <link rel="stylesheet" href="<?= base_url('admin/assets/css/billlayout.css') ?>">
+<body>
+    <div class="content bg-gray-lighter">
+        <center>
+            <button type="button" onclick="printDiv('prnt')"><i class="si si-printer"></i> Print</button>
+        </center>
+        <br>
+        <div id="prnt" style="overflow:auto" >
+                <page class="org" size="A4" layout="portrait">
+                    <table class="tblsize" border="0" cellpadding="0" cellspacing="0">
+                        <tr style="height:258px">
+                            <td>
+                                <table align="right" style="margin-right: 60px;margin-top: 80px;" border="0" cellpadding="3">
+                                    <tr align="right">
+                                        <td><span style="font-weight:bold;font-size: 20px ">Transaction:<b style="margin-left: 10px;font-family: Arial">Online</b></span></td>
+                                    </tr>
+                                    <tr  align="right">
+                                       <td><span style="font-weight:bold;font-size: 20px "> Bill No.:<b style="margin-left: 10px;font-family: Arial">20/21-2</b></span></td>
+                                    </tr>
+                                    <tr  align="right">
+                                        <td><span style="font-weight:bold;font-size: 20px "> Pan No.: <b style="font-family: Arial;text-transform: uppercase;">GJAT897415</b></span></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td>
+                                <table border="0" width="1010px" align="center" style="margin-top: 3px">
+                                    <tbody>
+                                    <tr>
+                                        <td width="35px" height="18px">&nbsp;</td>
+                                        <td width="240px" colspan="5"><b style="margin-left: 45px;font-size: 20px"><?= $data['u_f_name'].' '.$data['u_m_name'].' '.$data['u_l_name'] ?></b></td>
+                                        <td ><b style="font-size: medium"><?= $data['o_date']; ?></b></td>
+                                        <td colspan="2"><b style="margin-left: 85px;font-size: large !important;"><?= $data['o_city'] ?></b></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="35px" height="34px">&nbsp;</td>
+                                        <td width="240px">&nbsp;</td>
+                                        <td width="75px">&nbsp;</td>
+                                        <td width="98px">&nbsp;</td>
+                                        <td width="98px">&nbsp;</td>
+                                        <td width="98px">&nbsp;</td>
+                                        <td width="97px"> &nbsp;</td>
+                                        <td width="98px">&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr height="185px" valign="top">
+                                        <td colspan="9">
+                                            <table border="0"  width="100%" align="center" cellspacing="0" cellpadding="1">
+                                                <?php
+                                                    $pro = json_decode($data['o_details']);
+                                                    $price['gold'] = $making['gold'] = $shipping['gold'] = $other['gold'] = $total['gold'] = 0;
+                                                    $price['silver'] = $making['silver'] = $shipping['silver'] = $other['silver'] = $total['silver'] = 0;
+                                                    foreach ($pro as $k => $v):
+                                                        $data_pr = $this->db->select('*')
+                                                                            ->from('product p')
+                                                                            ->join('category c', 'p.p_cat = c.c_id')
+                                                                            ->where(['p_id' => $v->prod_id])
+                                                                            ->get()
+                                                                            ->row_array();
+                                                        
+                                                        if ($data_pr['c_name'] == 'Silver') {
+                                                            $shipping['silver'] += $v->shipping;
+                                                            $price['silver'] += $v->price;
+                                                            $making['silver'] += $v->making;
+                                                            $other['silver'] += $v->other;
+                                                            $total['silver'] += $v->total;
+                                                        }else if ($data_pr['c_name'] == 'Gold') {
+                                                            $shipping['gold'] += $v->shipping;
+                                                            $price['gold'] += $v->price;
+                                                            $making['gold'] += $v->making;
+                                                            $other['gold'] += $v->other;
+                                                            $total['gold'] += $v->total;
+                                                        }
+                                                        // $img = explode(',', $data_pr['p_image']);
+                                                ?>
+                                                <tr>
+                                                    <td width="10px" style="padding-left: 5px" align="center"><b style="font-size: medium"><?= $k+1 ?></b></td>
+                                                    <td width="290px" align="left" style="padding-left: 10px"><b style="font-size: medium"><?= $data_pr['p_name']; ?><?= ($v->price) ? '' : ' (Pre order)' ?> X <?= $v->qty; ?><br><?= $data_pr['p_code'] ?></b></td>
+                                                    <td width="80px" align="center" style="padding-right: 5px"><b style="font-size: medium"><?= $data_pr['p_g_wei'] ?></b></td>
+                                                    <td width="90px" align="center" style="padding-right: 5px"><b style="font-size: medium"><?= $data_pr['p_l_wei'] ?></b></td>
+                                                    <td width="90px" align="center" style="padding-right: 5px"><b style="font-size: medium"><?= $data_pr['p_gram'] ?></b></td>
+                                                    <td width="80px" align="center" style="padding-right: 5px"><b style="font-size: medium"><?= $v->price; ?></b></td>
+                                                    <td width="90px" align="center" style="padding-right: 5px"><b style="font-size: medium"><?= $v->making; ?></b></td>
+                                                    <td width="90px" align="center" style="padding-right: 5px"><b style="font-size: medium"><?= $v->other; ?></b></td>
+                                                    <td width="130px" align="center" style="padding-right: 10px"><b style="font-size: medium"><?= $v->total; ?></b></td>
+                                                </tr>
+                                                <?php endforeach ?>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr style="height: 200px;">
+                                        <td colspan="9" valign="bottom">
+                                            <b style="margin-left: 50px;top: 170px;position: relative">Discount on order : ₹ <?= $total['gold'] + $total['silver'] + $shipping['gold'] + $shipping['silver'] - $data['o_total'] ?> </b>
+                                            <table align="right" style="margin-right: 4px;" border="0" width="450px" cellpadding="0" cellspacing="0">
+                                                <tr>
+                                                    <td width="90px"></td>
+                                                    <td width="90px" align="right">
+                                                        <b> <?= $price['silver'] ?> </b>
+                                                    </td>
+                                                    <td width="90px"></td>
+                                                    <td width="90px" align="right">
+                                                        <b> <?= $price['gold'] ?> </b>
+                                                    </td>
+                                                </tr>
+                                                <tr height="27px">
+                                                    <td width="90px"></td>
+                                                    <td width="90px" align="right">
+                                                        <b> <?= $making['silver'] ?> </b>
+                                                    </td>
+                                                    <td width="90px"></td>
+                                                    <td width="90px" align="right">
+                                                        <b> <?= $making['gold'] ?> </b>
+                                                    </td>
+                                                </tr>
+                                                <tr height="25px">
+                                                    <td width="90px"></td>
+                                                    <td width="90px" align="right">
+                                                        <b><?=  $other['silver'] ?></b>
+                                                    </td>
+                                                    <td width="90px"></td>
+                                                    <td width="90px" align="right">
+                                                        <b> <?= $other['gold'] ?> </b>
+                                                    </td>
+                                                </tr>
+                                                <tr height="20px">
+                                                    <td width="90px"></td>
+                                                    <td width="90px" align="right">
+                                                        <b><?=  $shipping['silver'] ?></b>                                                           
+                                                    </td>
+                                                    <td width="90px"></td>
+                                                    <td width="90px" align="right">
+                                                        <b> <?= $shipping['gold']; ?></b>
+                                                    </td>
+                                                </tr>
+
+                                                 
+                                                <tr height="28px">
+                                                    <td width="90px"></td>
+                                                    <td width="90px" align="right">
+                                                        
+                                                        <b> ------- </b>
+                                                    </td>
+                                                    <td width="90px"></td>
+                                                    <td width="90px" align="right">
+                                                        
+                                                        <b> ------- </b>
+                                                    </td>
+                                                </tr>
+                                                <tr height="25px">
+                                                    <td width="90px"></td>
+                                                    <td width="90px" align="right">
+                                                        <b> ------- </b>
+                                                    </td>
+                                                    <td width="90px"></td>
+                                                    <td width="90px" align="right">
+                                                        <b> ------- </b>
+                                                    </td>
+                                                </tr>
+                                                <tr height="25px">
+                                                    <td width="90px"></td>
+                                                    <td width="90px" align="right">
+                                                        <b> ------- </b>
+                                                    </td>
+                                                    <td width="90px"></td>
+                                                    <td width="90px" align="right">
+                                                        <b> ------- </b>
+                                                    </td>
+                                                </tr>
+                                                <tr height="26px">
+                                                    <td width="90px"></td>
+                                                    <td width="90px" align="right">
+                                                        <b> ₹ <?= $total['silver'] ?> </b>
+                                                    </td>
+                                                    <td width="90px"></td>
+                                                    <td width="90px" align="right">
+                                                        <b> ₹ <?= $total['gold'] ?> </b>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td></td>
+                                                    <td colspan="3" align="center" style="padding-top: 0px">
+                                                        <b style="font-size: 20px">₹&nbsp;<?= $data['o_total'] ?></b>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td height="1px"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="9">
+                                            
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </page>
         </div>
-        <div class="col-sm-5 text-center text-sm-right">
-          <h4 class="text-7 mb-0">Estimate</h4>
-        </div>
-      </div>
-      <hr>
-    <main>
-      <div class="row">
-        <div class="col-sm-6"><strong>Date / Time : </strong> <?= $data['o_date'].' / '.$data['o_time']; ?></div>
-        <div class="col-sm-6 text-sm-right"> <strong>Estimate No : </strong><?= $data['o_invoice']; ?></div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-sm-6 text-sm-right order-sm-1"> <strong>Pay To:</strong>
-          <address>
-            <?= APP_NAME ?><br />
-            Moti Bazar, Golden Complex,<br />
-            Gondal-360311<br/>
-            nandish.jewellers@gmail.com
-          </address>
-        </div>
-        <div class="col-sm-6 order-sm-0"> <strong>Invoiced To:</strong>
-          <address>
-            <?= $this->user['u_f_name'].' '.$this->user['u_m_name'].' '.$this->user['u_l_name'] ?><br>
-            <?= $this->user['u_mobile'] ?><br>
-            <?= $data['o_address'].' ,'.$data['o_city'].' ,'.$data['o_state'].' ,'.$data['o_country']; ?>
-          </address>
-          PAN No. : <span><?= strtoupper($data['o_pancard']) ?></span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-body p-0">
-          <div class="table-responsive">
-            <table class="table mb-0">
-              <thead class="card-header">
-                <tr>
-                  <td class="border-0"><strong>Jewellery</strong></td>
-                  <td class="border-0"><strong>S.K.U code</strong></td>
-                  <td class="border-0"><strong>Image</strong></td>
-                  <td class="text-center border-0"><strong>Size</strong></td>
-                  <td class="text-center border-0"><strong>Gross Weight</strong></td>
-                  <td class="text-center border-0"><strong>Loss Weight</strong></td>
-                  <td class="text-center border-0"><strong>Net Weight</strong></td>
-                  <td class="text-center border-0"><strong>Rate</strong></td>
-                  <td class="text-center border-0"><strong>Making charge</strong></td>
-                  <td class="text-center border-0"><strong>Other Charge</strong></td>
-                  <td class="text-center border-0"><strong>QTY</strong></td>
-                  <td class="text-right border-0"><strong>GST 3%</strong></td>
-                  <td class="text-right border-0"><strong>Amount</strong></td>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                $pro = json_decode($data['o_details']);
-                $shipping = 0;
-                foreach ($pro as $v): $shipping += $v->shipping;
-                  $data_pr = $this->main->get('product', 'p_image, p_name, p_code, p_g_wei, p_l_wei, p_gram', ['p_id' => $v->prod_id]);
-                  $img = explode(',', $data_pr['p_image']);
-                ?>
-                <tr>
-                  <td class="border-0"><?= $data_pr['p_name']; ?><?= ($v->price) ? '' : ' (Pre order)' ?></td>
-                  <td class="text-center border-0"><span><?= $data_pr['p_code'] ?></span></td>
-                  <td class="text-center border-0"><img src="<?= base_url() ?>admin/image/product/<?= reset($img) ?>" height="100px" width="100px"></td>
-                  <td class="text-center border-0"><?= $v->size; ?></td>
-                  <td class="text-center border-0"><?= $data_pr['p_g_wei'] ?></td>
-                  <td class="text-center border-0"><?= $data_pr['p_l_wei'] ?></td>
-                  <td class="text-center border-0"><?= $data_pr['p_gram'] ?></td>
-                  <td class="text-right border-0"><span><i class="fa fa-inr" aria-hidden="true"></i><?= $v->price; ?></span></td>
-                  <td class="text-right border-0"><span><i class="fa fa-inr" aria-hidden="true"></i><?= $v->making; ?></span></td>
-                  <td class="text-right border-0"><span><i class="fa fa-inr" aria-hidden="true"></i><?= $v->other; ?></span></td>
-                  <td class="text-center border-0"><?= $v->qty; ?></td>
-                  <td class="text-center border-0"><?= $v->total - $v->price - $v->making - $v->other ?></td>
-                  <td class="text-center border-0"><?= $v->total; ?></td>
-                </tr>
-                <?php endforeach ?>
-              </tbody>
-              <tfoot class="card-footer">
-              <tr>
-                <td colspan="12" class="text-right"><strong>Sub Total : </strong></td>
-                <td class="text-right"><span><i class="fa fa-inr" aria-hidden="true"></i> 
-                  <?= round($data['o_total'] - $shipping) ?></span></td>
-              </tr>
-              <tr>
-                <td colspan="12" class="text-right"><strong>Shipping Charge (Including GST) : </strong></td>
-                <td class="text-right"><span><i class="fa fa-inr" aria-hidden="true"></i> 
-                  <?= $shipping; ?></span></td>
-              </tr>
-              <tr>
-                <td colspan="12" class="text-right"><strong>Total : </strong></td>
-                <td class="text-right"><span><i class="fa fa-inr" aria-hidden="true"></i> <?= round($data['o_total']) ?></span></td>
-              </tr>
-              </tfoot>
-            </table>
-          </div>
-        </div>
-      </div>
-    </main>
-    <footer class="text-center mt-4">
-      <p class="text-1"><strong>NOTE :</strong> This is computer generated receipt and does not require physical signature.</p>
-      <div class="btn-group btn-group-sm d-print-none"> <a href="javascript:window.print()" class="btn btn-light border text-black-50 shadow-none"><i class="fa fa-print"></i> Print</a> </div>
-    </footer>
-  </div>
+    </div>
 </body>
-</html>

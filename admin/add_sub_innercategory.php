@@ -4,9 +4,7 @@
     if(isset($_POST['submit']))
    	{ 
         $post = (object) $_POST;
-        $qry = "INSERT INTO `sub_innercategory` (`si_cat_id`, `si_subcat_id`, `si_innercat_id`, `si_name`, `seo_title`, `seo_description`, `seo_keywords`) 
-              VALUES ('$post->cat', '$post->subcat', '$post->innercat', '$post->name', '$post->seo_title', '$post->seo_description', '$post->seo_keywords')";
-    	
+        $qry = "INSERT INTO `sub_innercategory` (`si_cat_id`, `si_subcat_id`, `si_innercat_id`, `si_name`, `seo_title`, `seo_description`, `seo_keywords`, `seo_detail`) VALUES ('$post->cat', '$post->subcat', '$post->innercat', '$post->name', '$post->seo_title', '$post->seo_description', '$post->seo_keywords', '$post->detail')";
         $run = $connect->query($qry)or die("not insert Data");
 
 		if($run == true)
@@ -116,6 +114,12 @@
                                             <div class="form-group has-label">
                                                 <label>Keywords</label>
                                                 <input type="text" class="tagsinput" data-role="tagsinput" data-color="primary" name="seo_keywords" placeholder="Enter Keywords" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group has-label">
+                                              <label>Detail</label>
+                                              <textarea class="form-control ckeditor" name="detail"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-12">

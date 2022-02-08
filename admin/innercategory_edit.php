@@ -1,12 +1,11 @@
-<?php
-    include("layout/header.php");
+<?php include("layout/header.php");
 
-    $id = $_REQUEST['iid'];
+  $id = $_REQUEST['iid'];
 
-    $sql = "SELECT * FROM innercategory Where i_id = $id";
-    $result = $connect->query($sql);
-    $data = $result->fetch_assoc();
-    $image = $data['i_image'];
+  $sql = "SELECT * FROM innercategory Where i_id = $id";
+  $result = $connect->query($sql);
+  $data = $result->fetch_assoc();
+  $up_image = $unlink =  $data['i_image'];
 
   if(isset($_POST['submit']))
   { 
@@ -17,26 +16,35 @@
     $seo_title = $_POST['seo_title'];
     $seo_description = $_POST['seo_description'];
     $seo_keywords = $_POST['seo_keywords'];
-
+    $detail = $_POST['detail'];
+    
     if (!empty($_FILES['image']['name']))
     {
-      $tempimage = $_FILES['image']['tmp_name'];                
+      require "layout/thumbimage.php";
+
+      $tempimage = $_FILES['image']['tmp_name'];
+      $up_image = $image = "IMG-".time().".".pathinfo($_FILES['image']['name'],PATHINFO_EXTENSION);
       move_uploaded_file($tempimage, "image/category/$image");
+      $objThumbImage = new ThumbImage("image/category/$image");
+      $objThumbImage->createThumb("image/category/$image", 350);
+      // $up_image = $objThumbImage->convert_webp("image/category/", $image, "IMG-".time());
+      // if (file_exists("image/category/$image")) unlink("image/category/$image");
+      if (file_exists("image/category/$unlink")) unlink("image/category/$unlink");
     }
-    $qry = "UPDATE innercategory SET i_cat_id = '$cat', i_sub_id = '$subcat' , i_name = '$name' , i_image = '$image', i_show = '$sele', seo_title = '$seo_title', seo_description = '$seo_description', seo_keywords = '$seo_keywords' WHERE i_id = '$id'";
+    
+    $qry = "UPDATE innercategory SET i_cat_id = '$cat', i_sub_id = '$subcat' , i_name = '$name' , i_image = '$up_image', i_show = '$sele', seo_title = '$seo_title', seo_description = '$seo_description', seo_keywords = '$seo_keywords', seo_detail = '$detail' WHERE i_id = '$id'";
     
     if($connect->query($qry) === TRUE)
-    {
-?>
-      <script>
-        alert('data Update successfully');
-        window.open('innercategory_list.php','_self');
-      </script>
+    { ?>
+    <script>
+      alert('data Update successfully');
+      window.open('innercategory_list.php','_self');
+    </script>
 <?php }else{ ?>
       <script>
         alert('data Not Update successfully');      
       </script>
-<?php 
+    <?php 
      }
   }
 ?>
@@ -169,6 +177,12 @@
                   <input type="text" class="tagsinput" data-role="tagsinput" data-color="primary" name="seo_keywords" value="<?= $data['seo_keywords'] ?>" placeholder="Enter Keywords" />
       					</div>
       				</div>
+              <div class="col-md-6">
+                <div class="form-group has-label">
+                  <label>Detail</label>
+                  <textarea class="form-control ckeditor" name="detail"><?= $data['seo_detail'] ?></textarea>
+                </div>
+              </div>
       				<div class="col-md-12">
 		            <div class="card-footer text-right">
 		              <button type="submit" name="submit" class="btn btn-primary">Submit</button>
@@ -181,6 +195,4 @@
       </div>
     </div>
   </div>
-<?php
-    include("layout/footer.php");
-?>
+<?php include("layout/footer.php"); ?>

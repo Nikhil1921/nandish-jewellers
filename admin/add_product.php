@@ -1,7 +1,9 @@
 <?php
 include("layout/header.php");
+
 if(isset($_POST['submit']))
 {
+  $p_sort = ($connect->query('SELECT p_id FROM product')->num_rows + 1);
   $cat = $_POST['cat'];
   $subcat = $_POST['subcat'];
   $innercat = $_POST['innercat'];
@@ -29,18 +31,28 @@ if(isset($_POST['submit']))
   $countfiles = count($_FILES['image']['name']);
   $imgs = [];
   if ($_FILES['image']['name'][0]):
+    require "layout/thumbimage.php";
     for($i=0; $i<$countfiles; $i++)
     {
-      $image = explode('.', $_FILES['image']['name'][$i]);
+      /* $image = explode('.', $_FILES['image']['name'][$i]);
       $filename = time().$i.'.'.end($image);
       $imgs[$i] = $filename;
-      move_uploaded_file($_FILES['image']['tmp_name'][$i], 'image/product/'.$filename);
+      move_uploaded_file($_FILES['image']['tmp_name'][$i], 'image/product/'.$filename); */
+      
+      $tempimage = $_FILES['image']['tmp_name'][$i];
+      $image = "IMG-".time().$i.".".pathinfo($_FILES['image']['name'][$i],PATHINFO_EXTENSION);
+      move_uploaded_file($tempimage, "image/product/$image");
+      $objThumbImage = new ThumbImage("image/product/$image");
+      $objThumbImage->createThumb("image/product/thumb_$image", 260);
+      $objThumbImage->createThumb("image/product/thumb_120_$image", 120);
+      $imgs[$i] = $image;
     }
   endif;
-
+  
   $img = implode(",", $imgs);
-  $qry="INSERT INTO `product`( `p_cat`, `p_subcat`, `p_innercat`, `p_subinner`, `p_name`, `p_gram`, `p_image`, `p_detail`, `p_sub_detail`, `p_invoice`, `p_notes`, `p_show`, `p_size_type`, `p_size`, `p_g_wei`, `p_l_wei`, `p_l_char`, `p_carat`, `p_code`, `p_shipping`, `p_qty_avail`, `p_make_gram`, `p_other`, `p_pre`) VALUES ('$cat','$subcat','$innercat','$subinnercat','$name','$price','$img','$detail','$subdetail','$invoice','$notes','$show','$size_cat','$size','$g_wei','$l_wei','$l_char','$p_carat','$p_code','$p_shipping','$p_qty_avail','$p_make_gram','$p_other','$p_pre')";
-  $run = $connect->query($qry)or die("not insert Data");
+  
+  $qry="INSERT INTO `product`( `p_cat`, `p_subcat`, `p_innercat`, `p_subinner`, `p_name`, `p_gram`, `p_image`, `p_detail`, `p_sub_detail`, `p_invoice`, `p_notes`, `p_show`, `p_size_type`, `p_size`, `p_g_wei`, `p_l_wei`, `p_l_char`, `p_carat`, `p_code`, `p_shipping`, `p_qty_avail`, `p_make_gram`, `p_other`, `p_pre`, `p_sort`) VALUES ('$cat','$subcat','$innercat','$subinnercat','$name','$price','$img','$detail','$subdetail','$invoice','$notes','$show','$size_cat','$size','$g_wei','$l_wei','$l_char','$p_carat','$p_code','$p_shipping','$p_qty_avail','$p_make_gram','$p_other','$p_pre', '$p_sort')";
+  $run = $connect->query($qry) or die("not insert Data");
   
   if($run == true)
   {

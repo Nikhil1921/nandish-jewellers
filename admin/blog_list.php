@@ -18,7 +18,7 @@
           <span class="navbar-toggler-bar bar3"></span>
         </button>
       </div>
-      <a class="navbar-brand" href="">Category List</a>
+      <a class="navbar-brand" href="">Blog List</a>
     </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -45,7 +45,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title">Category List</h4>
+          <h4 class="card-title">Blog List</h4>
         </div>
         <div class="card-body">
           <div class="toolbar">
@@ -53,17 +53,15 @@
           <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
               <tr>
-                <th>No</th>
-                <th>Category Name</th>
-                <th>Price 24 Carat</th>
-                <th>Price 22 Carat</th>
-                <th>Price 18 Carat</th>
+                <th>Sr. No</th>
+                <th>Blog Title</th>
+                <th>Blog Image</th>
                 <th class="disabled-sorting text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
           	<?php 
-				      $sql = "SELECT * FROM category";
+				      $sql = "SELECT * FROM blog";
       				$result = $connect->query($sql); 
       				$i = 1;
       				while($data = $result->fetch_assoc())
@@ -71,12 +69,11 @@
       			?>
             <tr>
               <td><?= $i++;?></td>
-              <td><?= $data['c_name']; ?></td>
-              <td><?= $data['c_price']; ?></td>
-              <td><?= $data['c_price_22']; ?></td>
-              <td><?= $data['c_price_18']; ?></td>
+              <td><?= $data['title']; ?></td>
+              <td><img src="image/blog/<?= $data['image']; ?>" height="100px" width="100px"></td>
               <td class="text-right">
-                  <a href="category_edit.php?cid=<?= $data['c_id']; ?>" class="btn btn-warning btn-link btn-icon"><i class="fa fa-edit"></i></a>
+                  <a href="blog_edit.php?bid=<?= $data['id']; ?>" class="btn btn-warning btn-link btn-icon"><i class="fa fa-edit"></i></a>
+                  <a href="blog_delete.php?bid=<?= $data['id']; ?>&image=<?= $data['image'] ?>" class="btn btn-danger btn-link btn-icon"><i class="fa fa-times"></i></a>
               </td>
             </tr>
             <?php } ?>

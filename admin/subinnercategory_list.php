@@ -63,10 +63,10 @@
             </thead>
             <tbody>
           	<?php
-                /* $sql = "SELECT * FROM innercategory";
-                $result = $connect->query($sql)->fetch_all(MYSQLI_ASSOC);
+                /*  $sql = "SELECT * FROM innercategory";
+                $result = $connect->query($sql);
                 $sql = "INSERT INTO `sub_innercategory`(`si_cat_id`, `si_subcat_id`, `si_innercat_id`, `si_name`, `seo_title`, `seo_description`, `seo_keywords`) VALUES ";
-                foreach ($result as $v) {
+                while($v = $result->fetch_assoc()) {
                   $v = (object) $v;
                   $sql .= "('$v->i_cat_id', '$v->i_sub_id', '$v->i_id', 'New', '$v->seo_title', '$v->seo_description', '$v->seo_keywords'), ";
                 }

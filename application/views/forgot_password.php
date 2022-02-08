@@ -15,7 +15,7 @@
                             </div>
                             <?php else: ?>
                             <div class="single-input-item">
-                                <input type="text" placeholder="Enter Mobile" name="mobile" maxlength="10" />
+                                <input type="text" placeholder="Enter Mobile No." name="mobile" maxlength="10" />
                             </div>
                             <?php endif ?>
                             <div class="single-input-item">

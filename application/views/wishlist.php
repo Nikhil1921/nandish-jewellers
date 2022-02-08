@@ -25,7 +25,7 @@
                                 <tr>
                                     <td class="pro-thumbnail">
                                         <a href="<?= make_slug($data['c_name']."/".$data['sc_name']."/".$data['i_name']."/".$data['si_name']."/".$data['p_name']."-".e_id($data['p_id'])) ?>">
-                                            <img class="img-fluid" src="<?= base_url() ?>admin/image/product/<?= reset($imge) ?>" alt="Jewellery" />
+                                            <img class="img-fluid" src="<?= base_url() ?>admin/image/product/thumb_120_<?= reset($imge) ?>" alt="Jewellery" />
                                         </a>
                                     </td>
                                     <td class="pro-title">

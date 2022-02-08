@@ -26,7 +26,7 @@
                                 <tr>
                                     <td class="pro-thumbnail">
                                         <a href="<?= make_slug($cart['c_name']."/".$cart['sc_name']."/".$cart['i_name']."/".$cart['si_name']."/".$cart['p_name']."-".e_id($cart['p_id'])) ?>">
-                                        <img class="img-fluid" src="<?= base_url() ?>admin/image/product/<?= $imge[0] ?>" alt="Jewellery" />
+                                        <img class="img-fluid" src="<?= base_url() ?>admin/image/product/thumb_120_<?= $imge[0] ?>" alt="Jewellery" />
                                         </a>
                                     </td>
                                     <td class="pro-title"><a href="<?= make_slug($cart['c_name']."/".$cart['sc_name']."/".$cart['i_name']."/".$cart['si_name']."/".$cart['p_name']."-".e_id($cart['p_id'])) ?>"><?= $cart['p_name'] ?></a></td>

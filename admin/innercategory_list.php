@@ -1,6 +1,16 @@
-<?php
-    include("layout/header.php");
-?>
+<?php 
+if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'sort') {
+  include("layout/connect.php");
+  
+  foreach ($_POST['sort'] as $v) {
+    $sql = "UPDATE innercategory SET i_sort = '".$v['position']."' WHERE i_id = '".$v['id']."'";
+    $connect->query($sql);
+  }
+  
+  die(json_encode(['message' => "Sort successfull."]));
+}
+
+include("layout/header.php"); ?>
 <div class="main-panel">
 <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
   <div class="container-fluid">
@@ -50,46 +60,23 @@
         <div class="card-body">
           <div class="toolbar">
           </div>
-          <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+          <table id="innercat_list" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
               <tr>
                 <th>No</th>
                 <th>Category Name</th>
                 <th>Sub Category Name</th>
                 <th>Inner Category Name</th>
-                <th>Image</th>
+                <th>Category</th>
                 <th class="disabled-sorting text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
-          	<?php 
-				      $sql = "SELECT * FROM innercategory ic
-                      join category c on ic.i_cat_id = c.c_id
-                      join subcategory sc on ic.i_sub_id = sc.sc_id";
-      				$result = $connect->query($sql); 
-      				$i = 1;
-      				while($data = $result->fetch_assoc())
-      				{
-      			?>
-            <tr>
-              <td><?= $i++;?></td>
-              <td><?= $data['c_name']; ?></td>
-              <td><?= $data['sc_name']; ?></td>
-              <td><?= $data['i_name']; ?></td>
-              <td><img src="image/category/<?= $data['i_image']; ?>" height="100px" width="100px"></td>
-              <td class="text-right">
-                  <a href="innercategory_edit.php?iid=<?= $data['i_id']; ?>" class="btn btn-warning btn-link btn-icon"><i class="fa fa-edit"></i></a>
-                  <a href="innercategory_delete.php?iid=<?= $data['i_id']; ?>" class="btn btn-danger btn-link btn-icon"><i class="fa fa-times"></i></a>
-              </td>
-            </tr>
-            <?php } ?>
             </tbody>
           </table>
-        </div><!-- end content-->
-      </div><!--  end card  -->
-    </div> <!-- end col-md-12 -->
-  </div> <!-- end row -->
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<?php
-    include("layout/footer.php");
-?>
+<?php include("layout/footer.php"); ?>

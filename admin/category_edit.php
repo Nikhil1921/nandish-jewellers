@@ -16,8 +16,9 @@
     $seo_title = $_POST['seo_title'];
     $seo_description = $_POST['seo_description'];
     $seo_keywords = $_POST['seo_keywords'];
+    $detail = $_POST['detail'];
 
-    $qry = "UPDATE category SET c_name = '$name', c_price = '$price', c_price_22 = '$price_22', c_price_18 = '$price_18', seo_title = '$seo_title', seo_description = '$seo_description', seo_keywords = '$seo_keywords' WHERE c_id = '$id'";      
+    $qry = "UPDATE category SET c_name = '$name', c_price = '$price', c_price_22 = '$price_22', c_price_18 = '$price_18', seo_title = '$seo_title', seo_description = '$seo_description', seo_keywords = '$seo_keywords', seo_detail = '$detail' WHERE c_id = '$id'";      
     if($connect->query($qry) === TRUE)
     {
 ?>
@@ -51,7 +52,7 @@
             <span class="navbar-toggler-bar bar3"></span>
           </button>
         </div>
-        <a class="navbar-brand" href="javascript:;">Coupen Foram</a>
+        <a class="navbar-brand" href="javascript:;">Category Form</a>
       </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -80,7 +81,7 @@
         <form method="POST" enctype="multipart/form-data">
           <div class="card ">
             <div class="card-header ">
-              <h4 class="card-title">Coupen Edit</h4>
+              <h4 class="card-title">Category Edit</h4>
             </div>
             <div class="card-body">
             <div class="row">
@@ -127,6 +128,12 @@
                   <input type="text" class="tagsinput" data-role="tagsinput" data-color="primary" name="seo_keywords" value="<?= $data['seo_keywords'] ?>" placeholder="Enter Keywords" />
       					</div>
       				</div>
+              <div class="col-md-6">
+                <div class="form-group has-label">
+                  <label>Detail</label>
+                  <textarea class="form-control ckeditor" name="detail"><?= $data['seo_detail'] ?></textarea>
+                </div>
+              </div>
       				<div class="col-md-12">
 		            <div class="card-footer text-right">
 		              <button type="submit" name="submit" class="btn btn-primary">Submit</button>

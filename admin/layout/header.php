@@ -1,5 +1,5 @@
 <?php
-  include("connect.php");
+  include_once("connect.php");
     session_start();
     
     if(empty($_SESSION['uid']))
@@ -50,42 +50,43 @@
           Nandish
         </a>
       </div>
+      <?php $name = str_replace('.php', '', basename($_SERVER['PHP_SELF'])); ?>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="active">
+          <li class="<?= in_array($name, ['index']) ? 'active' : '' ?>">
             <a href="index.php">
               <i class="nc-icon nc-bank"></i>
               <p>Dashboard</p>
             </a>
           </li>
-          <li class="">
+          <li class="<?= in_array($name, ['users']) ? 'active' : '' ?>">
             <a href="users.php">
               <i class="nc-icon nc-book-bookmark"></i>
               <p>Users</p>
             </a>
           </li>
-          <li>
-            <a data-toggle="collapse" href="#pages">
+          <li class="<?= in_array($name, ['privacy', 'term', 'refund']) ? 'active' : '' ?>">
+            <a data-toggle="collapse" href="#pages" <?= in_array($name, ['privacy', 'term', 'refund']) ? 'aria-expanded="true"' : '' ?>>
               <i class="nc-icon nc-book-bookmark"></i>
               <p>
                 Pages<b class="caret"></b>
               </p>
             </a>
-            <div class="collapse " id="pages">
+            <div class="collapse <?= in_array($name, ['privacy', 'term', 'refund']) ? 'show' : '' ?>" id="pages">
               <ul class="nav">
-                <li>
+                <li class="<?= in_array($name, ['privacy']) ? 'active' : '' ?>">
                   <a href="privacy.php">
                     <span class="sidebar-mini-icon">PP</span>
                     <span class="sidebar-normal">Privacy Policy </span>
                   </a>
                 </li>
-                <li>
+                <li class="<?= in_array($name, ['term']) ? 'active' : '' ?>">
                   <a href="term.php">
                     <span class="sidebar-mini-icon">TC</span>
                     <span class="sidebar-normal"> Terms & Conditions </span>
                   </a>
                 </li>
-                <li>
+                <li class="<?= in_array($name, ['refund']) ? 'active' : '' ?>">
                   <a href="refund.php">
                     <span class="sidebar-mini-icon">RP</span>
                     <span class="sidebar-normal"> Refund Policy </span>
@@ -94,22 +95,22 @@
               </ul>
             </div>
           </li>
-          <li>
-            <a data-toggle="collapse" href="#banner">
+          <li class="<?= in_array($name, ['add_banner', 'banner_list']) ? 'active' : '' ?>">
+            <a data-toggle="collapse" href="#banner" <?= in_array($name, ['add_banner', 'banner_list']) ? 'aria-expanded="true"' : '' ?>>
               <i class="nc-icon nc-book-bookmark"></i>
               <p>
                 Banner<b class="caret"></b>
               </p>
             </a>
-            <div class="collapse " id="banner">
+            <div class="collapse <?= in_array($name, ['add_banner', 'banner_list']) ? 'show' : '' ?>" id="banner">
               <ul class="nav">
-                <li>
+                <li class="<?= in_array($name, ['add_banner']) ? 'active' : '' ?>">
                   <a href="add_banner.php">
                     <span class="sidebar-mini-icon">AB</span>
                     <span class="sidebar-normal">Add Banner </span>
                   </a>
                 </li>
-                <li>
+                <li class="<?= in_array($name, ['banner_list']) ? 'active' : '' ?>">
                   <a href="banner_list.php">
                     <span class="sidebar-mini-icon">BL</span>
                     <span class="sidebar-normal"> Banner List </span>
@@ -118,22 +119,22 @@
               </ul>
             </div>
           </li>
-          <li>
-            <a data-toggle="collapse" href="#category">
+          <li class="<?= in_array($name, ['add_category', 'category_list']) ? 'active' : '' ?>">
+            <a data-toggle="collapse" href="#category" <?= in_array($name, ['add_category', 'category_list']) ? 'aria-expanded="true"' : '' ?>>
               <i class="nc-icon nc-book-bookmark"></i>
               <p>
                 Category<b class="caret"></b>
               </p>
             </a>
-            <div class="collapse " id="category">
+            <div class="collapse <?= in_array($name, ['add_category', 'category_list']) ? 'show' : '' ?>" id="category">
               <ul class="nav">
-                <li>
+                <li class="<?= in_array($name, ['add_category']) ? 'active' : '' ?>">
                   <a href="add_category.php">
                     <span class="sidebar-mini-icon">AC</span>
                     <span class="sidebar-normal">Add Category </span>
                   </a>
                 </li>
-                <li>
+                <li class="<?= in_array($name, ['category_list']) ? 'active' : '' ?>">
                   <a href="category_list.php">
                     <span class="sidebar-mini-icon">CL</span>
                     <span class="sidebar-normal"> Category List </span>
@@ -142,22 +143,22 @@
               </ul>
             </div>
           </li>
-          <li>
-            <a data-toggle="collapse" href="#subcategory">
+          <li class="<?= in_array($name, ['add_subcategory', 'subcategory_list']) ? 'active' : '' ?>">
+            <a data-toggle="collapse" href="#subcategory" <?= in_array($name, ['add_subcategory', 'subcategory_list']) ? 'aria-expanded="true"' : '' ?>>
               <i class="nc-icon nc-book-bookmark"></i>
               <p>
                 Sub Category<b class="caret"></b>
               </p>
             </a>
-            <div class="collapse " id="subcategory">
+            <div class="collapse <?= in_array($name, ['add_subcategory', 'subcategory_list']) ? 'show' : '' ?>" id="subcategory">
               <ul class="nav">
-                <li>
+                <li class="<?= in_array($name, ['add_subcategory']) ? 'active' : '' ?>">
                   <a href="add_subcategory.php">
                     <span class="sidebar-mini-icon">AS</span>
                     <span class="sidebar-normal">Add Sub Category </span>
                   </a>
                 </li>
-                <li>
+                <li class="<?= in_array($name, ['subcategory_list']) ? 'active' : '' ?>">
                   <a href="subcategory_list.php">
                     <span class="sidebar-mini-icon">SL</span>
                     <span class="sidebar-normal"> Sub Category List </span>
@@ -166,22 +167,22 @@
               </ul>
             </div>
           </li>
-          <li>
-            <a data-toggle="collapse" href="#inner">
+          <li class="<?= in_array($name, ['add_innercategory','innercategory_list']) ? 'active' : '' ?>">
+            <a data-toggle="collapse" href="#inner" <?= in_array($name, ['add_innercategory','innercategory_list']) ? 'aria-expanded="true"' : '' ?>>
               <i class="nc-icon nc-book-bookmark"></i>
               <p>
                 Inner Category<b class="caret"></b>
               </p>
             </a>
-            <div class="collapse " id="inner">
+            <div class="collapse <?= in_array($name, ['add_innercategory','innercategory_list']) ? 'show' : '' ?>" id="inner">
               <ul class="nav">
-                <li>
+                <li class="<?= in_array($name, ['add_innercategory']) ? 'active' : '' ?>">
                   <a href="add_innercategory.php">
                     <span class="sidebar-mini-icon">AI</span>
                     <span class="sidebar-normal">Add Inner Category </span>
                   </a>
                 </li>
-                <li>
+                <li class="<?= in_array($name, ['innercategory_list']) ? 'active' : '' ?>">
                   <a href="innercategory_list.php">
                     <span class="sidebar-mini-icon">IL</span>
                     <span class="sidebar-normal"> Inner Category List </span>
@@ -190,22 +191,22 @@
               </ul>
             </div>
           </li>
-          <li>
-            <a data-toggle="collapse" href="#sub_inner">
+          <li class="<?= in_array($name, ['add_sub_innercategory', 'subinnercategory_list']) ? 'active' : '' ?>">
+            <a data-toggle="collapse" href="#sub_inner" <?= in_array($name, ['add_sub_innercategory', 'subinnercategory_list']) ? 'aria-expanded="true"' : '' ?>>
               <i class="nc-icon nc-book-bookmark"></i>
               <p>
                 Sub Inner Category<b class="caret"></b>
               </p>
             </a>
-            <div class="collapse " id="sub_inner">
+            <div class="collapse <?= in_array($name, ['add_sub_innercategory', 'subinnercategory_list']) ? 'show' : '' ?>" id="sub_inner">
               <ul class="nav">
-                <li>
+                <li class="<?= in_array($name, ['add_sub_innercategory']) ? 'active' : '' ?>">
                   <a href="add_sub_innercategory.php">
                     <span class="sidebar-mini-icon">AI</span>
                     <span class="sidebar-normal">Add Sub Inner Category </span>
                   </a>
                 </li>
-                <li>
+                <li class="<?= in_array($name, ['subinnercategory_list']) ? 'active' : '' ?>">
                   <a href="subinnercategory_list.php">
                     <span class="sidebar-mini-icon">IL</span>
                     <span class="sidebar-normal"> Sub Inner Category List </span>
@@ -214,22 +215,22 @@
               </ul>
             </div>
           </li>
-          <li>
-            <a data-toggle="collapse" href="#size">
+          <li class="<?= in_array($name, ['add_size', 'size_list']) ? 'active' : '' ?>">
+            <a data-toggle="collapse" href="#size" <?= in_array($name, ['add_size', 'size_list']) ? 'aria-expanded="true"' : '' ?>>
               <i class="nc-icon nc-book-bookmark"></i>
               <p>
                 Size<b class="caret"></b>
               </p>
             </a>
-            <div class="collapse " id="size">
+            <div class="collapse <?= in_array($name, ['add_size', 'size_list']) ? 'show' : '' ?>" id="size">
               <ul class="nav">
-                <li>
+                <li class="<?= in_array($name, ['add_size']) ? 'active' : '' ?>">
                   <a href="add_size.php">
                     <span class="sidebar-mini-icon">AS</span>
                     <span class="sidebar-normal">Add Size </span>
                   </a>
                 </li>
-                <li>
+                <li class="<?= in_array($name, ['size_list']) ? 'active' : '' ?>">
                   <a href="size_list.php">
                     <span class="sidebar-mini-icon">SL</span>
                     <span class="sidebar-normal"> Size List </span>
@@ -238,22 +239,22 @@
               </ul>
             </div>
           </li>
-          <li>
-            <a data-toggle="collapse" href="#code">
+          <li class="<?= in_array($name, ['add_coupen', 'coupen_list']) ? 'active' : '' ?>">
+            <a data-toggle="collapse" href="#code" <?= in_array($name, ['add_coupen', 'coupen_list']) ? 'aria-expanded="true"' : '' ?>>
               <i class="nc-icon nc-book-bookmark"></i>
               <p>
                 Coupon Code<b class="caret"></b>
               </p>
             </a>
-            <div class="collapse " id="code">
+            <div class="collapse <?= in_array($name, ['add_coupen', 'coupen_list']) ? 'show' : '' ?>" id="code">
               <ul class="nav">
-                <li>
+                <li class="<?= in_array($name, ['add_coupen']) ? 'active' : '' ?>">
                   <a href="add_coupen.php">
                     <span class="sidebar-mini-icon">ACC</span>
                     <span class="sidebar-normal">Add Coupon Code </span>
                   </a>
                 </li>
-                <li>
+                <li class="<?= in_array($name, ['coupen_list']) ? 'active' : '' ?>">
                   <a href="coupen_list.php">
                     <span class="sidebar-mini-icon">CCL</span>
                     <span class="sidebar-normal"> Coupon Code List </span>
@@ -262,22 +263,22 @@
               </ul>
             </div>
           </li>
-          <li>
-            <a data-toggle="collapse" href="#product">
+          <li class="<?= in_array($name, ['add_product', 'product_list']) ? 'active' : '' ?>">
+            <a data-toggle="collapse" href="#product" <?= in_array($name, ['add_product', 'product_list']) ? 'aria-expanded="true"' : '' ?>>
               <i class="nc-icon nc-book-bookmark"></i>
               <p>
                 Jewellery<b class="caret"></b>
               </p>
             </a>
-            <div class="collapse " id="product">
+            <div class="collapse <?= in_array($name, ['add_product', 'product_list']) ? 'show' : '' ?>" id="product">
               <ul class="nav">
-                <li>
+                <li class="<?= in_array($name, ['add_product']) ? 'active' : '' ?>">
                   <a href="add_product.php">
                     <span class="sidebar-mini-icon">AJ</span>
                     <span class="sidebar-normal">Add Jewellery </span>
                   </a>
                 </li>
-                <li>
+                <li class="<?= in_array($name, ['product_list']) ? 'active' : '' ?>">
                   <a href="product_list.php">
                     <span class="sidebar-mini-icon">JL</span>
                     <span class="sidebar-normal"> Jewellery List </span>
@@ -286,22 +287,46 @@
               </ul>
             </div>
           </li>
-          <li>
-            <a data-toggle="collapse" href="#testimonial">
+          <li class="<?= in_array($name, ['add_blog', 'blog_list']) ? 'active' : '' ?>">
+            <a data-toggle="collapse" href="#blog" <?= in_array($name, ['add_blog', 'blog_list']) ? 'aria-expanded="true"' : '' ?>>
+              <i class="nc-icon nc-book-bookmark"></i>
+              <p>
+                Blog<b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse <?= in_array($name, ['add_blog', 'blog_list']) ? 'show' : '' ?>" id="blog">
+              <ul class="nav">
+                <li class="<?= in_array($name, ['add_blog']) ? 'active' : '' ?>">
+                  <a href="add_blog.php">
+                    <span class="sidebar-mini-icon">AB</span>
+                    <span class="sidebar-normal">Add Blog </span>
+                  </a>
+                </li>
+                <li class="<?= in_array($name, ['blog_list']) ? 'active' : '' ?>">
+                  <a href="blog_list.php">
+                    <span class="sidebar-mini-icon">BL</span>
+                    <span class="sidebar-normal"> Blog List </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="<?= in_array($name, ['add_testimonial', 'testimonial_list']) ? 'active' : '' ?>">
+            <a data-toggle="collapse" href="#testimonial" <?= in_array($name, ['add_testimonial', 'testimonial_list']) ? 'aria-expanded="true"' : '' ?>>
               <i class="nc-icon nc-book-bookmark"></i>
               <p>
                 Owner Messsage<b class="caret"></b>
               </p>
             </a>
-            <div class="collapse " id="testimonial">
+            <div class="collapse <?= in_array($name, ['add_testimonial', 'testimonial_list']) ? 'show' : '' ?>" id="testimonial">
               <ul class="nav">
-                <li>
+                <li class="<?= in_array($name, ['add_testimonial']) ? 'active' : '' ?>">
                   <a href="add_testimonial.php">
                     <span class="sidebar-mini-icon">AT</span>
                     <span class="sidebar-normal">Add Owner Messsage </span>
                   </a>
                 </li>
-                <li>
+                <li class="<?= in_array($name, ['testimonial_list']) ? 'active' : '' ?>">
                   <a href="testimonial_list.php">
                     <span class="sidebar-mini-icon">TL</span>
                     <span class="sidebar-normal"> Owner Messsage List </span>
@@ -310,16 +335,16 @@
               </ul>
             </div>
           </li>
-          <li>
-            <a data-toggle="collapse" href="#return">
+          <li class="<?= in_array($name, ['order_list']) ? 'active' : '' ?>">
+            <a data-toggle="collapse" href="#return" <?= in_array($name, ['order_list']) ? 'aria-expanded="true"' : '' ?>>
               <i class="nc-icon nc-book-bookmark"></i>
               <p>
                 Return Order<b class="caret"></b>
               </p>
             </a>
-            <div class="collapse " id="return">
+            <div class="collapse <?= in_array($name, ['order_list']) ? 'show' : '' ?>" id="return">
               <ul class="nav">
-                <li>
+                <li class="<?= in_array($name, ['order_list']) ? 'active' : '' ?>">
                   <a href="order_list.php">
                     <span class="sidebar-mini-icon">RO</span>
                     <span class="sidebar-normal">Return Order List</span>
@@ -328,16 +353,16 @@
               </ul>
             </div>
           </li>
-          <li>
-            <a data-toggle="collapse" href="#complete">
+          <li class="<?= in_array($name, ['complete_order_list']) ? 'active' : '' ?>">
+            <a data-toggle="collapse" href="#complete" <?= in_array($name, ['complete_order_list']) ? 'aria-expanded="true"' : '' ?>>
               <i class="nc-icon nc-book-bookmark"></i>
               <p>
                 complete Order<b class="caret"></b>
               </p>
             </a>
-            <div class="collapse " id="complete">
+            <div class="collapse <?= in_array($name, ['complete_order_list']) ? 'show' : '' ?>" id="complete">
               <ul class="nav">
-                <li>
+                <li class="<?= in_array($name, ['complete_order_list']) ? 'active' : '' ?>">
                   <a href="complete_order_list.php">
                     <span class="sidebar-mini-icon">CL</span>
                     <span class="sidebar-normal"> complete Order List </span>

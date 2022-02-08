@@ -19,14 +19,14 @@
     {
 ?>
       <script>
-        alert('data Update successfully');
+        alert('Profile Update successfully');
         window.open('profile.php','_self');
       </script>
 <?php             
     }else{
 ?>
       <script>
-        alert('data Not Update successfully');      
+        alert('Profile Not Update successfully');      
       </script>
 <?php 
      }
@@ -107,10 +107,15 @@
                   </div>
                 </div>
                 <div class="col-md-12">
-                <div class="card-footer text-right">
-                  <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                  <div class="row">
+                    <div class="col-2">
+                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                  <div class="col-2">
+                    <a href="index.php" class="btn btn-danger">Cancel</a>
+                  </div>
+                  </div>
                 </div>
-            </div>
               </div>
             </form>
           </div>
