@@ -4,6 +4,7 @@ $route['default_controller'] = 'home';
 $route['404_override'] = 'home/error_404';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['maintainance'] = 'maintainance/index';
 $route['about-us'] = 'home/about_us';
 $route['save-order'] = 'user/save_order';
 $route['save_order_developer'] = 'user/save_order_developer';

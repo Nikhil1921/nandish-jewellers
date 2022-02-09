@@ -8,6 +8,14 @@ class Home extends Public_controller  {
 		$this->config->load('sms');
 	}
 
+	public function maintainance()
+	{
+		$data['name'] = 'maintainance';
+		$data['title'] = 'maintainance mode';
+
+		return $this->template->load('template', 'maintainance', $data);
+	}
+
 	public function index()
 	{
 		if($this->input->get('search'))

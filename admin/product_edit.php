@@ -46,7 +46,7 @@ if ($_FILES['image']['name'][0]):
     $image = "IMG-".time().$i.".".pathinfo($_FILES['image']['name'][$i],PATHINFO_EXTENSION);
     move_uploaded_file($tempimage, "image/product/$image");
     $objThumbImage = new ThumbImage("image/product/$image");
-    $objThumbImage->createThumb("image/product/thumb_$image", 260);
+    $objThumbImage->createThumb("image/product/thumb_$image", 512);
     $objThumbImage->createThumb("image/product/thumb_120_$image", 120);
     $imgs[$i] = $image;
   }

@@ -1,15 +1,11 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
- * 
- */
-class Public_controller extends MY_Controller
-{
-	
-	public function __construct()
+class Maintainance extends CI_Controller  {
+
+    public function __construct()
 	{
 		parent::__construct();
-		// return redirect('maintainance');
+		
 		$this->load->model('main_model', 'main');
 		$this->user_id = $this->session->user_id;
 		if ($this->user_id) {
@@ -21,5 +17,14 @@ class Public_controller extends MY_Controller
 			$this->cart = [];
 			$this->wishlist = [];
 		}
+	}
+
+	public function index()
+	{
+		$data['name'] = 'maintainance';
+		$data['title'] = 'maintainance mode';
+        $data['breadcrumb'] = 'maintainance mode';
+
+		return $this->template->load('template', 'maintainance', $data);
 	}
 }
