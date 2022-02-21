@@ -43,10 +43,11 @@ endif;
         <link rel="stylesheet" href="<?= base_url('assets/css/plugins/animate.css') ?>">
         <link rel="stylesheet" href="<?= base_url('assets/css/plugins/nice-select.css') ?>">
         <link rel="stylesheet" href="<?= base_url('assets/css/plugins/jqueryui.min.css') ?>">
-        <link rel="stylesheet" href="<?= base_url('assets/css/style.css?v=1.0.3') ?>">
-        <link rel="stylesheet" href="<?= base_url('assets/css/custom.css?v=1.0.3') ?>">
-        <link rel="stylesheet" href="<?= base_url('assets/css/responsive.css?v=1.0.3') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/style.css?v=1.0.4') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/custom.css?v=1.0.4') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/responsive.css?v=1.0.4') ?>">
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/xzoom.css') ?>" media="all" />
+        <link rel="canonical" href="<?= current_url() ?>" />
         <!-- Google Tag Manager -->
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -952,15 +953,15 @@ endif;
         <script src="<?= base_url('assets/js/plugins/ajax-mail.js') ?>"></script>
         <?php if($name == 'contact_us'): ?>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfmCVTjRI007pC1Yk2o2d_EhgkjTsFVN8"></script>
+            <script src="<?= base_url('assets/js/plugins/google-map.js') ?>"></script>
         <?php endif ?>
         <?php if($name == 'checkout'): ?>
             <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
         <?php endif ?>
-        <script src="<?= base_url('assets/js/plugins/google-map.js') ?>"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="<?= base_url('assets/js/jquery.validate.js') ?>"></script>
-        <script src="<?= base_url('assets/js/main.js?v=1.0.6') ?>"></script>
-        <script src="<?= base_url('assets/js/custom.js?v=1.0.6') ?>"></script>
+        <script src="<?= base_url('assets/js/main.js?v=1.0.7') ?>"></script>
+        <script src="<?= base_url('assets/js/custom.js?v=1.0.7') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/js/xzoom.min.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/js/jquery.hammer.min.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/js/setup.js') ?>"></script>

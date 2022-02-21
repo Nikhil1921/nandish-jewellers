@@ -529,3 +529,11 @@
 .wishlist-main-wrapper .pro-price {
     color: #5f5aa5!important;
 }
+.btn-cart3 {
+    height: 25px;
+    line-height: 25px;
+    color: #fff;
+    border-radius: 50px;
+    padding: 0 19px;
+    background-color: #5f5aa5;
+}

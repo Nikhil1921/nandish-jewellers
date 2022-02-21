@@ -258,7 +258,14 @@
           "order":[],
           "ajax":{
             url:"products.php",
-            type:"GET"
+            type:"GET",
+            data: function(data) {
+              data.cat = $('#cat').val();
+              data.subcat = $('#subcat').val();
+              data.innercat = $('#innercat').val();
+              data.subinnercat = $('#subinnercat').val();
+              data.prod_type = $('#prod_type').val();
+            },
           },
           language: {
             search: "_INPUT_",
@@ -283,6 +290,10 @@
             }
           });
           $("#excel-upload").val('');
+        });
+
+        $("#subinnercat, #prod_type").change(function(){
+          table.ajax.reload();
         });
       }
       
@@ -354,89 +365,85 @@
       table.on('click', '.like', function() {
         alert('You clicked on Like button');
       }); */
-    });
-  </script>
-  <script>
-    $(document).ready(function() {
+
       // Initialise Sweet Alert library
       demo.showSwal();
-    });
-  </script>
-  <script>
-    $(document).ready(function() {
+
       // initialise Datetimepicker and Sliders
       demo.initDateTimePicker();
       if ($('.slider').length != 0) {
         demo.initSliders();
       }
+
+      $("#cat").change(function(){
+
+          $("#subcat").html('<option value="">Select Sub Category</option>');
+          var cat = $('#cat').val();
+          var htmlData  = '';
+
+          $.ajax({
+            type: "GET",
+            url: "category.php",
+            data: {cat: cat},
+            dataType: "json",
+            cache: false,
+            success: function(response)
+            {
+              $.each(response , function(index, val) {
+                htmlData += '<option value="'+val['sc_id']+'">'+val['sc_name']+'</option>';
+              });
+              $("#subcat").append(htmlData);
+              if ($('#products_list').length > 0) table.ajax.reload();
+            }
+          });
+      });
+
+      $("#subcat").change(function(){
+
+          $("#innercat").html('<option value="">Select Inner Category</option>');
+          var subcat = $('#subcat').val();
+          var htmlData  = '';
+
+          $.ajax({
+            type: "GET",
+            url: "innercategory.php",
+            data: {subcat: subcat},
+            dataType: "json",
+            cache: false,
+            success: function(response)
+            {
+              $.each(response , function(index, val) {
+                htmlData += '<option value="'+val['i_id']+'">'+val['i_name']+'</option>';
+              });
+              $("#innercat").append(htmlData);
+              if ($('#products_list').length > 0) table.ajax.reload();
+            }
+          });
+      });
+
+      $("#innercat").change(function(){
+
+          $("#subinnercat").html('<option value="">Select Sub Inner Category</option>');
+          var innercat = $('#innercat').val();
+          var htmlData  = '';
+
+          $.ajax({
+            type: "GET",
+            url: "innercat.php",
+            data: {innercat: innercat},
+            dataType: "json",
+            cache: false,
+            success: function(response)
+            {
+              $.each(response , function(index, val) {
+                htmlData += '<option value="'+val['si_id']+'">'+val['si_name']+'</option>';
+              });
+              $("#subinnercat").append(htmlData);
+              if ($('#products_list').length > 0) table.ajax.reload();
+            }
+          });
+      });
     });
   </script>
-<script type="text/javascript">
-    $("#cat").change(function(){
-
-        $("#subcat").html('<option value="">Select Sub Category</option>');
-        var cat = $('#cat').val();
-        var htmlData  = '';
-
-        $.ajax({
-          type: "GET",
-          url: "category.php",
-          data: {cat: cat},
-          dataType: "json",
-          cache: false,
-          success: function(response)
-          {
-            $.each(response , function(index, val) {
-              htmlData += '<option value="'+val['sc_id']+'">'+val['sc_name']+'</option>';
-            });
-            $("#subcat").append(htmlData);
-          }
-        });
-    });
-
-    $("#subcat").change(function(){
-
-        $("#innercat").html('<option value="">Select Inner Category</option>');
-        var subcat = $('#subcat').val();
-        var htmlData  = '';
-
-        $.ajax({
-          type: "GET",
-          url: "innercategory.php",
-          data: {subcat: subcat},
-          dataType: "json",
-          cache: false,
-          success: function(response)
-          {
-            $.each(response , function(index, val) {
-              htmlData += '<option value="'+val['i_id']+'">'+val['i_name']+'</option>';
-            });
-            $("#innercat").append(htmlData);
-          }
-        });
-    });
-
-    $("#innercat").change(function(){
-
-        $("#subinnercat").html('<option value="">Select Sub Inner Category</option>');
-        var innercat = $('#innercat').val();
-        var htmlData  = '';
-
-        $.ajax({
-          type: "GET",
-          url: "innercat.php",
-          data: {innercat: innercat},
-          dataType: "json",
-          cache: false,
-          success: function(response)
-          {
-            $.each(response , function(index, val) {
-              htmlData += '<option value="'+val['si_id']+'">'+val['si_name']+'</option>';
-            });
-            $("#subinnercat").append(htmlData);
-          }
-        });
-    });
-</script>
 </body>
 </html>

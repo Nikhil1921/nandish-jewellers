@@ -19,7 +19,7 @@
         document.body.innerHTML = originalContents;
     }
 </script>
-    <link rel="stylesheet" href="assets/css/billlayout.css">
+<link rel="stylesheet" href="<?= base_url('assets/css/billlayout.css') ?>">
 <body>
     <div class="content bg-gray-lighter">
         <center>

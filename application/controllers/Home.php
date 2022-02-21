@@ -216,7 +216,7 @@ class Home extends Public_controller  {
 				$sub_inners['si_cat_id'] = $data['prods'][0]['p_cat'];
 				$sub_inners['si_subcat_id'] = $data['prods'][0]['p_subcat'];
 				$sub_inners['si_innercat_id'] = $data['prods'][0]['p_innercat'];
-				$data['sub_inns'] = $this->main->getall('sub_innercategory', 'CONCAT("'."$cat/$subcat/$inner/".'", si_name) AS si_url, si_name',$sub_inners);
+				$data['sub_inns'] = $this->main->getall('sub_innercategory', 'CONCAT("'."$cat/$subcat/$inner/".'", si_name) AS si_url, si_name',$sub_inners, 'si_id DESC');
 			}
 			$data['seo'] = [
 					'title' => $data['prods'][0]['seo_title'],
@@ -278,6 +278,32 @@ class Home extends Public_controller  {
 		}
 		else
 			return $this->error_404();
+	}
+
+	public function verify_pincode()
+	{
+		check_ajax();
+		$this->form_validation->set_data($this->input->get());
+		$this->form_validation->set_rules('pincode', 'Pincode', 'required|numeric|exact_length[6]', [
+                'required' => "%s is Required",
+                'exact_length' => "%s is invalid",
+                'numeric' => "%s is invalid",
+            ]);
+		if ($this->form_validation->run() == FALSE)
+			$response = [
+				'message' => str_replace("*", "", strip_tags(validation_errors())),
+				'error' => true
+			];
+		else{
+			if ($this->check_pincode($this->input->get('pincode'))) {
+				$response = [
+					'message' => "Delivery available for pincode : " . $this->input->get('pincode'),
+					'error' => false
+				];
+			}
+		}
+
+		die(json_encode($response));
 	}
 	
 	public function prod_info()

@@ -116,7 +116,7 @@
                             <?php if(isset($sub_inns)): ?>
                             <div class="col-lg-12 col-md-12 col-12 pt-4 text-center">
                                 <?php foreach($sub_inns as $sub_inn): ?>
-                                    <a class="btn btn-cart2 ml-3 mb-3" href="<?= make_slug($sub_inn->si_url) ?>" ><?= $sub_inn->si_name ?></a>
+                                    <a class="btn btn-cart3 ml-3 mb-3" href="<?= make_slug($sub_inn->si_url) ?>" ><?= $sub_inn->si_name ?></a>
                                 <?php endforeach ?>
                             </div>
                             <?php endif ?>

@@ -153,7 +153,27 @@ include("layout/header.php") ?>
           </div>
           <div class="card-body table-responsive">
             <div class="toolbar">
+              <div class="row">
+                <select name="cat" class="form-control col-2 ml-4" id="cat">
+                  <option value="">Select Category</option>
+                  <?php 
+                    $sql = "SELECT c_id, c_name FROM category";
+                    $result = $connect->query($sql);
+                    while($v = $result->fetch_assoc()) echo "<option value='".$v['c_id']."'>".$v['c_name']."</option>";
+                  ?>
+                </select>
+                <select class="form-control col-2 ml-4" name="subcat" id="subcat"></select>
+                <select class="form-control col-2 ml-4" name="innercat" id="innercat"></select>
+                <select class="form-control col-2 ml-4" name="subinnercat" id="subinnercat"></select>
+                <select class="form-control col-2 ml-4" name="prod_type" id="prod_type">
+                  <option value="">Select Type</option>
+                  <option value="All">All</option>
+                  <option value="New">New</option>
+                  <option value="Best">Best</option>
+                </select>
+              </div>
             </div>
+            <br>
             <?php 
             /* $sql = "SELECT p_id, p_cat, p_subcat, p_innercat, si_id, si_cat_id, si_subcat_id, si_innercat_id FROM product p JOIN sub_innercategory si ON p.p_innercat = si.si_innercat_id";
             $result = $connect->query($sql);
@@ -169,6 +189,8 @@ include("layout/header.php") ?>
                   <th>No</th>
                   <th>Category Name</th>
                   <th>Sub Category Name</th>
+                  <th>Inner Name</th>
+                  <th>Sub Inner Name</th>
                   <th>Jewellery Name</th>
                   <th>S.K.U. Code</th>
                   <th>Jewellery Gram</th>

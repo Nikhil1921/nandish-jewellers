@@ -381,8 +381,11 @@
         asNavFor: '.testimonial-content-carousel',
         centerMode: true,
         arrows: false,
+        // arrows: true,
         centerPadding: 0,
-        focusOnSelect: true
+        focusOnSelect: true,
+        prevArrow: '<button type="button" class="slick-prev left_aero"><i class="pe-7s-angle-left"></i></button>',
+        nextArrow: '<button type="button" class="slick-next right_aero"><i class="pe-7s-angle-right"></i></button>',
     });
 
 

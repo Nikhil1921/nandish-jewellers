@@ -88,21 +88,21 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="section-title text-center">
-                    <h1 class="">Online Jewellery Store</h1>
+                <div class="section-title">
+                    <h2 class="fnt_size">Online Jewellery Store</h2>
                     <hr>
                 </div>
                 <p class="text-justify">
-                    Nandish Jewellers is one of the best jewellery brands in India in terms of item collection and variety of
-                    ornaments. Nandish.in has an online store with a large selection one-of-a-kind and premium-quality
-                    jewellery of gold and silver jewellery in India!! Ideal the wedding for the special you with Nandish
-                    jewellers unique and quality jewellery remarks incredible. Easy purchase on selected real gold, silver and
-                    diamond online jewellery store. We have a maximum collection for men, women, and kids items from
-                    lightweight to heavyweight range for latest and contemporary women to antique gold necklace of
-                    Kundan and Polki for the bride in weddings as well. . Nandish Jewellers is one of India's most well-known
-                    jewellery brands, with a reputation for customer transparency and constantly updated gold and silver
-                    collections. We offer all of our branded jewellery online and are a recognized hallmarked
-                    certified brand, giving us the title of the trusted online jewellery store.
+                    <b>Nandish Jewellers</b> is one of the best jewellery brands in India in terms of item collection and variety of
+                    ornaments. <b>Nandish.in</b> has an online store with a large selection of one-of-a-kind and premium-quality
+                    jewellery of gold and silver jewellery in India!! Ideal the wedding for the special you with <b>Nandish
+                    jewellers</b> unique and quality jewellery remarks incredible. Easy purchase on a selected real gold, silver,
+                    and diamond online jewellery store. We have a maximum collection for men, women, and kids items
+                    from lightweight to heavyweight range, latest and contemporary women to <a class="text-dark" href="<?= base_url('gold/women/long-necklace/antique.html') ?>"><b>Antique Gold Necklace</b></a> of
+                    Kundan and Polki for the bride in weddings as well. <b>Nandish Jewellers</b> is one of India's most well-known
+                    jewellery brands with a reputation for customer transparency and constantly updated gold and silver
+                    collections. We offer all of our branded jewellery online and are a recognized hallmarked certified
+                    brand, giving us the title of the trusted online jewellery store.
                 </p>
             </div>
         </div>
@@ -129,8 +129,8 @@
                         <div class="group-item">
                             <div class="group-item-thumb">
                                 <a href="<?= make_slug($new->c_name."/".$new->sc_name."/".$new->i_name."/$new->si_name/$new->p_name-".e_id($new->p_id)) ?>">
-                                    <?php if (file_exists("admin/image/product/thumb_120_".reset($img)) && !is_dir("admin/image/product/thumb_120_".reset($img))): ?>
-                                    <?= img(['src' => "admin/image/product/thumb_120_".reset($img), 'alt' => $new->p_name]) ?>
+                                    <?php if (file_exists("admin/image/product/thumb_".reset($img)) && !is_dir("admin/image/product/thumb_".reset($img))): ?>
+                                    <?= img(['src' => "admin/image/product/thumb_".reset($img), 'alt' => $new->p_name]) ?>
                                     <?php else: ?>
                                     <?= img(['src' => "admin/image/noproduct.png", 'alt' => $new->p_name]) ?>
                                     <?php endif ?>
@@ -198,29 +198,28 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="section-title text-center">
-                    <h2 class="">Gold Jewellery</h2>
+                <div class="section-title">
+                    <h2 class="fnt_size">Gold Jewellery</h2>
                     <hr>
                 </div>
                 <p class="text-justify">
-                    In terms of item collection and diversity of ornaments, <b>Nandish.in</b> is one of India's best jewellery
-                    brands.We have a customer-friendly website with a selection of gold jewellery collections for online
-                    purchasing in India. So, if you're looking for something special, we're here to help you find it on our
-                    website, which holds all of the renowned gold jewellery collections. You may consider our assortment to
-                    be one of India's best gold shopping brands, as well as the most diverse. We believe in providing pure
-                    and authentic service to our consumers, hence we provide hallmarked 22Karat (916) excellent grade
-                    jewellery. From antique to contemporary jewellery, all ornaments and products are hallmarked.
-                    We provide the most recent collections for men, women, and children. Men's gold jewellery designs are
-                    complicated, and exquisite gents jewellery completes his faultless ensemble. We bring to you the
-                    greatest selection of items. Men's gold items have the best deals and a diverse assortment of discounts.
-                    Our exquisite and astonishing latest gold ornaments are attractive to today's fashion-conscious women.
-                    We guarantee that we will provide you with the most up-to-date gold fashion jewellery designs for
-                    ladies without sacrificing quality. The best thing is that you may take advantage of appealing discounts
-                    on select female or women gold items as well as economical bridal gold jewellery. Also available are
-                    exquisite pieces of jewellery for both kid boys and girls. Baby gold jewellery should be lovely and unique,
-                    keeping that in mind we have special gold designs for kids that can also be used as a gift for small
-                    children and newborn babies. You can buy baby jewellery online and explore our vast collection of gifts
-                    for kids here. Gift real gold to your newborn baby boy and girl and make them wear flawless.
+                    In terms of item collection and diversity of ornaments, <b>Nandish.in</b> is one of India's best jewellery brands.
+                    We have a customer-friendly website with a selection of gold jewellery collections and <a class="text-dark" href="<?= base_url('gold/women/necklace/antique.html') ?>"><b>Antique Long
+                    Necklace</b></a> for online purchasing in India. We're here to help you find it on our website, you may consider
+                    our assortment to be one of India's best gold shopping sites as well as the most diverse collection. We
+                    believe in serving customers with purity and genuineness provide and we provide hallmarked 22Karat
+                    (916) excellent grade jewellery. We provide the most recent collections for men, women & children.
+                    Men's gold jewellery designs are complicated, and exquisite gents jewellery completes his faultless
+                    ensemble. Men's gold items have the best deals and a diverse assortment. Our astonishing latest <a class="text-dark" href="<?= base_url('gold/women/bangles/copper-kadli.html') ?>"><b>Gold
+                    Kadli Bengles</b></a> and ornaments are attractive to today's fashion-conscious women.
+                </p>
+                <p class="text-justify">
+                    We guarantee that we will provide you with the most up-to-date real gold fashion jewellery designs for
+                    ladies without sacrificing quality. You can consider our collection of female or women items for the top
+                    gold jewellery brands in India and also the most versatile brand. Also available are exquisite pieces of
+                    Antique gold necklace, bridal gold jewellery, and both kid boys and girls. <a class="text-dark" href="<?= base_url('gold/kids.html') ?>"><b>Baby Gold Jewellery</b></a> should be
+                    lovely and unique, keeping that in mind we have special gold jewellery for kids that can also be used as a
+                    gift for small children and newborn baby boy & girl.
                 </p>
             </div>
         </div>
@@ -253,8 +252,8 @@
                                 <div class="group-item">
                                     <div class="group-item-thumb">
                                         <a href="<?= make_slug($best->c_name."/".$best->sc_name."/".$best->i_name."/$best->si_name/$best->p_name-".e_id($best->p_id)) ?>">
-                                            <?php if (file_exists("admin/image/product/thumb_120_".reset($imge)) && !is_dir("admin/image/product/thumb_120_".reset($imge))): ?>
-                                            <?= img(['src' => "admin/image/product/thumb_120_".reset($imge), 'alt' => $best->p_name]) ?>
+                                            <?php if (file_exists("admin/image/product/thumb_".reset($imge)) && !is_dir("admin/image/product/thumb_".reset($imge))): ?>
+                                            <?= img(['src' => "admin/image/product/thumb_".reset($imge), 'alt' => $best->p_name]) ?>
                                             <?php else: ?>
                                             <?= img(['src' => "admin/image/noproduct.png", 'alt' => $best->p_name]) ?>
                                             <?php endif ?>
@@ -281,16 +280,16 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="section-title text-center">
-                    <h3 class="">Silver Jewellery</h3>
+                <div class="section-title">
+                    <h3 class="fnt_size">Silver Jewellery</h3>
                     <hr>
                 </div>
                 <p class="text-justify">
                     <b>Nandish.in</b> is the wonderful assortment of top silver jewellery buying online is also known as Chandi ki
-                    jewellery. You can discover the latest silver fashion jewellery, such as silver ornaments for women, silver
-                    jewellery for men and kids. Not only that, but we also offer a huge selection of designer silver fashion
-                    jewellery for bridal. This store offers a unique section for silver aficionados, and it makes our customers
-                    feel a warm welcome.
+                    jewellery. You can discover the latest silver fashion jewellery such as <a class="text-dark" href="<?= base_url('silver/women/anklet.html') ?>"><b>Silver Anklet</b></a> and ornaments for
+                    women, silver jewellery for men and kids. Not only that, but we also offer a huge selection of designer
+                    silver fashion jewellery for bridal. This store offers a unique section for silver aficionados, and it makes
+                    our customers feel a warm welcome.
                 </p>
                 <p class="text-justify">
                     Silver jewellery for men comprises items that are both flexible and stylish. Here you will find the greatest

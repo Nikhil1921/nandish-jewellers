@@ -87,6 +87,12 @@
                                 </div>
                             </div>
                             <?php endif ?>
+                            <?= form_open('check-pincode', ['method' => 'GET', 'onsubmit' => "saveData(this); return false;"]); ?>
+                            <div class="pro-size" >
+                                <input type="text" name="pincode" id="pincode" maxlength="6" class="form-control col-5 mr-4" placeholder="Check pincode for availibility" />
+                                <input class="btn btn-cart" type="submit" value="Check" />
+                            </div>
+                            <?= form_close(); ?>
                         </div>
                     </div>
                 </div>

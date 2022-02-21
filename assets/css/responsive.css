@@ -106,7 +106,7 @@
         justify-content: space-between;
     }
     .product-caption {
-        padding-top: 17px;
+        padding-top: 10px;
         width: 100%;
         margin: auto;
     }
@@ -184,7 +184,7 @@
     .btn {
         font-size: 10px;
         color: #fff;
-        line-height: 1;
+        line-height: 2.5;
     }
     .button-group a {
         width: 40px;

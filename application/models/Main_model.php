@@ -18,7 +18,7 @@ class Main_model extends Public_model
 	{
 		return $this->db->select('p_id, p_name, sc_name, i_name, c_name, p_gram, p_image, c_price, c_price_22, c_price_18, p_carat, p_l_char, p_other, si_name')
 						->from('product p')
-						->where(['p_show' => 'New', 'p_qty_avail >' => 0])
+						->where(['p_show' => 'New', 'p_qty_avail >' => 0, 'p.is_deleted' => 0])
 						->join('category c', 'c.c_id = p.p_cat')
 						->join('subcategory sc', 'sc.sc_id = p.p_subcat')
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
@@ -46,6 +46,7 @@ class Main_model extends Public_model
 		return $this->db->select('p_id, p_name, sc_name, i_name, c_name, p_gram, p_image, c_price, c_price_22, c_price_18, p_carat, p_l_char, p_other, si_name')
 						->from('product p')
 						->where(['p_show' => 'Best', 'p_qty_avail >' => 0, 'p_cat' => $p_cat])
+						->where(['p.is_deleted' => 0])
 						->join('category c', 'c.c_id = p.p_cat')
 						->join('subcategory sc', 'sc.sc_id = p.p_subcat')
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
@@ -62,6 +63,7 @@ class Main_model extends Public_model
 		return $this->db->select('p_id, p_name, sc_name, i_name, c_name, p_gram, p_image, c_price, c_price_22, c_price_18, p_carat, p_l_char, p_other, si_name')
 						->from('product p')
 						->where(['p_qty_avail >' => 0, 'i_name' => $inner, 'p_id !=' => $p_id])
+						->where(['p.is_deleted' => 0])
 						->join('category c', 'c.c_id = p.p_cat')
 						->join('subcategory sc', 'sc.sc_id = p.p_subcat')
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
@@ -87,7 +89,8 @@ class Main_model extends Public_model
 		
 		$this->db->select($select)
 				 ->from('product p')
-				 ->where($where);
+				 ->where($where)
+				 ->where(['p.is_deleted' => 0]);
 
 		if ($this->input->get('search')){
 			$search = str_replace(' ', '-', $this->input->get('search'));
@@ -164,6 +167,7 @@ class Main_model extends Public_model
 		return $this->db->select('p_qty_avail, ca_pro_id, p_pre, p_shipping, ca_id, ca_qty, ca_size, ca_pre_order, p_id, p_name, sc_name, i_name, c_name, p_gram, p_image, c_price, c_price_22, c_price_18, p_carat, p_l_char, p_other, si_name')
 						->from('product p')
 						->where(['p_qty_avail >' => 0, 'ca_u_id' => $user])
+						->where(['p.is_deleted' => 0])
 						->join('category c', 'c.c_id = p.p_cat')
 						->join('subcategory sc', 'sc.sc_id = p.p_subcat')
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
@@ -179,6 +183,7 @@ class Main_model extends Public_model
 		return $this->db->select('w_id, p_id, p_name, sc_name, i_name, si_name, c_name, p_gram, p_image, c_price, c_price_22, c_price_18, p_carat, p_l_char, p_other')
 						->from('product p')
 						->where(['p_qty_avail >' => 0, 'w_u_id' => $user])
+						->where(['p.is_deleted' => 0])
 						->join('category c', 'c.c_id = p.p_cat')
 						->join('subcategory sc', 'sc.sc_id = p.p_subcat')
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
@@ -194,6 +199,7 @@ class Main_model extends Public_model
 		return $this->db->select('p_id, p_name, c_name, p_gram, p_image, c_price, c_price_22, c_price_18, p_carat, p_l_char, p_other, p_code, p_detail, p_pre, p_size_type, p_sub_detail, p_size, p_g_wei, p_l_wei, p_gram, p_carat, p_make_gram, p_notes, si.seo_title, si.seo_description, si.seo_keywords')
 						->from('product p')
 						->where(['p_qty_avail >' => 0, 'p_id' => $prod])
+						->where(['p.is_deleted' => 0])
 						->join('category c', 'c.c_id = p.p_cat')
 						/* ->join('subcategory sc', 'sc.sc_id = p.p_subcat') */
 						/* ->join('innercategory ic', 'ic.i_id = p.p_innercat') */

@@ -220,6 +220,50 @@ textarea:focus {
     opacity: 1;
 }
 
+.fnt_size {
+    font-size: 21px;
+}
+
+.mobile-menu li.menu-item-has-children {
+    display: block;
+    position: relative;
+    line-height: 2;
+}
+
+.mobile-menu li.menu-item-has-children .menu-expand i {
+    display: block;
+    position: relative;
+    width: 10px;
+    margin-top: 24px;
+    border-bottom: 1px solid #222222;
+    -webkit-transition: all 250ms ease-out;
+    -o-transition: all 250ms ease-out;
+    transition: all 250ms ease-out;
+}
+
+/* .right_aero {
+    font-size: 40px;
+    position: absolute;
+    right: 0;
+    top: 0;
+} */
+
+
+/* i.pe-7s-angle-left {
+    font-size: 42px;
+    position: absolute;
+    top: -95px;
+    left: 300px;
+}
+
+i.pe-7s-angle-right {
+    position: absolute;
+    right: 0;
+    top: -93px;
+    font-size: 42px;
+    left: 259px;
+} */
+
 
 /* ----tab problem fix css ----*/
 
@@ -698,7 +742,7 @@ only screen and (max-width: 767.98px) {
 }
 
 .slick-slider .slick-slide>div {
-    margin-bottom: 30px;
+    margin-bottom: 7px;
 }
 
 .slick-slider .slick-slide>div:last-child {
