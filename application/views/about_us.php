@@ -14,20 +14,66 @@
                     </div>
                 </div>
                 <h5 class="about-sub-title">About US</h5>
-                <p>Nandish jewellers 1st showroom was established in the year 1992 and has achieved strong growth continuously year by year.
-                Nandish jewellers hold a top position in gold, silver,  jewellery trading business and within short span of time get a leadership position in this field at north gujarat level. Nandish jewellers is one of the pioneer in the field of gold jewellery trading in the gujarat. We also deal in bullion trading at retail level. Nandish  jewellers with its good experience has maintained relation with customers and created a strong reputation in the jewellery field. Nandish jewellers provides hallmarked (bis approved) gold jewellery with quality assurance. Our owner Mr. Nandish Makwana with his 20 years of experience in this field has inspired Nandish Jewellers to achieve Strong Growth and Reputation . Nandish jewellers is esteemed member of Gold and Silver and Jewellery Trade Council of India.Nandish now has leading 2 royal showroom in gujarat.</p>
-                <p>1. 200 Years of Experience in Gold and silver Industry</p>
-                <p>2. Loyalty and Trust.</p>
-                <p>3. Standard Quality of Gold and Silver.</p>
-                <p>4. Best Return of Clients Investment.</p>
+                <p><b>Nandish Jewellers</b> is the 4 th generation leading jewellery brand and has achieved strong growth
+                    continuously year by year. <b>Nandish Jewellers</b> hold a top position in gold, silver jewellery
+                    trading business and within short span of time get a leadership position in this field at India level.
+                    <b>Nandish jewellers</b> is one of the pioneer in the field of gold jewellery trading in the India. We
+                    also deal in bullion trading at retail level. <b>Nandish jewellers</b> with its good experience has
+                    maintained relation with customers and created a strong reputation in the jewellery field. We
+                    pride ourselves on our business transparency, and we never compromise on the quality of our
+                    gold ornaments, as seen by our 916 hallmarking, which certifies the purity of 22 karat gold. Our
+                    owner Mr. Nandish Makwana with 2 decades of experience in this field has inspired Nandish
+                    Jewellers to achieve strong growth and reputation. <b>Nandish jewellers</b> is esteemed member of
+                    Gold and Silver and Jewellery Trade Council of India. Nandish now has leading 2 royal
+                    showroom in Gujarat,India. We have two centuries of experience in the gold and silver jewellery
+                    field. <b>Nandish Jewellers</b> always win our customers&#39; hearts by meeting their wants and
+                    attempting to supply them with the precise item they desire. We have a future-forward vision,
+                    and we&#39;ve earned the trust of our customers over the years, which has helped us to improve
+                    tremendously day by day.
+                </p>
+                <p>
+                    Navneet Makwana is a skilled founder of <b>Nandish Jewellers</b> with over decades of experience.
+                    Customer relationship management is something he is really enthusiastic about. His significant
+                    understanding of the sector supports the company&#39;s future.
+                </p>
+                <p>
+                    Nandish Makwana, brand owner of <b>Nandish Jewellers</b> has the expertise and is enthusiastic
+                    about jewellery collection and quality. His insight is assisting the organization&#39;s growth and
+                    achievement of new milestones.
+                </p>
             </div>
             <div class="col-lg-12">
-                <h5 class="about-sub-title">WHICH ARE THE BEST JEWELLERS IN INDIA?</h5>
-                <p>India’s heritage is often best depicted in places that have managed to preserve its history and craftsmanship intact over centuries. Jewellers all over the country are dedicated to this cause, preservation of this tradition, while adapting to the newness of modern culture and contemporization. Every city in India has their favourite jeweller and each of them has done that one thing differently that makes them simply the best. Among the best jewellers in Gujarat, Nandish Jewellers stands out as one of the most unique jewellery houses to have their flagship jewellery showroom in Gujarat that caters to this exact same thing.</p>
-                <h5 class="about-sub-title">WHERE CAN YOU FIND THE BEST JEWELLERY SHOP IN GUJARAT?</h5>
-                <p>Known to be immensely popular for being one of the best gold jewellers in Gujarat, Nandish Jewellers has two store in Gujarat location, beautifully designed to segregate every customer’s needs, from the latest designs in gold, to fanciful gold style wear, to traditional Necklace and Rajwadi Necklace jewellery. Nandish is one of the rare jewellers in India who have dedicated their interest to specialized bridal jewellery. The Nandish Bridal Customize collection makes them one of the best jewellery shops in India, with their beautifully handcrafted inspirational jewellery spewn over an entire floor with a royal theme, which is nothing less than a woman’s dream wedding jewellery haven. Nandish’s traditional concepts stand apart from any other jeweller in Gujarat owing to the indegenious craftsmanship of Nandish.</p>
-                <p>Nandish also prides itself for being one of the few standalone jewellers in India creating bespoke designs in gold, the first of its kind, drawing from Customize craftsmanship, called the Indian Royal Delight.</p>
-                <p>Amongst other gold jewellery, Nandish is the proud designer of The Indian Chic, a mix of designs in gold and silver. As all gold jewellers in India, each of Nandish jewels are hallmarked and certified.</p>
+                <h5 class="about-sub-title">200 years of experience in Gold and silver industry</h5>
+                <p>
+                    We have 200 years of familiarity in the field of gold and silver and we modernize our
+                    course of action as per the changing demands of the customers. We have our showroom
+                    at Gondal, Gujarat since many decades doing impressively well. Today, gold still
+                    occupies an important place in our culture and society. And we are here to give the best
+                    to our customers.
+                </p>
+                <h5 class="about-sub-title">Loyalty and Trust</h5>
+                <p>
+                    Building trust and loyalty among customers is something that takes time. While trust
+                    helps positive word-of-mouth, it also creates customer loyalty, which helps our business
+                    grow immensely good. <b>Nandish Jewellers</b> has got the best customer support and kept up
+                    good relations with customers and getting desired trust from them too. <b>Nandish.in</b>
+                    provides all the hallmarked jewellery to ensure no doubt in quality
+                </p>
+                <h5 class="about-sub-title">Standard quality of gold and silver</h5>
+                <p>
+                    We never compromise in quality of our items. We give the best quality items to our
+                    customers. We have hallmarked as well as bis approved jewellery in our store. We prioritise quality at first place in order to provide the best among all. We have vast range
+                    of No. 1 graded gold and silver items for all the occasions for Men, women and kids.
+                </p>
+                <h5 class="about-sub-title">Best return of client investment</h5>
+                <p>
+                    Gold has a track of record generating steady returns over various time periods. Once you
+                    invest in gold, it never lets your return down. We provide the best return of the invested
+                    amount.
+                </p>
+                <p>
+                    The organisation melds its rich history and old traditions with current ingenuity and cutting-edge workmanship, bringing together the dualities of science and aesthetics. <b>Nandish Jewellers</b> specialises in excellent Jadau and Kundan jewellery. With a range of jewellery for every occasion, from everyday pieces for every day to the most delicate pieces for women, <b>Nandish Jewellers</b> are the jewellery destination of choice.
+                </p>
             </div>
         </div>
     </div>

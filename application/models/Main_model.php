@@ -23,7 +23,7 @@ class Main_model extends Public_model
 						->join('subcategory sc', 'sc.sc_id = p.p_subcat')
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
 						->join('sub_innercategory si', 'si.si_id = p.p_subinner')
-						->limit(12)
+						// ->limit(12)
 						/* ->order_by('last_update DESC') */
 						->order_by('p_sort ASC')
 						->get()
@@ -51,7 +51,7 @@ class Main_model extends Public_model
 						->join('subcategory sc', 'sc.sc_id = p.p_subcat')
 						->join('innercategory ic', 'ic.i_id = p.p_innercat')
 						->join('sub_innercategory si', 'si.si_id = p.p_subinner')
-						->limit(8)
+						// ->limit(8)
 						// ->order_by('last_update DESC')
 						->order_by('p_sort ASC')
 						->get()

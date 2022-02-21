@@ -21,13 +21,13 @@ class Home extends Public_controller  {
 		if($this->input->get('search'))
 			return $this->product_list();
 		$data['name'] = 'home';
-		$data['title'] = 'Online Jewellary Store | Top Jewellery Brand in India';
+		$data['title'] = 'Online Jewellary Store In India | Gold & Silver | Nandish Jewellers';
 		$data['seo'] = [
-			'title' => APP_NAME. ' | Online Jewellary Store | Top Jewellery Brand in India',
-			'desc' => 'Nandish Jewellers - Buy the latest designer Gold & Silver jewellery online in India. We offer the best quality gold & silver jewellery with a wide variety of collections at an affordable price. Secure delivery & BIS Hallmark certified jewellers Shop now!',
+			'title' => 'Online Jewellary Store In India | Gold & Silver | Nandish Jewellers',
+			'desc' => 'Nandish Jewellers - Gold & Silver online jewellery store in India. Best jewellery brand for online shopping. ✓ BIS Hallmark Certified ✓ Secure Shipping ✓ Trusted Store.',
 			'image' => base_url('admin/image/logo.png'),
 			'url' => current_url(),
-			'keywords' => 'buy online jewellery, online jewellery shopping, Online jewellery store, online shopping jewellery, jewellery brand, jewellery website, online jewellery, jewellery, jewellery india, jewellery online shopping, buy jewellery online, online jewellery shopping india, buy gold & silver'
+			'keywords' => 'Buy Online Jewellery, Online jewellery shopping, Online Jewellery Store, Online Jewellery Shopping India, Jewellery brand In India, Best Jewellers In India, Best Jewellery Website, Branded Jewellery Online, Best Gold Jewellery Brand, Best brand for gold jewellery'
 		];
 		$data['banners'] = $this->main->getall('banner', 'b_image', ['b_cat_id' => 0], 'b_id DESC');
 		$data['testimonials'] = $this->main->getall('testimonial', 't_image, t_name, t_detail', []);
@@ -211,13 +211,34 @@ class Home extends Public_controller  {
 		$data['title'] = $data['prods'] && $data['prods'][0]['seo_title'] ? $data['prods'][0]['seo_title'] : 'shop';
 		
 		if ($data['prods']) {
-			if ($cat && $subcat && $inner){
-				$url = "$cat/$subcat/$inner";
-				$sub_inners['si_cat_id'] = $data['prods'][0]['p_cat'];
-				$sub_inners['si_subcat_id'] = $data['prods'][0]['p_subcat'];
-				$sub_inners['si_innercat_id'] = $data['prods'][0]['p_innercat'];
-				$data['sub_inns'] = $this->main->getall('sub_innercategory', 'CONCAT("'."$cat/$subcat/$inner/".'", si_name) AS si_url, si_name',$sub_inners, 'si_id DESC');
+			$url = "";
+			if ($cat){
+				$url .= "$cat/";
+				$sub_inners = ['sc_c_id' => $data['prods'][0]['p_cat']];
+				$data['sub_inns'] = $this->main->getall('subcategory', 'CONCAT("'."$url".'", sc_name) AS si_url, sc_name si_name', $sub_inners, 'sc_id ASC');
 			}
+
+			if ($subcat) {
+				$url .= "$subcat/";
+				$sub_inners = [
+					'i_cat_id' => $data['prods'][0]['p_cat'],
+					'i_sub_id' => $data['prods'][0]['p_subcat'],
+				];
+
+				$data['sub_inns'] = $this->main->getall('innercategory', 'CONCAT("'."$url".'", i_name) AS si_url, i_name si_name', $sub_inners, 'i_id ASC');
+			}
+			
+			if ($inner) {
+				$url .= "$inner/";
+				$sub_inners = [
+					'si_cat_id' => $data['prods'][0]['p_cat'],
+					'si_subcat_id' => $data['prods'][0]['p_subcat'],
+					'si_innercat_id' => $data['prods'][0]['p_innercat'],
+				];
+
+				$data['sub_inns'] = $this->main->getall('sub_innercategory', 'CONCAT("'."$url".'", si_name) AS si_url, si_name', $sub_inners, 'si_id DESC');
+			}
+			
 			$data['seo'] = [
 					'title' => $data['prods'][0]['seo_title'],
 					'desc' => $data['prods'][0]['seo_description'],
