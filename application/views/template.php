@@ -633,8 +633,8 @@ endif;
                                     <h6>User link</h6>
                                     <ul class="contact-block12">
                                     <?php if(!$this->session->user_id): ?>
-                                    <li><a href="<?= front_url('login-register') ?>">login</a></li>
-                                    <li><a href="<?= front_url('login-register') ?>">register</a></li>
+                                    <li><a href="<?= front_url('login-register') ?>">Login</a></li>
+                                    <li><a href="<?= front_url('login-register') ?>">Register</a></li>
                                     <?php else: ?>
                                     <li><a href="<?= front_url('my-account') ?>">my account</a></li>
                                     <li><a href="<?= front_url('logout') ?>">Logout</a></li>

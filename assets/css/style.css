@@ -224,6 +224,25 @@ textarea:focus {
     font-size: 21px;
 }
 
+/* 03-03-2022 changes */
+
+.fnt_size1 {
+    font-size: 30px;
+}
+.fnt_size2 {
+    font-size: 27px;
+}
+.fnt_size3 {
+    font-size: 24px;
+}
+
+.btn-cart3:hover {
+    background: #fbdc24;
+    color: #ffffff;
+}
+
+/* 03-03-2022 changes */
+
 .mobile-menu li.menu-item-has-children {
     display: block;
     position: relative;
@@ -1985,9 +2004,9 @@ only screen and (max-width: 767.98px) {
 }
 
 @media only screen and (max-width: 479.98px) {
-    .mobile-menu {
+    /* .mobile-menu {
         margin-top: 15px;
-    }
+    } */
 }
 
 .mobile-menu li>a {
@@ -2019,9 +2038,9 @@ only screen and (max-width: 767.98px) {
     position: relative;
 }
 
-.mobile-menu li.menu-item-has-children .dropdown {
+/* .mobile-menu li.menu-item-has-children .dropdown {
     padding-left: 15px;
-}
+} */
 
 .mobile-menu li.menu-item-has-children .menu-expand {
     line-height: 50;
@@ -2073,7 +2092,7 @@ only screen and (max-width: 767.98px) {
 /*------ offcanvas widget area start ------*/
 
 .offcanvas-widget-area {
-    /* margin-top: auto; */
+    margin-top: auto;
     padding-bottom: 30px;
 }
 
@@ -6831,6 +6850,7 @@ only screen and (min-width: 768px) and (max-width: 991.98px) {
 
 .login-reg-form-wrap .login-reg-form-meta a {
     color: #5f5aa5;
+    font-size: 15px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991.98px) {

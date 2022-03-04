@@ -2,7 +2,7 @@
 <div class="contact-area section-padding">
    <div class="container shadow pt-3 pb-3">
       <div class="row">
-         <!-- <div class="col-lg-6">
+         <div class="col-lg-6">
             <div class="contact-message">
                <h4 class="contact-title">Tell Us Your Project</h4>
                <form id="contact-form" action="#"
@@ -35,8 +35,8 @@
                   </div>
                </form>
             </div>
-         </div> -->
-         <div class="col-lg-12">
+         </div>
+         <div class="col-lg-6">
             <div class="contact-info">
                <h4 class="contact-title">Contact Us</h4>
                <ul>

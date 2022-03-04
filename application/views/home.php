@@ -89,7 +89,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-title">
-                    <h2 class="fnt_size">Online Jewellery Store</h2>
+                    <h2 class="fnt_size1">Online Jewellery Store</h2>
                     <hr>
                 </div>
                 <p class="text-justify">
@@ -199,7 +199,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-title">
-                    <h2 class="fnt_size">Gold Jewellery</h2>
+                    <h2 class="fnt_size2">Gold Jewellery</h2>
                     <hr>
                 </div>
                 <p class="text-justify">
@@ -281,7 +281,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-title">
-                    <h3 class="fnt_size">Silver Jewellery</h3>
+                    <h3 class="fnt_size3">Silver Jewellery</h3>
                     <hr>
                 </div>
                 <p class="text-justify">
