@@ -17,3 +17,4 @@ application/logs/*
 /vendor/
 /assets/old/
 /admin/image/
+*.zip
