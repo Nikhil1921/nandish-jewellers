@@ -36,7 +36,7 @@
                             <div class="single-input-item">
                                 <div class="row">
                                     <div class="col-4">
-                                        <button class="btn btn-sqr" type="submit">Login</button>
+                                        <button class="btn-sqr" type="submit">Login</button>
                                     </div>
                                     <div class="col-6">
                                         <div class="single-input-item">
@@ -66,7 +66,7 @@
                             </div>
                             <?php endif ?>
                             <div class="single-input-item">
-                                <button class="btn btn-sqr" type="submit"><?= $this->session->mobile_check ? 'Check OTP' : 'Send OTP' ?></button>
+                                <button class=" btn-sqr" type="submit"><?= $this->session->mobile_check ? 'Check OTP' : 'Send OTP' ?></button>
                             </div>
                         </form>
                     </div>

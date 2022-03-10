@@ -36,13 +36,13 @@ endif;
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('admin/image/logo.png') ?>">
         <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,900" rel="stylesheet">
-        <link rel="stylesheet" href="https://demo.hasthemes.com/corano-preview/corano/assets/css/vendor/bootstrap.min.css">
-        <link rel="stylesheet" href="https://demo.hasthemes.com/corano-preview/corano/assets/css/vendor/pe-icon-7-stroke.css">
-        <link rel="stylesheet" href="https://demo.hasthemes.com/corano-preview/corano/assets/css/vendor/font-awesome.min.css">
-        <link rel="stylesheet" href="https://demo.hasthemes.com/corano-preview/corano/assets/css/plugins/slick.min.css">
-        <link rel="stylesheet" href="https://demo.hasthemes.com/corano-preview/corano/assets/css/plugins/animate.css">
-        <link rel="stylesheet" href="https://demo.hasthemes.com/corano-preview/corano/assets/css/plugins/nice-select.css">
-        <link rel="stylesheet" href="https://demo.hasthemes.com/corano-preview/corano/assets/css/plugins/jqueryui.min.css">
+        <link rel="stylesheet" href="<?= base_url('assets/css/vendor/bootstrap.min.css') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/vendor/pe-icon-7-stroke.css') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/vendor/font-awesome.min.css') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/plugins/slick.min.css') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/plugins/animate.css') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/plugins/nice-select.css') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/plugins/jqueryui.min.css') ?>">
         <link rel="stylesheet" href="<?= base_url('assets/css/style.css?v=1.0.3') ?>">
         <link rel="stylesheet" href="<?= base_url('assets/css/custom.css?v=1.0.3') ?>">
         <link rel="stylesheet" href="<?= base_url('assets/css/responsive.css?v=1.0.3') ?>">
@@ -939,21 +939,21 @@ endif;
 
         gtag('config', 'G-E1DLP9MBQS');
         </script>
-        <script src="https://demo.hasthemes.com/corano-preview/corano/assets/js/vendor/modernizr-3.6.0.min.js"></script>
-        <script src="https://demo.hasthemes.com/corano-preview/corano/assets/js/vendor/jquery-3.3.1.min.js"></script>
-        <script src="https://demo.hasthemes.com/corano-preview/corano/assets/js/vendor/popper.min.js"></script>
-        <script src="https://demo.hasthemes.com/corano-preview/corano/assets/js/vendor/bootstrap.min.js"></script>
-        <script src="https://demo.hasthemes.com/corano-preview/corano/assets/js/plugins/slick.min.js"></script>
-        <script src="https://demo.hasthemes.com/corano-preview/corano/assets/js/plugins/countdown.min.js"></script>
-        <script src="https://demo.hasthemes.com/corano-preview/corano/assets/js/plugins/nice-select.min.js"></script>
-        <script src="https://demo.hasthemes.com/corano-preview/corano/assets/js/plugins/jqueryui.min.js"></script>
-        <script src="https://demo.hasthemes.com/corano-preview/corano/assets/js/plugins/imagesloaded.pkgd.min.js"></script>
-        <script src="https://demo.hasthemes.com/corano-preview/corano/assets/js/plugins/instagramfeed.min.js"></script>
-        <script src="https://demo.hasthemes.com/corano-preview/corano/assets/js/plugins/ajaxchimp.js"></script>
-        <script src="https://demo.hasthemes.com/corano-preview/corano/assets/js/plugins/ajax-mail.js"></script>
+        <script src="<?= base_url('assets/js/vendor/modernizr-3.6.0.min.js') ?>"></script>
+        <script src="<?= base_url('assets/js/vendor/jquery-3.3.1.min.js') ?>"></script>
+        <script src="<?= base_url('assets/js/vendor/popper.min.js') ?>"></script>
+        <script src="<?= base_url('assets/js/vendor/bootstrap.min.js') ?>"></script>
+        <script src="<?= base_url('assets/js/plugins/slick.min.js') ?>"></script>
+        <script src="<?= base_url('assets/js/plugins/countdown.min.js') ?>"></script>
+        <script src="<?= base_url('assets/js/plugins/nice-select.min.js') ?>"></script>
+        <script src="<?= base_url('assets/js/plugins/jqueryui.min.js') ?>"></script>
+        <script src="<?= base_url('assets/js/plugins/imagesloaded.pkgd.min.js') ?>"></script>
+        <script src="<?= base_url('assets/js/plugins/instagramfeed.min.js') ?>"></script>
+        <script src="<?= base_url('assets/js/plugins/ajaxchimp.js') ?>"></script>
+        <script src="<?= base_url('assets/js/plugins/ajax-mail.js') ?>"></script>
         <?php if($name == 'contact_us'): ?>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfmCVTjRI007pC1Yk2o2d_EhgkjTsFVN8"></script>
-            <script src="https://demo.hasthemes.com/corano-preview/corano/assets/js/plugins/google-map.js"></script>
+            <script src="<?= base_url('assets/js/plugins/google-map.js') ?>"></script>
         <?php endif ?>
         <?php if($name == 'checkout'): ?>
             <script src="https://checkout.razorpay.com/v1/checkout.js"></script>

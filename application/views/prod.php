@@ -90,7 +90,7 @@
                             <?= form_open('check-pincode', ['method' => 'GET', 'onsubmit' => "saveData(this); return false;"]); ?>
                             <div class="pro-size" >
                                 <input type="text" name="pincode" id="pincode" maxlength="6" class="form-control col-md-3 col-sm-4 col-5 mr-4" placeholder="Check Pincode" />
-                                <input class="btn btn-cart" type="submit" value="Check" />
+                                <input class="btn cart_btnn cart-btn btn-cart" type="submit" value="Check" />
                             </div>
                             <?= form_close(); ?>
                         </div>
@@ -226,7 +226,7 @@
                         </a>
                      </div>
                      <div class="cart-hover">
-                        <button class="btn btn-cart" data-p_id="<?= e_id($relat['p_id']) ?>" onclick="addToCart(this)">
+                        <button class="btn cart_btn btn-cart" data-p_id="<?= e_id($relat['p_id']) ?>" onclick="addToCart(this)">
                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" class="bag1">
                               <path d="M443.209,442.24l-27.296-299.68c-0.736-8.256-7.648-14.56-15.936-14.56h-48V96c0-25.728-9.984-49.856-28.064-67.936
                                  C306.121,10.24,281.353,0,255.977,0c-52.928,0-96,43.072-96,96v32h-48c-8.288,0-15.2,6.304-15.936,14.56L68.809,442.208

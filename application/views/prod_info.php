@@ -41,7 +41,7 @@
                     if(!$this->user): ?>
                         <a href="<?= front_url('login-register') ?>" class="btn btn-cart2"><?= $bag ?></a>
                     <?php else: ?>
-                        <button class="btn btn-cart" data-p_id="<?= e_id($data['p_id']) ?>" onclick="addToCart(this)"><?= $bag ?></button>
+                        <button class="btn cart_btnn cart-btn btn-cart" data-p_id="<?= e_id($data['p_id']) ?>" onclick="addToCart(this)"><?= $bag ?></button>
                     <?php endif ?>
                 </div>
             </div>
@@ -79,7 +79,7 @@
             <?= form_open('check-pincode', ['method' => 'GET', 'onsubmit' => "saveData(this); return false;"]); ?>
             <div class="pro-size" >
                <input type="text" name="pincode" id="pincode" maxlength="6" class="form-control col-md-3 col-sm-4 col-5 mr-4" placeholder="Check pincode" />
-               <input class="btn btn-cart" type="submit" value="Check" />
+               <input class="btn quick_view btn-cart" type="submit" value="Check" />
             </div>
             <?= form_close(); ?>
             <!-- <div class="useful-links">

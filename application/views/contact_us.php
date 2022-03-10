@@ -26,7 +26,7 @@
                               required=""></textarea>
                         </div>
                         <div class="contact-btn">
-                           <button class="btn btn-sqr" type="submit">Send Message</button>
+                           <button class="btn-sqr" type="submit">Send Message</button>
                         </div>
                      </div>
                      <div class="col-12 d-flex justify-content-center">
