@@ -127,7 +127,7 @@ if ( ! function_exists('send_sms'))
     
             $url = "key=".$key."&campaign=12397&routeid=7&type=text&contacts=".$contact."&senderid=".$from."&msg=".urlencode($sms)."&template_id=".$template;
     
-            $base_URL = 'http://denseteklearning.com/app/smsapi/index?'.$url;
+            $base_URL = 'http://densetek.tk/app/smsapi/index?'.$url;
     
             $curl_handle = curl_init();
             curl_setopt($curl_handle,CURLOPT_URL,$base_URL);

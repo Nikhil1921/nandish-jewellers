@@ -11,20 +11,20 @@
                                 <input type="text" placeholder="Enter Mobile No." name="mobile" maxlength="10" />
                             </div>
                             <div class="single-input-item">
-                                <input type="password" placeholder="Password" name="password" id="password" />
+                                <input type="password" placeholder="Password" name="password" id="re_password" />
                             </div>
 
                             <div class="single-input-item">
-                                        <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
-                                            <div class="remember-meta">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="rememberMe" onclick="if(this.checked === true) document.getElementById('password').type = ('text'); else document.getElementById('password').type = ('password')">
-                                                    <label class="custom-control-label" for="rememberMe">Show Password</label>
-                                                </div>
-                                            </div>
-                                            <?= anchor('forgot-password', 'Forgot Password?', 'class="forget-pwd"') ?>
+                                <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                                    <div class="remember-meta">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="rememberMe" onclick="if(this.checked === true) document.getElementById('re_password').type = ('text'); else document.getElementById('re_password').type = ('password')">
+                                            <label class="custom-control-label" for="rememberMe">Show Password</label>
                                         </div>
                                     </div>
+                                    <?= anchor('forgot-password', 'Forgot Password?', 'class="forget-pwd"') ?>
+                                </div>
+                            </div>
 
                             <!-- <div class="single-input-item">
                                 <div class="form-group">
