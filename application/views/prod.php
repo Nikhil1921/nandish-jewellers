@@ -2,7 +2,7 @@
 <div class="shop-main-wrapper section-padding pb-0">
     <div class="container">
         <?php if($data): ?>
-        <div class="row">
+        <div class="row" itemscope itemtype="http://schema.org/Product">
             <div class="col-lg-12 order-1 order-lg-2">
                 <div class="product-details-inner">
                 <div class="row">
@@ -10,17 +10,28 @@
                         <div class="xzoom-container">
                             <?php
                             $imge = explode(",", $data['p_image']); ?>
-                            <img class="xzoom" id="xzoom-default" src="<?= base_url('admin/image/product/'.reset($imge)) ?>" xoriginal="<?= base_url('admin/image/product/'.reset($imge)) ?>" />
+                            <img itemprop="image" class="xzoom" id="xzoom-default" src="<?= base_url('admin/image/product/'.reset($imge)) ?>" xoriginal="<?= base_url('admin/image/product/'.reset($imge)) ?>" />
                             <div class="xzoom-thumbs mt-4">
                             <?php
                             foreach ($imge as $key => $value)
                             {
                             ?>
                                 <a href="<?= base_url('admin/image/product/'.$value) ?>">
-                                    <img class="xzoom-gallery" width="80" height="80" src="<?= base_url('admin/image/product/thumb_120_'.$value) ?>" xpreview="<?= base_url('admin/image/product/'.$value) ?>" title="<?= $data['p_name']; ?>">
+                                    <img itemprop="image" class="xzoom-gallery" width="80" height="80" src="<?= base_url('admin/image/product/thumb_120_'.$value) ?>" xpreview="<?= base_url('admin/image/product/'.$value) ?>" title="<?= $data['p_name']; ?>">
                                 </a>
                                 <?php } ?>
                             </div>
+                            
+                            <meta itemprop="brand" content="<?= APP_NAME ?>">
+                            <meta itemprop="name" content="<?= $data['p_name']; ?>">
+                            <meta itemprop="description" content="<?= $data['p_detail'] ?>">
+                            <meta itemprop="productID" content="<?= $data['p_code']; ?>">
+                            <meta itemprop="url" content="<?= current_url() ?>">
+                            <meta itemprop="image" content="<?= base_url('admin/image/product/'.reset($imge)) ?>" xoriginal="<?= base_url('admin/image/product/'.reset($imge)) ?>">
+                            <link itemprop="availability" href="http://schema.org/InStock">
+                            <meta itemprop="price" content="<?= round(($data[$data['p_carat']] * $data['p_gram'] + $data['p_other'] + $data['p_l_char']) * 1.03) ?>" />
+                            <meta itemprop="priceCurrency" content="INR" />
+                            
                         </div>
                     </div>
                     <div class="col-lg-6 offset-lg-1">
@@ -28,13 +39,15 @@
                             <div class="manufacturer-name">
                                 <a href="javascript:void(0)">Nandish Jewellers</a>
                             </div>
-                            <h3 class="product-name"><?= $data['p_name']; ?></h3>
+                            <h3 itemprop="name" class="product-name"><?= $data['p_name']; ?></h3>
                             <span>
                             S.K.U. Code - <?= $data['p_code']; ?></span>
                             <div class="price-box">
                                 <span class="price-regular"><i class="fa fa-inr" aria-hidden="true"></i><?= round(($data[$data['p_carat']] * $data['p_gram'] + $data['p_other'] + $data['p_l_char']) * 1.03) ?></span>
                             </div>
-                            <?= $data['p_detail'] ?>
+                            <p itemprop="description">
+                                <?= $data['p_detail'] ?>
+                            </p>
                             <div class="quantity-cart-box d-flex align-items-center">
                                 <h6 class="option-title">qty:</h6>
                                 <div class="quantity">
