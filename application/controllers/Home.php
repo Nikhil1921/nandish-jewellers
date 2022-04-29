@@ -33,7 +33,7 @@ class Home extends Public_controller  {
 		$data['testimonials'] = $this->main->getall('testimonial', 't_image, t_name, t_detail', []);
 		$data['new_prods'] = $this->main->getNewProds();
 		$data['innerCats'] = $this->main->getInners();
-		$data['blogs'] = $this->main->getall('blog', 'title, id, CONCAT("admin/image/blog/thumb_", image) image', [], 'id DESC');
+		$data['blogs'] = $this->main->getall('blog', 'title, id, CONCAT("admin/image/blog/thumb_", image) image', ['for_homepage' => 1, 'is_deleted' => 0], 'id DESC');
 		
 		$data['cats'] = array_map(function($arr){
 					return (object) [

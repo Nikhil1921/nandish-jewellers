@@ -209,6 +209,37 @@ endif;
                                             </ul>
                                         </li>
                                         <?php endforeach ?>
+                                        <li>
+                                        <a href="javascript:;">blogs <i class="fa fa-angle-down"></i></a>
+                                            <ul class="dropdown">
+                                                <?php foreach($cats as $cat_data): ?>
+                                                <li>
+                                                    <a href="javascript:;"><?= $cat_data->c_name ?> <i class="fa fa-angle-right"></i></a>
+                                                    <ul class="dropdown">
+                                                        <?php foreach($cat_data->sub_cats as $sub_data): ?>
+                                                        <li>
+                                                            <a href="javascript:;"><?= $sub_data->sc_name ?> <i class="fa fa-angle-right"></i></a>
+                                                            <ul class="dropdown">
+                                                                <?php foreach($sub_data->inner_cats as $inn_data): ?>
+                                                                    <li>
+                                                                        <a href="javascript:;"><?= $inn_data->i_name ?> <i class="fa fa-angle-right"></i></a>
+                                                                        <ul class="dropdown">
+                                                                            <?php foreach($sub_data->inner_cats as $inn_data): ?>
+                                                                            <li>
+                                                                                <a href="javascript:;"><?= $inn_data->i_name ?></a>
+                                                                            </li>
+                                                                            <?php endforeach ?>
+                                                                        </ul>
+                                                                    </li>
+                                                                <?php endforeach ?>
+                                                            </ul>
+                                                        </li>
+                                                        <?php endforeach ?>
+                                                    </ul>
+                                                </li>
+                                                <?php endforeach ?>
+                                            </ul>
+                                        </li>
                                     </ul>
                                     </div>
                                     <div class="col-6">
