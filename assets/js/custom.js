@@ -462,3 +462,26 @@ function checkout_develop(form) {
 $('input[name=password]').bind("cut copy paste", function(e) {
     e.preventDefault();
 });
+
+$("#comment-form").validate({
+    ignore: ".ignore",
+    rules: {
+        name: {
+            required: true,
+            maxlength: 100
+        },
+        email: {
+            required: true,
+            email: true,
+            maxlength: 100
+        },
+        comment: {
+            required: true,
+            maxlength: 255
+        }
+    },
+    errorPlacement: function(error, element) {},
+    submitHandler: function(form) {
+        saveData(form);
+    }
+});

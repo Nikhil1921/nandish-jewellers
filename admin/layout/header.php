@@ -77,6 +77,12 @@
               <p>Users</p>
             </a>
           </li>
+          <li class="<?= in_array($name, ['blog-comments']) ? 'active' : '' ?>">
+            <a href="<?= $base_url ?>blog-comments.php">
+              <i class="nc-icon nc-book-bookmark"></i>
+              <p>Blog Comments</p>
+            </a>
+          </li>
           <li class="<?= in_array($name, ['privacy', 'term', 'refund']) ? 'active' : '' ?>">
             <a data-toggle="collapse" href="#pages" <?= in_array($name, ['privacy', 'term', 'refund']) ? 'aria-expanded="true"' : '' ?>>
               <i class="nc-icon nc-book-bookmark"></i>

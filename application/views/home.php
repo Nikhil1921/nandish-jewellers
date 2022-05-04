@@ -364,9 +364,20 @@
                     <!-- blog post item start -->
                     <div class="blog-post-item">
                         <figure class="blog-thumb">
-                            <a href="<?= make_slug("blog/".$blog->title."-".e_id($blog->id)) ?>">
-                                <?= img($blog->image) ?>
-                            </a>
+                            <div class="blog-carousel-2 slick-row-15 slick-arrow-style slick-dot-style">
+                                <div class="blog-single-slide">
+                                    <a href="<?= make_slug("blog/".$blog->title."-".e_id($blog->id)) ?>">
+                                        <?= img($blog->image) ?>
+                                    </a>
+                                </div>
+                                <?php foreach($this->main->getall('blog_imgs', 'p_image', ['b_id' => $blog->id]) as $img): ?>
+                                <div class="blog-single-slide">
+                                    <a href="<?= make_slug("blog/".$blog->title."-".e_id($blog->id)) ?>">
+                                        <?= img('admin/image/blog/thumb_'.$img->p_image) ?>
+                                    </a>
+                                </div>
+                                <?php endforeach ?>
+                            </div>
                         </figure>
                         <div class="blog-content">
                             <div class="blog-meta">

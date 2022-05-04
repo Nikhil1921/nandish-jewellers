@@ -1,16 +1,20 @@
-<!-- blog main wrapper start -->
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div class="blog-main-wrapper section-padding">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="blog-item-wrapper">
-                    <!-- blog post item start -->
                     <div class="blog-post-item blog-details-post">
                         <figure class="blog-thumb">
                             <div class="blog-carousel-2 slick-row-15 slick-arrow-style slick-dot-style">
                                 <div class="blog-single-slide">
-                                    <?= img(['src' => $data['image'], 'style' => 'height: 60vh;']) ?>
+                                    <?= img('admin/image/blog/'.$data['image']) ?>
                                 </div>
+                                <?php foreach($this->main->getall('blog_imgs', 'p_image', ['b_id' => $data['id']]) as $img): ?>
+                                <div class="blog-single-slide">
+                                    <?= img('admin/image/blog/'.$img->p_image) ?>
+                                </div>
+                                <?php endforeach ?>
                             </div>
                         </figure>
                         <div class="blog-content">
@@ -35,7 +39,52 @@
                             </div>
                         </div>
                     </div>
-                    <!-- blog post item end -->
+                </div>
+                <div class="comment-section section-padding">
+                    <h5>03 Comment</h5>
+                    <ul>
+                        <?php foreach($comments as $comment): ?>
+                            <li>
+                                <div class="author-avatar">
+                                    <?= img('admin/image/logo.png') ?>
+                                </div>
+                                <div class="comment-body">
+                                    <h5 class="comment-author"><?= $comment->name ?></h5>
+                                    <div class="comment-post-date">
+                                        <?= date('d M, Y', $comment->created_at) ?> at <?= date('h:i A', $comment->created_at) ?>
+                                    </div>
+                                    <p><?= $comment->comment ?></p>
+                                </div>
+                            </li>
+                        <?php endforeach ?>
+                    </ul>
+                </div>
+                <div class="blog-comment-wrapper mt-4">
+                    <h5>Leave a reply</h5>
+                    <p>Your email address will not be published. Required fields are marked *</p>
+                    <?= form_open('', 'id="comment-form"') ?>
+                        <div class="comment-post-box">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4">
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" name="name" maxlength="100" class="coment-field" placeholder="Name" required />
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" maxlength="100" class="coment-field" placeholder="Email" required />
+                                </div>
+                                <div class="col-12">
+                                    <label for="comment">Comment</label>
+                                    <textarea name="comment" id="comment" name="comment" maxlength="255" placeholder="Write a comment" required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <div class="coment-btn">
+                                        <input class="btn btn-sqr" type="submit" value="Post Comment" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

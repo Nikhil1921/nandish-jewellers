@@ -1,5 +1,4 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); 
-/* header('Cache-Control: max-age=31536000'); */
 if (!isset($cats)):
     $cats = array_map(function($arr){
         return (object) [
@@ -14,6 +13,21 @@ if (!isset($cats)):
                 }, $this->main->getall('subcategory', 'sc_id, sc_name', ['sc_c_id' => $arr->c_id]))
             ];
     }, $this->main->getall('category', 'c_id, c_name', []));
+endif;
+if (!isset($blog_cats)):
+    $blog_cats = array_map(function($arr){
+        return (object) [
+                'c_id' => $arr->id,
+                'c_name' => $arr->c_name,
+                'sub_cats' => array_map(function($arr){
+                    return (object) [
+                        'sc_id' => $arr->id,
+                        'sc_name' => $arr->sc_name,
+                        'inner_cats' => (object) $this->main->getall('blog_inner_category', 'id AS i_id, ic_name', ['s_id' => $arr->id, 'is_deleted' => 0])
+                    ];
+                }, $this->main->getall('blog_sub_category', 'id, sc_name', ['c_id' => $arr->id, 'is_deleted' => 0]))
+            ];
+    }, $this->main->getall('blog_category', 'id, c_name', ['is_deleted' => 0]));
 endif;
 ?>
 <!DOCTYPE html>
@@ -43,9 +57,9 @@ endif;
         <link rel="stylesheet" href="https://demo.hasthemes.com/corano-preview/corano/assets/css/plugins/animate.css">
         <link rel="stylesheet" href="https://demo.hasthemes.com/corano-preview/corano/assets/css/plugins/nice-select.css">
         <link rel="stylesheet" href="https://demo.hasthemes.com/corano-preview/corano/assets/css/plugins/jqueryui.min.css">
-        <link rel="stylesheet" href="<?= base_url('assets/css/style.css?v=1.0.3') ?>">
-        <link rel="stylesheet" href="<?= base_url('assets/css/custom.css?v=1.0.3') ?>">
-        <link rel="stylesheet" href="<?= base_url('assets/css/responsive.css?v=1.0.3') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/style.css?v=1.0.4') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/custom.css?v=1.0.4') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/responsive.css?v=1.0.4') ?>">
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/xzoom.css') ?>" media="all" />
         <link rel="canonical" href="<?= current_url() ?>" />
         <!-- Google Tag Manager -->
@@ -209,31 +223,17 @@ endif;
                                             </ul>
                                         </li>
                                         <?php endforeach ?>
-                                        <li>
-                                        <a href="javascript:;">blogs <i class="fa fa-angle-down"></i></a>
-                                            <ul class="dropdown">
-                                                <?php foreach($cats as $cat_data): ?>
-                                                <li>
-                                                    <a href="javascript:;"><?= $cat_data->c_name ?> <i class="fa fa-angle-right"></i></a>
-                                                    <ul class="dropdown">
-                                                        <?php foreach($cat_data->sub_cats as $sub_data): ?>
-                                                        <li>
-                                                            <a href="javascript:;"><?= $sub_data->sc_name ?> <i class="fa fa-angle-right"></i></a>
-                                                            <ul class="dropdown">
-                                                                <?php foreach($sub_data->inner_cats as $inn_data): ?>
-                                                                    <li>
-                                                                        <a href="javascript:;"><?= $inn_data->i_name ?> <i class="fa fa-angle-right"></i></a>
-                                                                        <ul class="dropdown">
-                                                                            <?php foreach($sub_data->inner_cats as $inn_data): ?>
-                                                                            <li>
-                                                                                <a href="javascript:;"><?= $inn_data->i_name ?></a>
-                                                                            </li>
-                                                                            <?php endforeach ?>
-                                                                        </ul>
-                                                                    </li>
-                                                                <?php endforeach ?>
-                                                            </ul>
-                                                        </li>
+                                        <li class="position-static">
+                                            <a href="javascript:;">Blogs<i class="fa fa-angle-down"></i></a>
+                                            <ul class="megamenu dropdown">
+                                                <?php foreach($blog_cats as $b_cat): ?>
+                                                <li class="mega-title">
+                                                    <span><a href="<?= make_slug('blogs/'.$b_cat->c_name) ?>"><?= $b_cat->c_name ?></a></span>
+                                                    <ul class="">
+                                                        <?php foreach($b_cat->sub_cats as $b_sub_cat): ?>
+                                                            <li class="">
+                                                                <a href="<?= make_slug('blogs/'.$b_cat->c_name."/".$b_sub_cat->sc_name) ?>"><?= $b_sub_cat->sc_name ?></a>
+                                                            </li>
                                                         <?php endforeach ?>
                                                     </ul>
                                                 </li>
@@ -991,8 +991,8 @@ endif;
         <?php endif ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="<?= base_url('assets/js/jquery.validate.js') ?>"></script>
-        <script src="<?= base_url('assets/js/main.js?v=1.0.7') ?>"></script>
-        <script src="<?= base_url('assets/js/custom.js?v=1.0.7') ?>"></script>
+        <script src="<?= base_url('assets/js/main.js?v=1.0.8') ?>"></script>
+        <script src="<?= base_url('assets/js/custom.js?v=1.0.8') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/js/xzoom.min.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/js/jquery.hammer.min.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/js/setup.js') ?>"></script>

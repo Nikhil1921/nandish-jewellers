@@ -286,15 +286,49 @@ class Home extends Public_controller  {
 		$blog = explode('-', $blog);
 		$blog_id = end($blog);
 		$data['name'] = 'blog';
-		$data['data'] = $this->main->get('blog', 'title, detail, CONCAT("admin/image/blog/", image) image', ['id' => d_id($blog_id)]);
+		$data['data'] = $this->main->get('blog', 'id, title, detail, image, seo_title, seo_description, seo_keywords', ['id' => d_id($blog_id)]);
 		
+		if($this->input->is_ajax_request()){
+			$post = [
+				'name' => $this->input->post('name'),
+				'email' => $this->input->post('email'),
+				'comment' => $this->input->post('comment'),
+				'created_at' => time(),
+				'b_id' => d_id($blog_id)
+			];
+
+			if ($this->main->add($post, 'comments'))
+				$response = [
+					'message' => "Comment is successfull.",
+					'redirect' => current_url(),
+					'error' => false
+				];
+			else
+				$response = [
+					'message' => "Comment is not successfull. Try again.",
+					'error' => true
+				];
+
+			die(json_encode($response));
+		}
+
 		if($data['data']){
 			$data['title'] = $data['data']['title'];
 			$data['breadcrumb'] = [
 				"blog",
 				$data['data']['title']
 			];
-			
+
+			$data['seo'] = [
+				'title' => $data['data']['seo_title'],
+				'desc' => $data['data']['seo_description'],
+				'url' => current_url(),
+				'image' => base_url('admin/admin/image/blog/'.$data['data']['image']),
+				'keywords' => $data['data']['seo_keywords']
+			];
+
+			$data['comments'] = $this->main->getall('comments', 'name, comment, created_at', ['b_id' => $data['data']['id'], 'publish' => 1, 'is_deleted' => 0]);
+
 			return $this->template->load('template', 'blog', $data);
 		}
 		else

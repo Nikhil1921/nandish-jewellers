@@ -116,12 +116,70 @@ class Main_model extends Public_model
 						->join('sub_innercategory si', 'si.si_id = p.p_subinner', 'left');
 	}
 
+	public function blog_list($where)
+	{
+		$select = ['b.id', 'b.title', 'b.detail', 'b.image', 'b.seo_title', 'b.seo_description', 'b.seo_keywords', 'b.seo_detail', 'c.c_name', 'sc.sc_name', 'ic.ic_name', 'si.si_name', 'b.c_id', 'b.sc_id', 'b.ic_id', 'b.si_id'];
+		
+		if (isset($where['si_name']))
+			array_push($select, 'si.seo_title', 'si.seo_description', 'si.seo_keywords','si.seo_detail');
+		elseif (isset($where['ic_name']))
+			array_push($select, 'ic.seo_title', 'ic.seo_description', 'ic.seo_keywords','ic.seo_detail');
+		elseif (isset($where['sc_name']))
+			array_push($select, 'sc.seo_title', 'sc.seo_description', 'sc.seo_keywords','sc.seo_detail');
+		else
+			array_push($select, 'c.seo_title', 'c.seo_description', 'c.seo_keywords','c.seo_detail');
+		
+		$this->db->select($select)
+				 ->from('blog b')
+				 ->where($where)
+				 ->where(['b.is_deleted' => 0]);
+
+		if ($this->input->get('search')){
+			$search = str_replace(' ', '-', $this->input->get('search'));
+			foreach($select as $s => $item){
+				if($s===0)
+				{
+					$this->db->group_start(); 
+					$this->db->like($item, $search);
+				}
+				else
+				{
+					$this->db->or_like($item, $search);
+				}
+				
+				if(count($select) - 1 == $s) 
+				$this->db->group_end();
+			}
+		}
+		
+		return $this->db->join('blog_category c', 'c.id = b.c_id', 'left')
+						->join('blog_sub_category sc', 'sc.id = b.sc_id', 'left')
+						->join('blog_inner_category ic', 'ic.id = b.ic_id', 'left')
+						->join('blog_sub_inner_category si', 'si.id = b.si_id', 'left');
+	}
+
 	public function products_all_count($where)
 	{
 		$this->product_list($where);
 		return $this->db->get()->num_rows();
 	}
 
+	public function blogs_all_count($where)
+	{
+		$this->blog_list($where);
+		return $this->db->get()->num_rows();
+	}
+
+	public function blogs_list($where, $offset, $limit)
+	{
+		$this->blog_list($where);
+		$this->db->order_by('b.id DESC');
+		
+		$this->db->limit($limit, $offset);
+		
+		return $this->db->get()->result_array();
+	}
+	
 	public function products_list($where, $offset, $limit)
 	{
 		$this->product_list($where);
