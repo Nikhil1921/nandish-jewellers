@@ -25,6 +25,14 @@
                <a href="javascript:void(0)">Nandish Jewellers</a>
             </div>
             <h3 class="product-name"><?= $data['p_name']; ?></h3>
+            <div class="ratings d-flex">
+               <?php for($i = 0; $i < ceil($rate['rating']); $i++): ?>
+                  <span><i class="fa fa-star-o"></i></span>
+               <?php endfor ?>
+               <div class="pro-review">
+                  <span><?= $rate['reviews'] ?> Reviews</span>
+               </div>
+            </div>
             <span>S.K.U. Code - <?= $data['p_code']; ?></span>
             <div class="price-box">
                <span class="price-regular"><i class="fa fa-inr" aria-hidden="true"></i><?= round(($data[$data['p_carat']] * $data['p_gram'] + $data['p_other'] + $data['p_l_char']) * 1.03) ?></span>

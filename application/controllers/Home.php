@@ -290,8 +290,10 @@ class Home extends Public_controller  {
 				'url' => current_url(),
 				'keywords' => $data['data']['seo_keywords']
 			];
-		}
 
+			$data['rate'] = $this->main->get('reviews', 'AVG(rating) AS rating, count(p_id) AS reviews', ['is_deleted' => 0, 'publish' => 1, 'p_id' => d_id($prod_id)]);
+		}
+		
 		$data['related'] = $this->main->getRelatedProds(str_replace('-', ' ', $inner), d_id($prod_id));
 		unset($prod[array_key_last($prod)]);
 		$data['title'] = implode(" ", $prod);
@@ -347,8 +349,8 @@ class Home extends Public_controller  {
 		$blog = explode('-', $blog);
 		$blog_id = end($blog);
 		$data['name'] = 'blog';
-		$data['data'] = $this->main->get('blog', 'id, title, detail, image, seo_title, seo_description, seo_keywords', ['id' => d_id($blog_id)]);
-		
+		$data['data'] = $this->main->getBlog(['b.id' => d_id($blog_id)]);
+
 		if($this->input->is_ajax_request()){
 			$post = [
 				'name' => $this->input->post('name'),
@@ -375,11 +377,14 @@ class Home extends Public_controller  {
 
 		if($data['data']){
 			$data['title'] = $data['data']['title'];
-			$data['breadcrumb'] = [
-				"blog",
-				$data['data']['title']
-			];
-
+			
+			$data['breadcrumb'][] = "blog";
+			array_push($data['breadcrumb'], "<a href='".make_slug('blogs/'.$data['data']['c_name'])."'>".str_replace('-', ' ', $data['data']['c_name'])."</a>");
+			if($data['data']['sc_name']) array_push($data['breadcrumb'], "<a href='".make_slug('blogs/'.$data['data']['sc_name'])."'>".str_replace('-', ' ', $data['data']['sc_name'])."</a>");
+			if($data['data']['ic_name']) array_push($data['breadcrumb'], "<a href='".make_slug('blogs/'.$data['data']['ic_name'])."'>".str_replace('-', ' ', $data['data']['ic_name'])."</a>");
+			if($data['data']['si_name']) array_push($data['breadcrumb'], "<a href='".make_slug('blogs/'.$data['data']['si_name'])."'>".str_replace('-', ' ', $data['data']['si_name'])."</a>");
+			array_push($data['breadcrumb'], $data['data']['title']);
+			
 			$data['seo'] = [
 				'title' => $data['data']['seo_title'],
 				'desc' => $data['data']['seo_description'],
@@ -426,6 +431,7 @@ class Home extends Public_controller  {
 	{
 		check_ajax();
         $data['data'] = $this->main->prod(d_id($this->input->get('p_id')));
+		if($data['data']) $data['rate'] = $this->main->get('reviews', 'AVG(rating) AS rating, count(p_id) AS reviews', ['is_deleted' => 0, 'publish' => 1, 'p_id' => d_id($this->input->get('p_id'))]);
 		return $this->load->view('prod_info', $data);
 	}
 	

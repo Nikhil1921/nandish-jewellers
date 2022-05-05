@@ -1,4 +1,27 @@
-<?php include("layout/header.php"); ?>
+<?php include("layout/header.php");
+
+extract($_REQUEST);
+
+if(isset($act) && $act === 'delete')
+{
+  $qry = "SELECT id FROM `reviews` WHERE id = '$pid'";
+  $run = $connect->query($qry);
+  $data = $run->fetch_assoc();
+  if(!$data){
+      echo '<script>
+              alert("Review not found.");
+              window.open("reviews.php", "_self");
+          </script>';
+  }else{
+    $qry = "UPDATE `reviews` SET `is_deleted` = '1' WHERE id = '$pid'";
+    $msg = $connect->query($qry) === true ? 'Data '. (isset($pid) ? "updated" : "inserted") .' successfully'
+              : 'Data not '. (isset($pid) ? "updated" : "inserted") .' successfully';
+
+    echo '<script>alert("'.$msg.'"); window.open("reviews.php", "_self");</script>';
+  }
+}
+
+?>
 <div class="main-panel">
 <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
   <div class="container-fluid">
@@ -52,6 +75,7 @@
             <thead>
               <tr>
                 <th>Sr. No</th>
+                <th>SKU Code</th>
                 <th>Jewellery</th>
                 <th>Rating</th>
                 <th class="disabled-sorting text-right">Publish</th>
@@ -60,8 +84,10 @@
             </thead>
             <tbody>
           	<?php 
-                $sql = "SELECT p.p_name, r.rating, r.publish, r.id FROM reviews r
-                INNER JOIN product p ON p.p_id = r.p_id";
+                $sql = "SELECT p.p_name, r.rating, r.publish, r.id, p.p_code
+                FROM reviews r
+                INNER JOIN product p ON p.p_id = r.p_id
+                WHERE r.is_deleted = 0";
                 $result = $connect->query($sql); 
                 $i = 1;
                 while($data = $result->fetch_assoc())
@@ -69,10 +95,14 @@
             ?>
             <tr>
               <td><?= $i++;?></td>
+              <td><?= $data['p_code']; ?></td>
               <td><?= $data['p_name']; ?></td>
               <td><?= $data['rating']; ?></td>
               <td><a href="publish-review.php?pid=<?= $data['id']; ?>" class="btn btn-<?= $data['publish'] == 0 ? 'danger' : 'success' ?> btn-link btn-icon"><i class="fa fa-thumbs-<?= $data['publish'] == 0 ? 'down' : 'up' ?>"></i></a></td>
-              <td><a href="reply-review.php?pid=<?= $data['id']; ?>" class="btn btn-success btn-link btn-icon"><i class="fa fa-pencil"></i></a></td>
+              <td>
+                <a href="reply-review.php?pid=<?= $data['id']; ?>" class="btn btn-success btn-link btn-icon"><i class="fa fa-pencil"></i></a>
+                <a href="reviews.php?pid=<?= $data['id']; ?>&act=delete" class="btn btn-danger btn-link btn-icon"><i class="fa fa-trash"></i></a>
+              </td>
             </tr>
             <?php } ?>
             </tbody>

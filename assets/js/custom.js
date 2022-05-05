@@ -509,7 +509,7 @@ function loadReviews(id, pagno) {
                     reviews += `<span class="good"><i class="fa fa-star"></i></span>`;
                 }
                 
-                reviews += `</div><p>${response.result[index].review}</p>`;
+                reviews += `</div><p><strong>${response.result[index].name}</strong> : ${response.result[index].review}</p>`;
                 if(response.result[index].reply) reviews += `<p>Reply from <strong>Nandish Jewellers</strong> : ${response.result[index].reply}</p>`;
                 
                 reviews += `</div></div>`;

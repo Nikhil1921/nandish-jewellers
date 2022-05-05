@@ -1,4 +1,27 @@
-<?php include("layout/header.php"); ?>
+<?php include("layout/header.php");
+
+extract($_REQUEST);
+
+if(isset($act) && $act === 'delete')
+{
+  $qry = "SELECT id FROM `comments` WHERE id = '$pid'";
+  $run = $connect->query($qry);
+  $data = $run->fetch_assoc();
+  if(!$data){
+      echo '<script>
+              alert("Comment not found.");
+              window.open("blog-comments.php", "_self");
+          </script>';
+  }else{
+    $qry = "UPDATE `comments` SET `is_deleted` = '1' WHERE id = '$pid'";
+    $msg = $connect->query($qry) === true ? 'Data '. (isset($pid) ? "updated" : "inserted") .' successfully'
+              : 'Data not '. (isset($pid) ? "updated" : "inserted") .' successfully';
+
+    echo '<script>alert("'.$msg.'"); window.open("blog-comments.php", "_self");</script>';
+  }
+}
+
+?>
 <div class="main-panel">
 <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
   <div class="container-fluid">
@@ -61,7 +84,8 @@
             <tbody>
           	<?php 
                 $sql = "SELECT b.title, c.comment, c.name, c.publish, c.id FROM comments c
-                INNER JOIN blog b ON b.id = c.b_id";
+                INNER JOIN blog b ON b.id = c.b_id
+                WHERE c.is_deleted = 0";
                 $result = $connect->query($sql); 
                 $i = 1;
                 while($data = $result->fetch_assoc())
@@ -72,7 +96,10 @@
               <td><?= $data['title']; ?></td>
               <td><?= $data['name']; ?></td>
               <td><?= $data['comment']; ?></td>
-              <td><a href="publish-comment.php?cid=<?= $data['id']; ?>" class="btn btn-<?= $data['publish'] == 0 ? 'danger' : 'success' ?> btn-link btn-icon"><i class="fa fa-thumbs-<?= $data['publish'] == 0 ? 'down' : 'up' ?>"></i></a></td>
+              <td>
+                <a href="publish-comment.php?cid=<?= $data['id']; ?>" class="btn btn-<?= $data['publish'] == 0 ? 'danger' : 'success' ?> btn-link btn-icon"><i class="fa fa-thumbs-<?= $data['publish'] == 0 ? 'down' : 'up' ?>"></i></a>
+                <a href="blog-comments.php?pid=<?= $data['id']; ?>&act=delete" class="btn btn-danger btn-link btn-icon"><i class="fa fa-trash"></i></a>
+              </td>
             </tr>
             <?php } ?>
             </tbody>

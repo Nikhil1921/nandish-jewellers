@@ -992,7 +992,7 @@ endif;
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="<?= base_url('assets/js/jquery.validate.js') ?>"></script>
         <script src="<?= base_url('assets/js/main.js?v=1.0.9') ?>"></script>
-        <script src="<?= base_url('assets/js/custom.js?v=1.0.9') ?>"></script>
+        <script src="<?= base_url('assets/js/custom.js?v=1.0.10') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/js/xzoom.min.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/js/jquery.hammer.min.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/js/setup.js') ?>"></script>
