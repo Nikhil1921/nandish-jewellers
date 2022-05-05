@@ -40,8 +40,9 @@
                         </div>
                     </div>
                 </div>
+                <?php if($comments): ?>
                 <div class="comment-section section-padding">
-                    <h5>03 Comment</h5>
+                    <h5><?= count($comments) ?> Comment</h5>
                     <ul>
                         <?php foreach($comments as $comment): ?>
                             <li>
@@ -59,6 +60,7 @@
                         <?php endforeach ?>
                     </ul>
                 </div>
+                <?php endif ?>
                 <div class="blog-comment-wrapper mt-4">
                     <h5>Leave a reply</h5>
                     <p>Your email address will not be published. Required fields are marked *</p>

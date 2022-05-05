@@ -1,0 +1,110 @@
+<?php
+  $show = 'Reply';
+  include("layout/header.php");
+  extract($_REQUEST);
+  
+  if(isset($pid)){
+    $qry = "SELECT reply, review FROM `reviews` WHERE id = '$pid'";
+    $run = $connect->query($qry);
+    $data = $run->fetch_assoc();
+    
+    if(!$data){
+        echo '<script>
+                alert("Review not found.");
+                window.open("reviews.php", "_self");
+            </script>';
+    }
+  }else{
+        echo '<script>
+                alert("Review not found.");
+                window.open("reviews.php", "_self");
+            </script>';
+  }
+
+  if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($data))
+  {
+    $qry = "UPDATE `reviews` SET `reply` = '$reply' WHERE id = '$pid'";
+    
+    $msg = $connect->query($qry) === true ? 'Data '. (isset($pid) ? "updated" : "inserted") .' successfully'
+              : 'Data not '. (isset($pid) ? "updated" : "inserted") .' successfully';
+
+    echo '<script>alert("'.$msg.'"); window.open("'.$_SERVER['REQUEST_URI'].'", "_self");</script>';
+  } ?>
+<div class="main-panel">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+        <div class="container-fluid">
+            <div class="navbar-wrapper">
+                <div class="navbar-minimize">
+                    <button id="minimizeSidebar" class="btn btn-icon btn-round">
+        <i class="nc-icon nc-minimal-right text-center visible-on-sidebar-mini"></i>
+        <i class="nc-icon nc-minimal-left text-center visible-on-sidebar-regular"></i>
+        </button>
+                </div>
+                <div class="navbar-toggle">
+                    <button type="button" class="navbar-toggler">
+        <span class="navbar-toggler-bar bar1"></span>
+        <span class="navbar-toggler-bar bar2"></span>
+        <span class="navbar-toggler-bar bar3"></span>
+        </button>
+                </div>
+                <a class="navbar-brand" href="javascript:;">
+                    <?= $show ?> Form</a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                <ul class="navbar-nav">
+                    <li class="nav-item btn-rotate dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="nc-icon nc-bell-55"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="profile.php">Profile</a>
+                            <a class="dropdown-item" href="logout.php">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<!-- End Navbar -->
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <form method="POST">
+                <div class="card ">
+                    <div class="card-header ">
+                        <h4 class="card-title">Add
+                            <?= $show ?>
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <strong>Review</strong>
+                                <label><?= isset($data['review']) ? $data['review'] : '' ?></label>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group has-label">
+                                    <label>Reply</label>
+                                    <input class="form-control" value="<?= isset($data['reply']) ? $data['reply'] : '' ?>" maxlength="255" name="reply" type="text" required="true" placeholder="Enter reply" />
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="card-footer text-right">
+                                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                                    <a href="<?= $base_url ?>reviews.php" class="btn btn-danger">Go to List</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php include("layout/footer.php"); ?>

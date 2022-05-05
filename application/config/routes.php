@@ -39,6 +39,7 @@ $route['forgot-password'] = 'home/forgot_password';
 $route['change-password'] = 'home/change_password';
 $route['sitemap'] = 'home/sitemap';
 $route['check-pincode'] = 'home/verify_pincode';
+$route['reviews/(:num)/(:num)'] = 'home/reviews/$1/$2';
 /* $route['(:any)(/:any)?(/:any)?'] = 'home/product_list/$1$2$3';
 $route['(:any)/(:any)/(:any)/(:any)'] = 'home/product/$1/$2/$3/$4'; */
 $route['blog/(:any)'] = 'home/blog/$1';

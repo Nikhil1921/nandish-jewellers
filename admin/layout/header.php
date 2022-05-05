@@ -77,6 +77,12 @@
               <p>Users</p>
             </a>
           </li>
+          <li class="<?= in_array($name, ['reviews', 'reply-review']) ? 'active' : '' ?>">
+            <a href="<?= $base_url ?>reviews.php">
+              <i class="nc-icon nc-book-bookmark"></i>
+              <p>Jewellery Reviews</p>
+            </a>
+          </li>
           <li class="<?= in_array($name, ['blog-comments']) ? 'active' : '' ?>">
             <a href="<?= $base_url ?>blog-comments.php">
               <i class="nc-icon nc-book-bookmark"></i>

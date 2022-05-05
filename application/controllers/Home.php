@@ -259,6 +259,29 @@ class Home extends Public_controller  {
 		$data['data'] = $this->main->prod(d_id($prod_id));
 		
 		if ($data['data']){
+			if($this->input->is_ajax_request()){
+				$post = [
+					'review' => $this->input->post('review'),
+					'rating' => $this->input->post('rating'),
+					'user_id' => $this->session->user_id,
+					'created_at' => time(),
+					'p_id' => d_id($prod_id)
+				];
+
+				if ($this->main->add($post, 'reviews'))
+					$response = [
+						'message' => "Review is successfull.",
+						'redirect' => current_url(),
+						'error' => false
+					];
+				else
+					$response = [
+						'message' => "Review is not successfull. Try again.",
+						'error' => true
+					];
+
+				die(json_encode($response));
+			}
 			$img = explode(',', $data['data']['p_image']);
 			$data['seo'] = [
 				'title' => $data['data']['seo_title'],
@@ -281,6 +304,44 @@ class Home extends Public_controller  {
 		return $this->template->load('template', 'prod', $data);
 	}
 	
+	public function reviews($id, $rowno=1)
+	{
+		$this->load->library('pagination');
+		$rowperpage = 5;
+   
+        if($rowno >= 1) $rowno = ($rowno-1) * $rowperpage;
+
+		$allcount = $this->main->count('reviews', 'id', ['p_id' => d_id($id), 'is_deleted' => 0, 'publish' => 1]);
+		
+		$config['base_url'] = base_url('reviews/'.$id);
+        $config['use_page_numbers'] = TRUE;
+        $config['total_rows'] = $allcount;
+        $config['per_page'] = $rowperpage;
+   
+        $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination">';  
+        $config['full_tag_close']   = '</ul></nav></div>';  
+        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';  
+        $config['num_tag_close']    = '</span></li>';  
+        $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';  
+        $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';  
+        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';  
+        $config['next_tag_close']  = '<span aria-hidden="true"></span></span></li>';  
+        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';  
+        $config['prev_tag_close']  = '</span></li>';  
+        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';  
+        $config['first_tag_close'] = '</span></li>';  
+        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';  
+        $config['last_tag_close']  = '</span></li>';  
+   
+        $this->pagination->initialize($config);
+   
+        $data['pagination'] = $this->pagination->create_links();
+        $data['result'] = $this->main->getReviews(d_id($id), $rowno, $rowperpage);
+        $data['row'] = $rowno;
+		
+        die(json_encode($data));
+	}
+
 	public function blog($blog)
 	{
 		$blog = explode('-', $blog);

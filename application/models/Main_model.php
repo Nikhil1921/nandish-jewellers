@@ -294,4 +294,14 @@ class Main_model extends Public_model
 
 		return $this->db->trans_status();
 	}
+
+	public function getReviews($id, $rowno, $rowperpage)
+	{
+		return $this->db->select('review, rating, , reply')
+						->where('p_id', $id)
+						->where('is_deleted', 0)
+						->where('publish', 1)
+						->limit($rowperpage, $rowno)
+						->get('reviews')->result_array();
+	}
 }

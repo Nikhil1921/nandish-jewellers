@@ -2,6 +2,7 @@
 <div class="shop-main-wrapper section-padding pb-0">
     <div class="container">
         <?php if($data): ?>
+        <input type="hidden" name="reviews" value="<?= e_id($data['p_id']) ?>" />
         <div class="row" itemscope itemtype="http://schema.org/Product">
             <div class="col-lg-12 order-1 order-lg-2">
                 <div class="product-details-inner">
@@ -124,66 +125,104 @@
                                 <li>
                                     <a data-toggle="tab" href="#tab_three">Notes</a>
                                 </li>
+                                <li>
+                                    <a data-toggle="tab" href="#review">reviews</a>
+                                </li>
                             </ul>
                             <div class="tab-content reviews-tab">
-                            <div class="tab-pane fade show active" id="tab_one">
-                                <div class="tab-one table Bill-Details">
-                                    <?= $data['p_sub_detail'] ?>
+                                <div class="tab-pane fade show active" id="tab_one">
+                                    <div class="tab-one table Bill-Details">
+                                        <?= $data['p_sub_detail'] ?>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="tab-pane fade table Bill-Details" id="tab_two">
-                                <table class="table table-bordered Bill-Details">
-                                    <tbody>
-                                        <tr>
-                                        <td>Gross Weight (Grams)</td>
-                                        <td><?= $data['p_g_wei'] ?></td>
-                                        </tr>
-                                        <tr>
-                                        <td>Loss Weight (Grams)</td>
-                                        <td><?= $data['p_l_wei'] ?></td>
-                                        </tr>
-                                        <tr>
-                                        <td>Net Weight (Grams)</td>
-                                        <td><?= $data['p_gram'] ?></td>
-                                        </tr>
-                                        <tr>
-                                        <td>Rate (Per Grams)</td>
-                                        <td><?= ($data[$data['p_carat']]) ?></td>
-                                        </tr>
-                                        <tr>
-                                        <td>Making Charge (Per Grams)</td>
-                                        <td><?= ($data['p_make_gram']) ? round($data['p_make_gram']) : 'NA' ?></td>
-                                        </tr>
-                                        <tr>
-                                        <td>Other Charge</td>
-                                        <td><?= ($data['p_other']) ? round($data['p_other']) : 'NA' ?></td>
-                                        </tr>
-                                        <tr>
-                                        <td><?= $data['c_name'] ?> Price</td>
-                                        <td><?= round($data['p_gram'] * $data[$data['p_carat']]) ?></td>
-                                        </tr>
-                                        <tr>
-                                        <td>Total Making Charge</td>
-                                        <td><?= round($data['p_l_char']) ?></td>
-                                        </tr>
-                                        <tr>
-                                        <td>Taxable Value</td>
-                                        <td><?= round($data[$data['p_carat']] * $data['p_gram'] + $data['p_other'] + $data['p_l_char']) ?></td>
-                                        </tr>
-                                        <tr>
-                                        <td>G.S.T  (C.S) & (I) 3%</td>
-                                        <td><?= round(($data[$data['p_carat']] * $data['p_gram'] + $data['p_other'] + $data['p_l_char']) * 0.03) ?></td>
-                                        </tr>
-                                        <tr>
-                                        <td>Total Amount</td>
-                                        <td><?= round(($data[$data['p_carat']] * $data['p_gram'] + $data['p_other'] + $data['p_l_char']) * 1.03) ?></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="tab-pane fade" id="tab_three">
-                                <?= $data['p_notes'] ?>
-                            </div>
+                                <div class="tab-pane fade table Bill-Details" id="tab_two">
+                                    <table class="table table-bordered Bill-Details">
+                                        <tbody>
+                                            <tr>
+                                            <td>Gross Weight (Grams)</td>
+                                            <td><?= $data['p_g_wei'] ?></td>
+                                            </tr>
+                                            <tr>
+                                            <td>Loss Weight (Grams)</td>
+                                            <td><?= $data['p_l_wei'] ?></td>
+                                            </tr>
+                                            <tr>
+                                            <td>Net Weight (Grams)</td>
+                                            <td><?= $data['p_gram'] ?></td>
+                                            </tr>
+                                            <tr>
+                                            <td>Rate (Per Grams)</td>
+                                            <td><?= ($data[$data['p_carat']]) ?></td>
+                                            </tr>
+                                            <tr>
+                                            <td>Making Charge (Per Grams)</td>
+                                            <td><?= ($data['p_make_gram']) ? round($data['p_make_gram']) : 'NA' ?></td>
+                                            </tr>
+                                            <tr>
+                                            <td>Other Charge</td>
+                                            <td><?= ($data['p_other']) ? round($data['p_other']) : 'NA' ?></td>
+                                            </tr>
+                                            <tr>
+                                            <td><?= $data['c_name'] ?> Price</td>
+                                            <td><?= round($data['p_gram'] * $data[$data['p_carat']]) ?></td>
+                                            </tr>
+                                            <tr>
+                                            <td>Total Making Charge</td>
+                                            <td><?= round($data['p_l_char']) ?></td>
+                                            </tr>
+                                            <tr>
+                                            <td>Taxable Value</td>
+                                            <td><?= round($data[$data['p_carat']] * $data['p_gram'] + $data['p_other'] + $data['p_l_char']) ?></td>
+                                            </tr>
+                                            <tr>
+                                            <td>G.S.T  (C.S) & (I) 3%</td>
+                                            <td><?= round(($data[$data['p_carat']] * $data['p_gram'] + $data['p_other'] + $data['p_l_char']) * 0.03) ?></td>
+                                            </tr>
+                                            <tr>
+                                            <td>Total Amount</td>
+                                            <td><?= round(($data[$data['p_carat']] * $data['p_gram'] + $data['p_other'] + $data['p_l_char']) * 1.03) ?></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="tab_three">
+                                    <?= $data['p_notes'] ?>
+                                </div>
+                                <div class="tab-pane fade" id="review">
+                                    <div class="total-reviewss">
+                                        No review available.
+                                    </div>
+                                    <div id='pagination'></div>
+                                    <?php if($this->user): ?>
+                                    <?= form_open('', 'class="review-form" id="comment-form"') ?>
+                                        <div class="form-group row">
+                                            <div class="col">
+                                                <label class="col-form-label"><span class="text-danger">*</span> Your Review</label>
+                                                <textarea class="form-control" name="review" required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col">
+                                                <label class="col-form-label"><span class="text-danger">*</span>Rating</label>
+                                                &nbsp;&nbsp;&nbsp; Bad&nbsp;
+                                                <input type="radio" value="1" name="rating" />
+                                                &nbsp;
+                                                <input type="radio" value="2" name="rating" />
+                                                &nbsp;
+                                                <input type="radio" value="3" name="rating" />
+                                                &nbsp;
+                                                <input type="radio" value="4" name="rating" />
+                                                &nbsp;
+                                                <input type="radio" value="5" name="rating" checked />
+                                                &nbsp;Good
+                                            </div>
+                                        </div>
+                                        <div class="buttons">
+                                            <button class="btn btn-sqr" type="submit">Submit</button>
+                                        </div>
+                                    </form>
+                                    <?php endif ?>
+                                </div>
                             </div>
                         </div>
                     </div>

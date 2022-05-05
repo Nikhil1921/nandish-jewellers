@@ -478,6 +478,10 @@ $("#comment-form").validate({
         comment: {
             required: true,
             maxlength: 255
+        },
+        review: {
+            required: true,
+            maxlength: 255
         }
     },
     errorPlacement: function(error, element) {},
@@ -485,3 +489,43 @@ $("#comment-form").validate({
         saveData(form);
     }
 });
+
+function loadReviews(id, pagno) {
+    $.ajax({
+        url: `${base_url}reviews/${id}/${pagno}`,
+        type: "get",
+        dataType: "json",
+        success: function (response) {
+            let sno = Number(response.row);
+            let reviews = '';
+            for (index in response.result) {
+                reviews += `<div class="total-reviews"><div class="rev-avatar">
+                                <img src="${base_url}admin/image/logo.png" />
+                            </div>`;
+                reviews += `<div class="review-box">
+                                <div class="ratings">`;
+                                    
+                for (let i = 0; i < Number(response.result[index].rating); i++) {
+                    reviews += `<span class="good"><i class="fa fa-star"></i></span>`;
+                }
+                
+                reviews += `</div><p>${response.result[index].review}</p>`;
+                if(response.result[index].reply) reviews += `<p>Reply from <strong>Nandish Jewellers</strong> : ${response.result[index].reply}</p>`;
+                
+                reviews += `</div></div>`;
+            }
+            $("#pagination").html(response.pagination);
+            $(".total-reviewss").html(reviews);
+        },
+    });
+}
+
+$("#pagination").on("click", "a", function (e) {
+    e.preventDefault();
+    var pageno = $(this).attr("data-ci-pagination-page");
+    loadReviews($("input[name=reviews]").val(), pageno);
+});
+
+if($('input[name=reviews]').length > 0){
+    loadReviews($("input[name=reviews]").val(), 1);
+}
