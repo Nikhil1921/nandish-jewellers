@@ -209,20 +209,23 @@
                                                 <textarea class="form-control" name="review" required></textarea>
                                             </div>
                                         </div>
+                                        
                                         <div class="form-group row">
                                             <div class="col">
                                                 <label class="col-form-label"><span class="text-danger">*</span>Rating</label>
-                                                &nbsp;&nbsp;&nbsp; Bad&nbsp;
-                                                <input type="radio" value="1" name="rating" />
-                                                &nbsp;
-                                                <input type="radio" value="2" name="rating" />
-                                                &nbsp;
-                                                <input type="radio" value="3" name="rating" />
-                                                &nbsp;
-                                                <input type="radio" value="4" name="rating" />
-                                                &nbsp;
-                                                <input type="radio" value="5" name="rating" checked />
-                                                &nbsp;Good
+                                                <br>
+                                                <div class="rating">
+                                                    <input type="radio" id="star5" name="rating" value="5" checked />
+                                                    <label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
+                                                    <input type="radio" id="star4" name="rating" value="4" />
+                                                    <label class="star" for="star4" title="Great" aria-hidden="true"></label>
+                                                    <input type="radio" id="star3" name="rating" value="3" />
+                                                    <label class="star" for="star3" title="Very good" aria-hidden="true"></label>
+                                                    <input type="radio" id="star2" name="rating" value="2" />
+                                                    <label class="star" for="star2" title="Good" aria-hidden="true"></label>
+                                                    <input type="radio" id="star1" name="rating" value="1" />
+                                                    <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="buttons">
