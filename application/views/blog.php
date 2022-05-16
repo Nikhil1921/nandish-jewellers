@@ -8,11 +8,11 @@
                         <figure class="blog-thumb">
                             <div class="blog-carousel-2 slick-row-15 slick-arrow-style slick-dot-style">
                                 <div class="blog-single-slide">
-                                    <?= img('admin/image/blog/'.$data['image'], '', 'height="300"') ?>
+                                    <?= img('admin/image/blog/'.$data['image'], '', 'height="500"') ?>
                                 </div>
                                 <?php foreach($this->main->getall('blog_imgs', 'p_image', ['b_id' => $data['id']]) as $img): ?>
                                 <div class="blog-single-slide">
-                                    <?= img('admin/image/blog/'.$img->p_image, '', 'height="300"') ?>
+                                    <?= img('admin/image/blog/'.$img->p_image, '', 'height="500"') ?>
                                 </div>
                                 <?php endforeach ?>
                             </div>

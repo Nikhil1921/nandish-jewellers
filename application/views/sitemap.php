@@ -49,6 +49,23 @@ $dom->formatOutput = true;
                         endforeach;
                 endforeach;
         endforeach;
+
+        foreach($this->main->getall('blog_category', 'id, c_name', ['is_deleted' => 0]) as $cat):
+                createElement(['loc' => make_slug("blogs/$cat->c_name"), 'priority' => "0.80"], $dom, $root); 
+                foreach($this->main->getall('blog_sub_category', 'id, sc_name', ['is_deleted' => 0, 'c_id' => $cat->id]) as $sub_cat):
+                        createElement(['loc' => make_slug("blogs/$cat->c_name/$sub_cat->sc_name"), 'priority' => "0.80"], $dom, $root);
+                        foreach($this->main->getall('blog_inner_category', 'id, ic_name', ['is_deleted' => 0, 's_id' => $sub_cat->id]) as $inn_cat):
+                                createElement(['loc' => make_slug("blogs/$cat->c_name/$sub_cat->sc_name/$inn_cat->ic_name"), 'priority' => "0.80"], $dom, $root);
+                                foreach($this->main->getall('blog_sub_inner_category', 'id, si_name', ['is_deleted' => 0, 'i_id' => $inn_cat->id]) as $sub_inn):
+                                        createElement(['loc' => make_slug("blogs/$cat->c_name/$sub_cat->sc_name/$inn_cat->ic_name/$sub_inn->si_name"), 'priority' => "0.80"], $dom, $root);
+                                endforeach;
+                        endforeach;
+                endforeach;
+        endforeach;
+        
+        foreach($this->main->blogs_list(['b.is_deleted' => 0], 0, 10000) as $blog):
+                createElement(['loc' => make_slug("blog/".$blog['title']."-".e_id($blog['id'])), 'priority' => "0.80"], $dom, $root);
+        endforeach;
         
         function createElement($uri, $dom, $root)
         {
@@ -74,5 +91,4 @@ $dom->formatOutput = true;
 
                 return $uri;
         }
-        
 $dom->save('sitemap.xml');

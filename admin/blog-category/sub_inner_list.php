@@ -1,4 +1,27 @@
-<?php include("../layout/header.php"); $show = 'Sub Inner Category' ?>
+<?php include("../layout/header.php"); $show = 'Sub Inner Category';
+
+extract($_REQUEST);
+
+if(isset($act) && $act === 'delete')
+{
+  $qry = "SELECT id FROM `blog_sub_inner_category` WHERE id = '$pid'";
+  $run = $connect->query($qry);
+  $data = $run->fetch_assoc();
+  
+  if(!$data){
+      echo '<script>
+              alert("'.$show.' not found.");
+              window.open("'.$_SERVER['PHP_SELF'].'", "_self");
+          </script>';
+  }else{
+    $qry = "DELETE FROM `blog_sub_inner_category` WHERE id = '$pid'";
+    $msg = $connect->query($qry) === true ? 'Data '. (isset($pid) ? "deleted" : "not deleted") .' successfully'
+              : 'Data not '. (isset($pid) ? "deleted" : "not deleted") .' successfully';
+
+    echo '<script>alert("'.$msg.'"); window.open("'.$_SERVER['PHP_SELF'].'", "_self");</script>';
+  }
+}
+?>
 <div class="main-panel">
 <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
   <div class="container-fluid">
@@ -85,6 +108,7 @@
                 <td><?= $data['c_name']; ?></td>
                 <td class="text-right">
                     <a href="<?= $base_url ?>blog-category/add_sub_inner.php?cid=<?= $data['id']; ?>" class="btn btn-warning btn-link btn-icon"><i class="fa fa-edit"></i></a>
+                    <a href="<?= $base_url ?>blog-category/sub_inner_list.php?pid=<?= $data['id']; ?>&act=delete" class="btn btn-danger btn-link btn-icon"><i class="fa fa-trash"></i></a>
                 </td>
               </tr>
               <?php } ?>

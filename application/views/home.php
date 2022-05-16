@@ -370,13 +370,6 @@
                                         <?= img($blog->image) ?>
                                     </a>
                                 </div>
-                                <?php foreach($this->main->getall('blog_imgs', 'p_image', ['b_id' => $blog->id]) as $img): ?>
-                                <div class="blog-single-slide">
-                                    <a href="<?= make_slug("blog/".$blog->title."-".e_id($blog->id)) ?>">
-                                        <?= img('admin/image/blog/thumb_'.$img->p_image) ?>
-                                    </a>
-                                </div>
-                                <?php endforeach ?>
                             </div>
                         </figure>
                         <div class="blog-content">

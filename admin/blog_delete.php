@@ -11,6 +11,18 @@ if($connect->query($qry) == true):
         unlink("image/blog/$image");
     if (file_exists("image/blog/thumb_$image"))
         unlink("image/blog/thumb_$image");
+    $qry = "SELECT p_image from blog_imgs where b_id = '$id'";
+
+    $result = $connect->query($qry);
+
+    while($img = $result->fetch_assoc()) {
+        if (file_exists("image/blog/".$img['p_image']))
+            unlink("image/blog/".$img['p_image']);
+        if (file_exists("image/blog/thumb_".$img['p_image']))
+            unlink("image/blog/thumb_".$img['p_image']);
+    }
+
+    $connect->query("DELETE from blog_imgs where b_id = '$id'");
 
     $msg = 'Data deleted successfully';
 else:

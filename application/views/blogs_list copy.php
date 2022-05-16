@@ -78,57 +78,43 @@
                     <?php endforeach ?>
                 </div>
                 <?php endif ?>
-                <div class="shop-product-wrap grid-view row mbn-30">
-                <?php foreach($blogs as $blog): ?>
-                <div class="col-md-4 col-sm-4 col-12">
-                    <div class="product-item">
-                        <figure class="blog-thumb">
-                                <div class="blog-carousel-2 slick-row-15 slick-arrow-style slick-dot-style">
-                                    <div class="blog-single-slide">
-                                        <a href="<?= make_slug("blog/".$blog['title']."-".e_id($blog['id'])) ?>">
-                                            <?= img('admin/image/blog/thumb_'.$blog['image']) ?>
-                                        </a>
+                <div class="blog-item-wrapper">
+                    <div class="row mbn-30">
+                        <?php foreach($blogs as $blog): ?>
+                        <div class="col-md-4">
+                            <div class="blog-post-item mb-30">
+                                <figure class="blog-thumb">
+                                    <div class="blog-carousel-2 slick-row-15 slick-arrow-style slick-dot-style">
+                                        <div class="blog-single-slide">
+                                            <a href="<?= make_slug("blog/".$blog['title']."-".e_id($blog['id'])) ?>">
+                                                <?= img('admin/image/blog/thumb_'.$blog['image']) ?>
+                                            </a>
+                                        </div>
+                                        <!-- <?php foreach($this->main->getall('blog_imgs', 'p_image', ['b_id' => $blog['id']]) as $img): ?>
+                                        <div class="blog-single-slide">
+                                            <a href="<?= make_slug("blog/".$blog['title']."-".e_id($blog['id'])) ?>">
+                                                <?= img('admin/image/blog/thumb_'.$img->p_image) ?>
+                                            </a>
+                                        </div>
+                                        <?php endforeach ?> -->
                                     </div>
-                                    <!-- <?php foreach($this->main->getall('blog_imgs', 'p_image', ['b_id' => $blog['id']]) as $img): ?>
-                                    <div class="blog-single-slide">
-                                        <a href="<?= make_slug("blog/".$blog['title']."-".e_id($blog['id'])) ?>">
-                                            <?= img('admin/image/blog/thumb_'.$img->p_image) ?>
-                                        </a>
-                                    </div>
-                                    <?php endforeach ?> -->
-                                </div>
-                            </figure>
-                            <div class="product-caption text-center">
-                                <h6 class="product-name">
-                                <a href="<?= make_slug("blog/".$blog['title']."-".e_id($blog['id'])) ?>"></a>
-                                </h6>
-                                <div class="price-box">
-                                    <a href="<?= make_slug("blog/".$blog['title']."-".e_id($blog['id'])) ?>"><?= $blog['title'] ?></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-list-item">
-                            <figure class="product-thumb">
-                                <a href="<?= make_slug("blog/".$blog['title']."-".e_id($blog['id'])) ?>">
-                                    <?= img(['class' => "pri-img", 'src' => 'admin/image/blog/thumb_'.$blog['image'], 'alt' => "Blog"]) ?>
-                                </a>
                                 </figure>
-                                <div class="product-content-list">
-                                    <h5 class="product-name"><a href="<?= make_slug("blog/".$blog['title']."-".e_id($blog['id'])) ?>"></a></h5>
-                                    <div class="price-box">
-                                        <a href="<?= make_slug("blog/".$blog['title']."-".e_id($blog['id'])) ?>"><?= $blog['title'] ?></a>
+                                <div class="blog-content">
+                                    <div class="blog-meta">
+                                        <p><a href="javascript:;"><?= APP_NAME ?></a></p>
                                     </div>
-                                    <?= substr($blog['detail'], 0, 500); ?>
+                                    <h4 class="blog-title">
+                                        <a href="<?= make_slug("blog/".$blog['title']."-".e_id($blog['id'])) ?>"><?= $blog['title'] ?></a>
+                                    </h4>
                                 </div>
                             </div>
                         </div>
                         <?php endforeach ?>
-                    </div>
-                    <?php if($this->pagination->create_links()): ?>
-                    <div class="paginatoin-area text-center">
-                        <?= $this->pagination->create_links() ?>
-                    </div>
-                    <?php endif ?>
+                        <?php if($this->pagination->create_links()): ?>
+                        <div class="paginatoin-area text-center">
+                            <?= $this->pagination->create_links() ?>
+                        </div>
+                        <?php endif ?>
                 </div>
             </div>
         </div>
