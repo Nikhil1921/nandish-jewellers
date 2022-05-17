@@ -89,7 +89,7 @@ endif;
                             <a target="_blank" href="https://www.linkedin.com/company/nandishjewellers"><i class="fa fa-linkedin"></i></a>
                             <a target="_blank" href="https://www.pinterest.com/nandishjewellers/"><i class="fa fa-pinterest"></i></a>
                             <a target="_blank" href="https://nandishjewellers.tumblr.com/"><i class="fa fa-tumblr"></i></a>
-                            <a target="_blank" href="https://www.youtube.com/channel/UCvfGeR0YCu38rJmv4ZF1kXg"><i class="fa fa-youtube-play"></i></a>
+                            <a target="_blank" href="https://www.youtube.com/c/NandishJewellers?sub_confirmation=1"><i class="fa fa-youtube-play"></i></a>
                             </div>
                         </div>
                         <div class="col-lg-4">
@@ -602,7 +602,7 @@ endif;
                                     <path  d="M432 442c2,2 1,4 1,6 0,17 0,35 0,52 0,4 -1,7 -5,9 -27,14 -56,20 -87,19 -34,-2 -63,-14 -83,-44 -9,-13 -10,-27 -10,-42 0,-50 -1,-100 -1,-150 0,-6 -2,-8 -8,-8 -9,1 -18,0 -28,1 -4,0 -5,-1 -5,-5 1,-17 1,-35 0,-52 0,-2 1,-4 3,-5 33,-13 53,-37 64,-70 4,-11 6,-22 7,-34 1,-4 3,-5 6,-5 15,0 29,0 43,0 5,0 5,3 5,6 0,31 0,62 0,93 0,5 1,6 6,6 25,0 50,0 75,0 5,0 7,1 7,6 -1,18 -1,36 0,54 0,4 -2,6 -6,6 -26,-1 -51,0 -76,-1 -5,0 -6,2 -6,7 0,39 0,77 0,116 0,6 1,11 1,17 0,25 21,36 39,36 19,1 36,-4 53,-15 1,-1 3,-2 4,-3 1,0 1,0 1,0z"/>
                                 </svg>
                             </a>
-                            <a target="_blank" href="https://www.youtube.com/channel/UCvfGeR0YCu38rJmv4ZF1kXg">
+                            <a target="_blank" href="https://www.youtube.com/c/NandishJewellers?sub_confirmation=1">
                                 <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="30px" height="30px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
                                     viewBox="0 0 875 883"
                                     xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -812,7 +812,7 @@ endif;
                                     <path  d="M432 442c2,2 1,4 1,6 0,17 0,35 0,52 0,4 -1,7 -5,9 -27,14 -56,20 -87,19 -34,-2 -63,-14 -83,-44 -9,-13 -10,-27 -10,-42 0,-50 -1,-100 -1,-150 0,-6 -2,-8 -8,-8 -9,1 -18,0 -28,1 -4,0 -5,-1 -5,-5 1,-17 1,-35 0,-52 0,-2 1,-4 3,-5 33,-13 53,-37 64,-70 4,-11 6,-22 7,-34 1,-4 3,-5 6,-5 15,0 29,0 43,0 5,0 5,3 5,6 0,31 0,62 0,93 0,5 1,6 6,6 25,0 50,0 75,0 5,0 7,1 7,6 -1,18 -1,36 0,54 0,4 -2,6 -6,6 -26,-1 -51,0 -76,-1 -5,0 -6,2 -6,7 0,39 0,77 0,116 0,6 1,11 1,17 0,25 21,36 39,36 19,1 36,-4 53,-15 1,-1 3,-2 4,-3 1,0 1,0 1,0z"/>
                                     </svg>
                                 </a>
-                                <a target="_blank" href="https://www.youtube.com/channel/UCvfGeR0YCu38rJmv4ZF1kXg">
+                                <a target="_blank" href="https://www.youtube.com/c/NandishJewellers?sub_confirmation=1">
                                     <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="30px" height="30px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
                                     viewBox="0 0 875 883"
                                     xmlns:xlink="http://www.w3.org/1999/xlink">
