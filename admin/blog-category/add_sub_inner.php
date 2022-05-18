@@ -15,9 +15,9 @@
     $i_id = $i_id ? $i_id : 0;
 
     if(isset($cid) && isset($data))
-      $qry = "UPDATE `blog_sub_inner_category` SET `si_name` = '$name', `i_id` = '$i_id', `s_id` = '$s_id', `c_id` = '$c_id', `seo_title` = '$seo_title', `seo_description` = '$seo_description', `seo_keywords` = '$seo_keywords', `seo_detail` = '$detail' WHERE id = '$cid'";
+      $qry = "UPDATE `blog_sub_inner_category` SET `si_name` = '$name', `i_id` = '$i_id', `s_id` = '$s_id', `c_id` = '$c_id', `seo_title` = '$seo_title', `seo_description` = '$seo_description', `seo_keywords` = '$seo_keywords', `seo_detail` = '' WHERE id = '$cid'";
     else
-      $qry = "INSERT INTO `blog_sub_inner_category` (`si_name`, `i_id`, `s_id`, `c_id`, `seo_title`, `seo_description`, `seo_keywords`, `seo_detail`) VALUES ('$name', '$i_id', '$s_id', '$c_id', '$seo_title', '$seo_description', '$seo_keywords', '$detail')";
+      $qry = "INSERT INTO `blog_sub_inner_category` (`si_name`, `i_id`, `s_id`, `c_id`, `seo_title`, `seo_description`, `seo_keywords`, `seo_detail`) VALUES ('$name', '$i_id', '$s_id', '$c_id', '$seo_title', '$seo_description', '$seo_keywords', '')";
 
     $msg = $connect->query($qry) === true ? 'Data '. (isset($cid) ? "updated" : "inserted") .' successfully'
               : 'Data not '. (isset($cid) ? "updated" : "inserted") .' successfully';
@@ -119,12 +119,6 @@
                 <input type="text" class="tagsinput" value="<?= isset($data['seo_keywords']) ? $data['seo_keywords'] : '' ?>" data-role="tagsinput" data-color="primary" name="seo_keywords" placeholder="Enter Keywords" />
       					</div>
       				</div>
-              <div class="col-md-12">
-                <div class="form-group has-label">
-                  <label>Detail</label>
-                  <textarea class="form-control ckeditor" name="detail"><?= isset($data['seo_detail']) ? $data['seo_detail'] : '' ?></textarea>
-                </div>
-              </div>
       				<div class="col-md-12">
 		            <div class="card-footer text-right">
 		              <button type="submit" name="submit" class="btn btn-primary">Submit</button>

@@ -28,9 +28,9 @@
       $si_id = $si_id ? $si_id : 0;
       
       if(isset($bid) && isset($data))
-        $qry = "UPDATE `blog` SET `title`='$title',`detail`='$detail',`c_id`='$c_id',`sc_id`='$sc_id',`ic_id`='$ic_id',`si_id`='$si_id',`image`='$image',`seo_title`='$seo_title',`seo_description`='$seo_description',`seo_keywords`='$seo_keywords',`seo_detail`='$seo_detail' WHERE id = '$bid'";
+        $qry = "UPDATE `blog` SET `title`='$title',`detail`='$detail',`c_id`='$c_id',`sc_id`='$sc_id',`ic_id`='$ic_id',`si_id`='$si_id',`image`='$image',`seo_title`='$seo_title',`seo_description`='$seo_description',`seo_keywords`='$seo_keywords' WHERE id = '$bid'";
       else
-        $qry = "INSERT INTO `blog` (`title`, `detail`, `c_id`, `sc_id`, `ic_id`, `si_id`, `image`, `seo_title`, `seo_description`, `seo_keywords`, `seo_detail`) VALUES ('$title', '$detail', '$c_id', '$sc_id', '$ic_id', '$si_id', '$image', '$seo_title', '$seo_description', '$seo_keywords', '$seo_detail')";
+        $qry = "INSERT INTO `blog` (`title`, `detail`, `c_id`, `sc_id`, `ic_id`, `si_id`, `image`, `seo_title`, `seo_description`, `seo_keywords`) VALUES ('$title', '$detail', '$c_id', '$sc_id', '$ic_id', '$si_id', '$image', '$seo_title', '$seo_description', '$seo_keywords')";
       
       $check = $connect->query($qry);
 
@@ -167,12 +167,6 @@
                 <input type="text" class="tagsinput" value="<?= isset($data['seo_keywords']) ? $data['seo_keywords'] : '' ?>" data-role="tagsinput" data-color="primary" name="seo_keywords" placeholder="Enter Keywords" />
       					</div>
       				</div>
-              <div class="col-md-12">
-                <div class="form-group has-label">
-                  <label>Detail</label>
-                  <textarea class="form-control ckeditor" name="seo_detail"><?= isset($data['seo_detail']) ? $data['seo_detail'] : '' ?></textarea>
-                </div>
-              </div>
       				<div class="col-md-12">
 		            <div class="card-footer text-right">
 		              <button type="submit" class="btn btn-primary">Submit</button>

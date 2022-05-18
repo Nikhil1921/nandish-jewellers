@@ -428,6 +428,23 @@ endif;
                                 </li>
                                 <?php endforeach ?>
                                 <li class="menu-item-has-children">
+                                    <a href="javascript:;">Blogs</a>
+                                    <ul class="megamenu dropdown">
+                                        <?php foreach($blog_cats as $b_cat): ?>
+                                        <li class="mega-title menu-item-has-children">
+                                            <span><a class="text-dark" href="<?= make_slug('blogs/'.$b_cat->c_name) ?>"><?= $b_cat->c_name ?></a></span>
+                                            <ul class="dropdown">
+                                                <?php foreach($b_cat->sub_cats as $b_sub_cat): ?>
+                                                    <li>
+                                                        <a href="<?= make_slug('blogs/'.$b_cat->c_name."/".$b_sub_cat->sc_name) ?>"><?= $b_sub_cat->sc_name ?></a>
+                                                    </li>
+                                                <?php endforeach ?>
+                                            </ul>
+                                        </li>
+                                        <?php endforeach ?>
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children">
                                     <a href="javascript:;">Metal Rate</a>
                                     <ul class="megamenu dropdown">
                                         <li class="mega-title menu-item-has-children">
