@@ -571,3 +571,9 @@
 .rating > input:checked ~ label:hover ~ label {
   color: #FECE31;
 }
+.blog-single-slide img {
+    width: auto;
+    height: 500px;
+    margin: auto;
+    display: table;
+}
