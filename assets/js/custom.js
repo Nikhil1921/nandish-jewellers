@@ -480,7 +480,6 @@ $("#comment-form").validate({
             maxlength: 255
         },
         review: {
-            required: true,
             maxlength: 255
         }
     },

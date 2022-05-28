@@ -18,9 +18,9 @@
                             </div>
                         </figure>
                         <div class="blog-content">
-                            <h3 class="blog-title">
+                            <h1 class="blog-title">
                                 <?= $data['title'] ?>
-                            </h3>
+                            </h1>
                             <div class="blog-meta">
                                 <?= APP_NAME ?>
                             </div>

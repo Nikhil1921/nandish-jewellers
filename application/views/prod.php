@@ -206,7 +206,7 @@
                                         <div class="form-group row">
                                             <div class="col">
                                                 <label class="col-form-label"><span class="text-danger">*</span> Your Review</label>
-                                                <textarea class="form-control" name="review" required></textarea>
+                                                <textarea class="form-control" name="review"></textarea>
                                             </div>
                                         </div>
                                         
