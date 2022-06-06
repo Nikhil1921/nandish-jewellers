@@ -577,3 +577,7 @@
     margin: auto;
     display: table;
 }
+
+.rev-avatar img {
+    max-width: 23%;
+}
