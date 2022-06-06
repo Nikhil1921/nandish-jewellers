@@ -35,7 +35,25 @@
             </div>
             <span>S.K.U. Code - <?= $data['p_code']; ?></span>
             <div class="price-box">
-               <span class="price-regular"><i class="fa fa-inr" aria-hidden="true"></i><?= round(($data[$data['p_carat']] * $data['p_gram'] + $data['p_other'] + $data['p_l_char']) * 1.03) ?></span>
+               <span class="price-regular">
+                  <?php 
+                  $original = round(($data[$data['p_carat']] * $data['p_gram'] + $data['p_other'] + $data['p_l_char']) * 1.03);
+                  if(isset($code)):
+                  $discount = round($data['p_l_char'] * $code['co_par'] / 100); ?>
+                  <i class="fa fa-inr" aria-hidden="true"></i> 
+                  <span class="text-dark"><b><?= $original - $discount ?></b></span>
+                  <br><br>
+                  <del><i class="fa fa-inr" aria-hidden="true"></i>
+                  <span class="text-dark"><b><?= $original ?></span>
+                  </del>
+                  &nbsp; <strong class="text-dark">You save</strong>&nbsp; <i class="fa fa-inr" aria-hidden="true"></i> <span class="text-dark"><b><?= $discount ?></span>
+                  <br>
+                  <br>
+                  <span class="text-dark">(<?= $code['co_par'] ?> % Discount on making charge Apply code <?= $code['co_code'] ?>)</span>
+                  <?php else: ?>
+                        <i class="fa fa-inr" aria-hidden="true"></i><?= $original ?>
+                  <?php endif ?>
+               </span>
             </div>
             <p class="pro-desc"><?= $data['p_detail'] ?></p>
             <div class="quantity-cart-box d-flex align-items-center">

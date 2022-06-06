@@ -49,7 +49,7 @@ class Home extends Public_controller  {
 							}, $this->main->getall('subcategory', 'sc_id, sc_name', ['sc_c_id' => $arr->c_id]))
 						];
 				}, $this->main->getall('category', 'c_id, c_name', []));
-		
+		$data['code'] = $this->main->get('code', 'co_code, co_par', ['co_status' => 0]);
         return $this->template->load('template', 'home', $data);
 	}
 	
@@ -247,6 +247,7 @@ class Home extends Public_controller  {
 					'keywords' => $data['prods'][0]['seo_keywords']
 				];
 		}
+		$data['code'] = $this->main->get('code', 'co_code, co_par', ['co_status' => 0]);
 		
 		return $this->template->load('template', 'product_list', $data);
 	}
@@ -303,6 +304,7 @@ class Home extends Public_controller  {
 			"<a href='".make_slug($cat."/".$subcat."/".$inner)."'>".str_replace('-', ' ', $inner)."</a>",
 			"<a href='".make_slug($cat."/".$subcat."/".$inner."/".$sub_inner)."'>".str_replace('-', ' ', $sub_inner)."</a>",
 			$data['title']];
+		$data['code'] = $this->main->get('code', 'co_code, co_par', ['co_status' => 0]);
 		return $this->template->load('template', 'prod', $data);
 	}
 	
@@ -430,6 +432,7 @@ class Home extends Public_controller  {
 	public function prod_info()
 	{
 		check_ajax();
+		$data['code'] = $this->main->get('code', 'co_code, co_par', ['co_status' => 0]);
         $data['data'] = $this->main->prod(d_id($this->input->get('p_id')));
 		if($data['data']) $data['rate'] = $this->main->get('reviews', 'AVG(rating) AS rating, count(p_id) AS reviews', ['is_deleted' => 0, 'publish' => 1, 'p_id' => d_id($this->input->get('p_id'))]);
 		return $this->load->view('prod_info', $data);

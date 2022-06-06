@@ -71,7 +71,7 @@
                   <td><?= $data['co_par'];?></td>
                   <td class="text-right">
                     <a href="coupen_edit.php?cid=<?= $data['co_id']; ?>" class="btn btn-warning btn-link btn-icon"><i class="fa fa-edit"></i></a>
-                    <a href="coupen_delete.php?cid=<?= $data['co_id']; ?>" class="btn btn-danger btn-link btn-icon"><i class="fa fa-times"></i></a>
+                    <!-- <a href="coupen_delete.php?cid=<?= $data['co_id']; ?>" class="btn btn-danger btn-link btn-icon"><i class="fa fa-times"></i></a> -->
                   </td>
                 </tr>
                 <?php } ?>

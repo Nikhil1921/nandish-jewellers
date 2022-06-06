@@ -277,10 +277,10 @@ class Main_model extends Public_model
 		$this->db->trans_start();
 		$this->db->insert("orders", $order);
 		$this->db->delete("cart", ['ca_u_id' => $order['o_u_id']]);
-		
-		if ($this->session->coupen_id):
+
+		/* if ($this->session->coupen_id):
 			$this->db->where(['co_id' => $this->session->coupen_id])->update('code', ['co_status'=> 1, 'co_order' => $this->db->insert_id()]);
-		endif;
+		endif; */
 		foreach ($cart as $qty):
 			if (!$qty['p_pre']):
 				$this->db->where(['p_id' => $qty['p_id']])->update('product', ['p_qty_avail'=> ($qty['p_qty_avail'] - $qty['ca_qty'])]);

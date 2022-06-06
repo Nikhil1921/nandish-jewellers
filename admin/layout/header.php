@@ -272,12 +272,12 @@
             </a>
             <div class="collapse <?= in_array($name, ['add_coupen', 'coupen_list']) ? 'show' : '' ?>" id="code">
               <ul class="nav">
-                <li class="<?= in_array($name, ['add_coupen']) ? 'active' : '' ?>">
+                <!-- <li class="<?= in_array($name, ['add_coupen']) ? 'active' : '' ?>">
                   <a href="<?= $base_url ?>add_coupen.php">
                     <span class="sidebar-mini-icon">ACC</span>
                     <span class="sidebar-normal">Add Coupon Code </span>
                   </a>
-                </li>
+                </li> -->
                 <li class="<?= in_array($name, ['coupen_list']) ? 'active' : '' ?>">
                   <a href="<?= $base_url ?>coupen_list.php">
                     <span class="sidebar-mini-icon">CCL</span>

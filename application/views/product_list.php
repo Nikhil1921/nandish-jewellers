@@ -157,7 +157,18 @@
                                         <a href="<?= make_slug($prod['c_name']."/".$prod['sc_name']."/".$prod['i_name']."/".$prod['si_name']."/".$prod['p_name']."-".e_id($prod['p_id'])) ?>"><?= $prod['p_name']; ?></a>
                                         </h6>
                                         <div class="price-box">
-                                            <span class="price-regular"><i class="fa fa-inr" aria-hidden="true"></i><?= round(($prod[$prod['p_carat']] * $prod['p_gram'] + $prod['p_other'] + $prod['p_l_char']) * 1.03) ?></span>
+                                            <span class="price-regular">
+                                                <?php
+                                                $original = round(($prod[$prod['p_carat']] * $prod['p_gram'] + $prod['p_other'] + $prod['p_l_char']) * 1.03);
+                                                if(isset($code)):
+                                                    $discount = round($prod['p_l_char'] * $code['co_par'] / 100); ?>
+                                                    <strong><i class="fa fa-inr" aria-hidden="true"></i> <?= $original - $discount ?></strong>
+                                                    &nbsp;
+                                                    <del><i class="fa fa-inr" aria-hidden="true"></i><?= $original ?></del>
+                                                <?php else: ?>
+                                                    <i class="fa fa-inr" aria-hidden="true"></i> <?= $original ?>
+                                                <?php endif ?>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>

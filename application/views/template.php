@@ -58,7 +58,7 @@ endif;
         <link rel="stylesheet" href="https://demo.hasthemes.com/corano-preview/corano/assets/css/plugins/nice-select.css">
         <link rel="stylesheet" href="https://demo.hasthemes.com/corano-preview/corano/assets/css/plugins/jqueryui.min.css">
         <link rel="stylesheet" href="<?= base_url('assets/css/style.css?v=1.0.4') ?>">
-        <link rel="stylesheet" href="<?= base_url('assets/css/custom.css?v=1.0.6') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/custom.css?v=1.0.7') ?>">
         <link rel="stylesheet" href="<?= base_url('assets/css/responsive.css?v=1.0.4') ?>">
         <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/xzoom.css') ?>" media="all" />
         <link rel="canonical" href="<?= current_url() ?>" />
