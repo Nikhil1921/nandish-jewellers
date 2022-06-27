@@ -30,7 +30,7 @@ $dom->formatOutput = true;
         
         createElement(['loc' => base_url(), 'priority' => "1.00"], $dom, $root);
         createElement(['loc' => make_slug("about-us"), 'priority' => "0.80"], $dom, $root);
-        createElement(['loc' => make_slug("privacy"), 'priority' => "0.80"], $dom, $root);
+        createElement(['loc' => make_slug("privacy-policy"), 'priority' => "0.80"], $dom, $root);
         createElement(['loc' => make_slug("contact-us"), 'priority' => "0.80"], $dom, $root);
 
         foreach($items as $cat):
